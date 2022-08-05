@@ -161,6 +161,85 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/05/coding-iOS-Vim/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="organicCola">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="organicCola's House">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/08/05/coding-iOS-Vim/" class="post-title-link" itemprop="url">Use Vim for iOS project development</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-08-05 17:24:11" itemprop="dateCreated datePublished" datetime="2022-08-05T17:24:11+08:00">2022-08-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一般对于iOS开发者来说Xcode是进行开发的首选工具，这也是苹果官方的开发工具。<br>如果是非专职iOS开发者，那么他们也有极大的概率使用着其他开发工具。比如写flutter或者rn这种非native app，则可能会直接使用VSCode；对于native app除了vscode也有其他选择，比如jetBrains家的App Code，已经做的非常好，甚至集成了CocoaPods，不过AppCode貌似是收费的。<br>如果你是Vim爱好者，那么很容易在Xcode以外的这些工具中找到Vim插件，体验不错，常用的功能都有。<br>对于Xcode官方也已经在Xcode13中提供了Vim keybind支持，不过很基础，一些常用的功能体面没有提供，使用使用体验与原生Vim存在差距。  </p>
+<p>而本文要讨论的则是一个更加朴素的环境，终端中的Vim，在终端中使用Vim来进行iOS工程的编写。</p>
+<p>虽说是终端编写，但并不是说不需要Xcode了，vim中做的只是编辑代码，仍需要使用Xcode来进行编译和运行以及Debug。<br>最终达成的效果是，用Xcode新建一个工程，编译，在vim中编写，回到Xcode编译</p>
+<div id="flowchart-0" class="flow-chart"></div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: Start
+xcode=>operation: compile with Xcode
+vim=>operation: coding in Vim
+cond=>condition: can sourcekit work well?
+e=>end
+st->xcode->vim->cond
+cond(yes)->vim
+cond(no)->xcode</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/30/cat_memo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -592,7 +671,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -605,7 +684,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
