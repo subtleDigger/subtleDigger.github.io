@@ -161,7 +161,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/05/coding-iOS-Vim/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/06/coding-iOS-Vim/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -175,7 +175,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/08/05/coding-iOS-Vim/" class="post-title-link" itemprop="url">Use Vim for iOS project development</a>
+            <a href="/2022/08/06/coding-iOS-Vim/" class="post-title-link" itemprop="url">Use Vim for iOS project development</a>
         </h2>
 
         <div class="post-meta">
@@ -185,7 +185,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-08-05 17:24:11" itemprop="dateCreated datePublished" datetime="2022-08-05T17:24:11+08:00">2022-08-05</time>
+              <time title="Created: 2022-08-06 21:58:30" itemprop="dateCreated datePublished" datetime="2022-08-06T21:58:30+08:00">2022-08-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -208,20 +208,129 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>一般对于iOS开发者来说Xcode是进行开发的首选工具，这也是苹果官方的开发工具。<br>如果是非专职iOS开发者，那么他们也有极大的概率使用着其他开发工具。比如写flutter或者rn这种非native app，则可能会直接使用VSCode；对于native app除了vscode也有其他选择，比如jetBrains家的App Code，已经做的非常好，甚至集成了CocoaPods，不过AppCode貌似是收费的。<br>如果你是Vim爱好者，那么很容易在Xcode以外的这些工具中找到Vim插件，体验不错，常用的功能都有。<br>对于Xcode官方也已经在Xcode13中提供了Vim keybind支持，不过很基础，一些常用的功能体面没有提供，使用使用体验与原生Vim存在差距。  </p>
-<p>而本文要讨论的则是一个更加朴素的环境，终端中的Vim，在终端中使用Vim来进行iOS工程的编写。</p>
-<p>虽说是终端编写，但并不是说不需要Xcode了，vim中做的只是编辑代码，仍需要使用Xcode来进行编译和运行以及Debug。<br>最终达成的效果是，用Xcode新建一个工程，编译，在vim中编写，回到Xcode编译</p>
-<div id="flowchart-0" class="flow-chart"></div>
+          <h2 id="iOS-project-Editor"><a href="#iOS-project-Editor" class="headerlink" title="iOS project Editor"></a>iOS project Editor</h2><p>一般对于iOS开发者来说Xcode是进行开发的首选工具，这也是苹果官方的开发工具。<br>如果是非专职iOS开发者，那么他们也有极大的概率使用着其他开发工具。比如写flutter或者rn这种非native app，则可能会直接使用VSCode；对于native app除了vscode也有其他选择，比如jetBrains家的App Code，已经做的非常好，甚至集成了CocoaPods，不过AppCode貌似是收费的。<br>如果你是Vim爱好者，那么很容易在Xcode以外的这些工具中找到Vim插件，体验不错，常用的功能都有。<br>对于Xcode官方也已经在Xcode13中提供了Vim keybind支持，不过很基础，一些常用的功能体面没有提供，使用使用体验与原生Vim存在差距。  </p>
+<h2 id="Language-Server-Protocol"><a href="#Language-Server-Protocol" class="headerlink" title="Language Server Protocol"></a>Language Server Protocol</h2><p>其实现阶段在类似sublime、vscode、Emacs中跨行编辑代码并不是难事，多亏了微软主导的<a target="_blank" rel="noopener" href="https://langserver.org/">Language Server Protocol</a>，每个语言的开发者据此协议提供自己语言服务器以对外提供接口，然后编辑器只需要遵循这个协议即可轻松实现对各种语言的对接，编辑器只需要做好自己的使用体验，界面，输入优化等。</p>
+<pre class="mermaid">graph TD;
+S(Swift) --> D;
+A(Java) --> D;
+B(JavaScript) --> D;
+C(C/C++) --> D;
+D(Language Server Protocol) --> E(Vim);
+D --> F(Sublime);
+D --> G(VSCode);
+D --> H(Emacs);</pre>
+<h2 id="Use-Vim-for-iOS-project-development"><a href="#Use-Vim-for-iOS-project-development" class="headerlink" title="Use Vim for iOS project development"></a>Use Vim for iOS project development</h2><p>而本文要讨论的则是一个更加朴素的环境，终端中的Vim，在终端中使用Vim来进行iOS工程的编写。<br>虽说是终端编写，但并不是说不需要Xcode了，Vim中做的只是编辑代码，仍需要使用Xcode来进行编译和运行以及Debug。<br>最终达成的效果是，用Xcode新建一个工程，编译，生成编译日志并将其解析为可供lsp-server使用的数据，在Vim中调用lsp-server提供自动补全、定义跳转等支持，在Vim中进行代码编写。</p>
+<pre class="mermaid">graph TD;
+A(XcodeCompile/Debug)--> |compile| B;
+
+subgraph prepare info for Language Server
+B(compile log)-.-> |Objective-C| X;
+B(compile log)--> |Swift| Xa;
+X(xcpretty/XCCompilationDB process) -.-> |compile_commands.json| L;
+Xa(Xcode Build Server process) --> |.compile| L;
+end
+
+subgraph Vim-lsp<=>Language server Interactive
+L((Vim-lsp)) -.- |json-compilation-database| Cl(Clangd);
+L --- |Build Server Protocol| S(Sourcekit);
+end
+
+L === |LSP support: autoCompleteion/goToDefinition...| C;
+C((Coding In Vim));</pre>
+<h2 id="A-simple-Screencast"><a href="#A-simple-Screencast" class="headerlink" title="A simple Screencast"></a>A simple Screencast</h2><script id="asciicast-jVh32tJK83zPuX3wZjR3MoVLL" src="https://asciinema.org/a/jVh32tJK83zPuX3wZjR3MoVLL.js" async></script>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/06/hexo_mermaid_support/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="organicCola">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="organicCola's House">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/08/06/hexo_mermaid_support/" class="post-title-link" itemprop="url">Use mermaid in Hexo</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-08-06 21:44:52" itemprop="dateCreated datePublished" datetime="2022-08-06T21:44:52+08:00">2022-08-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="1-使用mermaid，大致上有两种方法："><a href="#1-使用mermaid，大致上有两种方法：" class="headerlink" title="1. 使用mermaid，大致上有两种方法："></a>1. 使用mermaid，大致上有两种方法：</h3><h4 id="1-1如果你的主题是Next，那么可以直接使用next主题内置的"><a href="#1-1如果你的主题是Next，那么可以直接使用next主题内置的" class="headerlink" title="1.1如果你的主题是Next，那么可以直接使用next主题内置的"></a>1.1如果你的主题是Next，那么可以直接使用next主题内置的</h4><p>那么直接修改next主题文件夹下“_config.yml”中mermaid属性为true，就可以直接使用了。</p>
+<h4 id="1-2-使用单独的mermaid插件的方式，比如hexo-filter-mermaid-diagrams"><a href="#1-2-使用单独的mermaid插件的方式，比如hexo-filter-mermaid-diagrams" class="headerlink" title="1.2 使用单独的mermaid插件的方式，比如hexo-filter-mermaid-diagrams"></a>1.2 使用单独的mermaid插件的方式，比如hexo-filter-mermaid-diagrams</h4><p>经试验，如果使用hexo-filter-mermaid-diagrams, 那就需要按照官方提供方法的方法进行设置<br>1.2.1 安装  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-filter-mermaid-diagrams --save  </span><br></pre></td></tr></table></figure>
+<p>1.2.2 修改js这一步按照官方操作无法成功的话可能是theme.mermaid.变量无法正常获取导致的，去掉原本的判断条件<br>下面是官方提供的片段  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if theme.mermaid.enable %&#125;</span><br><span class="line">  &lt;script src=&#x27;https://unpkg.com/mermaid@&#123;&#123; theme.mermaid.version &#125;&#125;/dist/mermaid.min.js&#x27;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">    if (window.mermaid) &#123;</span><br><span class="line">      mermaid.initialize(&#123;&#123; JSON.stringify(theme.mermaid.options) &#125;&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是修改后的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&#x27;https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js&#x27;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">if (window.mermaid) &#123;</span><br><span class="line">  mermaid.initialize(&#123; theme: &#x27;default&#x27; &#125;);</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-关于语法"><a href="#2-关于语法" class="headerlink" title="2. 关于语法"></a>2. 关于语法</h3><h4 id="2-1-下面为next内置的一种写法，（与github默认支持的不兼容，无法在github预览中正常显示）"><a href="#2-1-下面为next内置的一种写法，（与github默认支持的不兼容，无法在github预览中正常显示）" class="headerlink" title="2.1 下面为next内置的一种写法，（与github默认支持的不兼容，无法在github预览中正常显示）"></a>2.1 下面为next内置的一种写法，（与github默认支持的不兼容，无法在github预览中正常显示）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;% mermaid graph TD %&#125;</span><br><span class="line">A[Hard] --&gt;|Text| B(Round)</span><br><span class="line">B --&gt; C&#123;Decision&#125;</span><br><span class="line">C --&gt;|One| D[Result 1]</span><br><span class="line">C --&gt;|Two| E[Result 2]</span><br><span class="line">&#123;% endmermaid %&#125;</span><br></pre></td></tr></table></figure>
+<pre class="mermaid" style="text-align: center;">
+            graph TD
+            A[Hard] -->|Text| B(Round)
+B --> C{Decision}
+C -->|One| D[Result 1]
+C -->|Two| E[Result 2]
+          </pre>
+
+<h4 id="2-2-下面为通用的写法，hexo-filter-mermaid-diagrams-中和next中都可以正常显示（与github默认支持的兼容）"><a href="#2-2-下面为通用的写法，hexo-filter-mermaid-diagrams-中和next中都可以正常显示（与github默认支持的兼容）" class="headerlink" title="2.2 下面为通用的写法，hexo-filter-mermaid-diagrams 中和next中都可以正常显示（与github默认支持的兼容）"></a>2.2 下面为通用的写法，hexo-filter-mermaid-diagrams 中和next中都可以正常显示（与github默认支持的兼容）</h4><p>（注意如果你是用的next内置的话，虽然不需要额外的代码修改，但是想要支持通用语法还是需要安装hexo–filter-mermaid-diagrams这一步，即npm install hexo-filter-mermaid-diagrams –save</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">注意下面的`在这里为了展示代码添加了多余的空格</span><br><span class="line">  ` ` `</span><br><span class="line">  mermaid</span><br><span class="line">  graph TD;</span><br><span class="line">  A--&gt;B;</span><br><span class="line">  A--&gt;C;</span><br><span class="line">  B--&gt;D;</span><br><span class="line">  C--&gt;D;</span><br><span class="line">  D--&gt;E;</span><br><span class="line">  ` ` `</span><br></pre></td></tr></table></figure>
+
+<pre class="mermaid">graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;
+D-->E;</pre>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: Start
-xcode=>operation: compile with Xcode
-vim=>operation: coding in Vim
-cond=>condition: can sourcekit work well?
-e=>end
-st->xcode->vim->cond
-cond(yes)->vim
-cond(no)->xcode</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script>
       
     </div>
 
@@ -671,7 +780,7 @@ cond(no)->xcode</textarea><textarea id="flowchart-0-options" style="display: non
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -684,7 +793,7 @@ cond(no)->xcode</textarea><textarea id="flowchart-0-options" style="display: non
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -717,6 +826,8 @@ cond(no)->xcode</textarea><textarea id="flowchart-0-options" style="display: non
   </span>
   <span class="author" itemprop="copyrightHolder">organicCola</span>
 </div>
+
+
 
         
 
@@ -763,6 +874,19 @@ cond(no)->xcode</textarea><textarea id="flowchart-0-options" style="display: non
 
 
 
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
 
 
   

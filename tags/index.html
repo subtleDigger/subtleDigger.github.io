@@ -185,10 +185,10 @@
       <div class="post-body">
           <div class="tag-cloud">
             <div class="tag-cloud-title">
-              6 tags in total
+              10 tags in total
             </div>
             <div class="tag-cloud-tags">
-              <a href="/tags/burning/" style="font-size: 12px; color: #ccc">burning</a> <a href="/tags/difficult/" style="font-size: 12px; color: #ccc">difficult</a> <a href="/tags/iOS/" style="font-size: 12px; color: #ccc">iOS</a> <a href="/tags/memo/" style="font-size: 12px; color: #ccc">memo</a> <a href="/tags/typing/" style="font-size: 12px; color: #ccc">typing</a> <a href="/tags/vim/" style="font-size: 12px; color: #ccc">vim</a>
+              <a href="/tags/burning/" style="font-size: 12px; color: #ccc">burning</a> <a href="/tags/difficult/" style="font-size: 12px; color: #ccc">difficult</a> <a href="/tags/flowchart/" style="font-size: 12px; color: #ccc">flowchart</a> <a href="/tags/hexo/" style="font-size: 12px; color: #ccc">hexo</a> <a href="/tags/iOS/" style="font-size: 12px; color: #ccc">iOS</a> <a href="/tags/memo/" style="font-size: 12px; color: #ccc">memo</a> <a href="/tags/mermaid/" style="font-size: 12px; color: #ccc">mermaid</a> <a href="/tags/next/" style="font-size: 12px; color: #ccc">next</a> <a href="/tags/typing/" style="font-size: 12px; color: #ccc">typing</a> <a href="/tags/vim/" style="font-size: 12px; color: #ccc">vim</a>
             </div>
           </div>
         
@@ -265,7 +265,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -278,7 +278,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -311,6 +311,8 @@
   </span>
   <span class="author" itemprop="copyrightHolder">organicCola</span>
 </div>
+
+
 
         
 
@@ -357,6 +359,19 @@
 
 
 
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
 
 
   
