@@ -305,14 +305,14 @@ C((Coding In Vim));</pre>
 
       
           <h3 id="1-使用mermaid，大致上有两种方法："><a href="#1-使用mermaid，大致上有两种方法：" class="headerlink" title="1. 使用mermaid，大致上有两种方法："></a>1. 使用mermaid，大致上有两种方法：</h3><h4 id="1-1如果你的主题是Next，那么可以直接使用next主题内置的"><a href="#1-1如果你的主题是Next，那么可以直接使用next主题内置的" class="headerlink" title="1.1如果你的主题是Next，那么可以直接使用next主题内置的"></a>1.1如果你的主题是<a target="_blank" rel="noopener" href="https://theme-next.js.org/docs/tag-plugins/mermaid.html">Next</a>，那么可以直接使用next主题内置的</h4><p>直接修改next主题文件夹下“_config.yml”中mermaid属性为true，就可以直接使用了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Mermaid tag</span><br><span class="line">mermaid:</span><br><span class="line">  enable: true</span><br><span class="line">  # Available themes: default | dark | forest | neutral</span><br><span class="line">  theme: neutral</span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Mermaid tag</span></span><br><span class="line"><span class="attr">mermaid:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Available themes: default | dark | forest | neutral</span></span><br><span class="line">  <span class="attr">theme:</span> <span class="string">neutral</span></span><br></pre></td></tr></table></figure>
 <p>注意：如果要使用```mermaid的语法则需要有安装hexo-filter-mermaid插件 <a href="#2.2"><code>见2.2</code></a></p>
 <h4 id="1-2-使用单独的mermaid插件的方式，比如hexo-filter-mermaid-diagrams"><a href="#1-2-使用单独的mermaid插件的方式，比如hexo-filter-mermaid-diagrams" class="headerlink" title="1.2 使用单独的mermaid插件的方式，比如hexo-filter-mermaid-diagrams"></a>1.2 使用单独的mermaid插件的方式，比如hexo-filter-mermaid-diagrams</h4><p>经试验，如果使用hexo-filter-mermaid-diagrams, 那就需要按照官方提供方法的方法进行设置<br>1.2.1 安装  </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-filter-mermaid-diagrams --save  </span><br></pre></td></tr></table></figure>
 <p>1.2.2 修改js这一步按照官方操作无法成功的话可能是theme.mermaid.变量无法正常获取导致的，去掉原本的判断条件<br>下面是官方提供的片段  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if theme.mermaid.enable %&#125;</span><br><span class="line">  &lt;script src=&#x27;https://unpkg.com/mermaid@&#123;&#123; theme.mermaid.version &#125;&#125;/dist/mermaid.min.js&#x27;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">    if (window.mermaid) &#123;</span><br><span class="line">      mermaid.initialize(&#123;&#123; JSON.stringify(theme.mermaid.options) &#125;&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="keyword">if</span> theme.<span class="property">mermaid</span>.<span class="property">enable</span> %&#125;</span><br><span class="line">  &lt;script src=<span class="string">&#x27;https://unpkg.com/mermaid@&#123;&#123; theme.mermaid.version &#125;&#125;/dist/mermaid.min.js&#x27;</span>&gt;&lt;/script&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-handlebars"><span class="language-xml"></span></span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars"><span class="language-xml">    if (window.mermaid) &#123;</span></span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars"><span class="language-xml">      mermaid.initialize(</span><span class="template-variable">&#123;&#123; <span class="name">JSON.stringify</span>(<span class="name">theme.mermaid.options</span>) &#125;&#125;</span><span class="language-xml">);</span></span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars"><span class="language-xml">    &#125;</span></span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars"><span class="language-xml">  </span></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
 <p>下面是修改后的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&#x27;https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js&#x27;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">if (window.mermaid) &#123;</span><br><span class="line">  mermaid.initialize(&#123; theme: &#x27;default&#x27; &#125;);</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&#x27;https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js&#x27;</span>&gt;&lt;/script&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">mermaid</span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  mermaid.<span class="title function_">initialize</span>(&#123; <span class="attr">theme</span>: <span class="string">&#x27;default&#x27;</span> &#125;);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 <h3 id="2-关于语法"><a href="#2-关于语法" class="headerlink" title="2. 关于语法"></a>2. 关于语法</h3><h4 id="2-1-下面为next内置的一种写法，（与github默认支持的不兼容，无法在github预览中正常显示）"><a href="#2-1-下面为next内置的一种写法，（与github默认支持的不兼容，无法在github预览中正常显示）" class="headerlink" title="2.1 下面为next内置的一种写法，（与github默认支持的不兼容，无法在github预览中正常显示）"></a>2.1 下面为next内置的一种写法，（与github默认支持的不兼容，无法在github预览中正常显示）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;% mermaid graph TD %&#125;</span><br><span class="line">A[Hard] --&gt;|Text| B(Round)</span><br><span class="line">B --&gt; C&#123;Decision&#125;</span><br><span class="line">C --&gt;|One| D[Result 1]</span><br><span class="line">C --&gt;|Two| E[Result 2]</span><br><span class="line">&#123;% endmermaid %&#125;</span><br></pre></td></tr></table></figure>
 <pre class="mermaid" style="text-align: center;">
             graph TD
@@ -345,7 +345,7 @@ C-->D;
 D-->E;</pre>
 
 <h3 id="3-调整mermaid位置，居中显示"><a href="#3-调整mermaid位置，居中显示" class="headerlink" title="3.调整mermaid位置，居中显示"></a>3.调整mermaid位置，居中显示</h3><p>通过添加css来实现<br>我是放在了 <code>themes/next/source/css/main.styl</code><br>添加居中</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*mermaid图居中*/</span><br><span class="line">.mermaid&#123;</span><br><span class="line">  text-align: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*mermaid图居中*/</span></span><br><span class="line"><span class="selector-class">.mermaid</span>&#123;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -533,73 +533,6 @@ D-->E;</pre>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/29/try-something-md/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="organicCola">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="organicCola's House">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/07/29/try-something-md/" class="post-title-link" itemprop="url">try_something</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-07-29 01:58:33" itemprop="dateCreated datePublished" datetime="2022-07-29T01:58:33+08:00">2022-07-29</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>type something here</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/29/third/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -648,6 +581,73 @@ D-->E;</pre>
 
       
           <p>which is very difficult</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/29/try-something-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="organicCola">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="organicCola's House">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/07/29/try-something-md/" class="post-title-link" itemprop="url">try_something</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-07-29 01:58:33" itemprop="dateCreated datePublished" datetime="2022-07-29T01:58:33+08:00">2022-07-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>type something here</p>
 
       
     </div>
