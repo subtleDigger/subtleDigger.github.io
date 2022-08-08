@@ -325,7 +325,9 @@ C -->|Two| E[Result 2]
 
 <a id="2.2"/>
 
-<h4 id="2-2-下面为通用的写法，hexo-filter-mermaid-diagrams-中和next中都可以正常显示（与github默认支持的兼容）"><a href="#2-2-下面为通用的写法，hexo-filter-mermaid-diagrams-中和next中都可以正常显示（与github默认支持的兼容）" class="headerlink" title="2.2 下面为通用的写法，hexo-filter-mermaid-diagrams 中和next中都可以正常显示（与github默认支持的兼容）"></a>2.2 下面为通用的写法，hexo-filter-mermaid-diagrams 中和next中都可以正常显示（与github默认支持的兼容）</h4><p>（注意如果你是用的next内置的话，虽然不需要额外的代码修改，但是想要支持通用语法还是需要安装hexo–filter-mermaid-diagrams这一步，即npm install hexo-filter-mermaid-diagrams –save</p>
+<h4 id="2-2-下面为Fenced-Code-Blocks风格的写法，hexo-filter-mermaid-diagrams-中和next中都可以正常显示（与github默认支持的兼容）"><a href="#2-2-下面为Fenced-Code-Blocks风格的写法，hexo-filter-mermaid-diagrams-中和next中都可以正常显示（与github默认支持的兼容）" class="headerlink" title="2.2 下面为Fenced Code Blocks风格的写法，hexo-filter-mermaid-diagrams 中和next中都可以正常显示（与github默认支持的兼容）"></a>2.2 下面为Fenced Code Blocks风格的写法，hexo-filter-mermaid-diagrams 中和next中都可以正常显示（与github默认支持的兼容）</h4><p>（注意如果你是用的next内置的话，虽然不需要额外的代码修改，但是想要支持用Fenced Code Blocks语法还是需要安装hexo–filter-mermaid-diagrams这一步，即<code>npm install hexo-filter-mermaid-diagrams --save</code><br>hexo-filter-mermaid-diagrams本质是使得由markdown语法Fenced Code Blocks转写成&lt;pre&gt;标签<br>其实这个库并不真正的执行渲染，可以点进去看源码里面基本上就是一个字符串处理的过程<br>next主题就是在这里next对mermaid标签进行了初始化，可以在这里对mermaid进行进一步的自定义设置<br>比如我把线条的直线改成来basis基础曲线</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;themes/next/layout/_third-party/tags/mermaid.swig&quot;</span> </span><br><span class="line"><span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;pre.mermaid&#x27;</span>).<span class="property">length</span>) &#123;</span><br><span class="line">  <span class="title class_">NexT</span>.<span class="property">utils</span>.<span class="title function_">getScript</span>(<span class="string">&#x27;&#123;&#123; mermaid_uri &#125;&#125;&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    mermaid.<span class="title function_">initialize</span>(&#123;</span><br><span class="line">      theme    : <span class="string">&#x27;&#123;&#123; theme.mermaid.theme &#125;&#125;&#x27;</span>,</span><br><span class="line">      logLevel : <span class="number">3</span>,</span><br><span class="line">      <span class="attr">flowchart</span>: &#123; curve     : <span class="string">&#x27;basis&#x27;</span> &#125;,</span><br><span class="line">      gantt    : &#123; <span class="attr">axisFormat</span>: <span class="string">&#x27;%m/%d/%Y&#x27;</span> &#125;,</span><br><span class="line">      sequence : &#123; <span class="attr">actorMargin</span>: <span class="number">50</span> &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;, <span class="variable language_">window</span>.<span class="property">mermaid</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <pre>
 &#96;&#96;&#96;mermaid
   graph TD;
@@ -896,7 +898,7 @@ if (document.querySelectorAll('pre.mermaid').length) {
     mermaid.initialize({
       theme    : 'neutral',
       logLevel : 3,
-      flowchart: { curve     : 'linear' },
+      flowchart: { curve     : 'basis' },
       gantt    : { axisFormat: '%m/%d/%Y' },
       sequence : { actorMargin: 50 }
     });
