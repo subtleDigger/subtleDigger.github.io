@@ -124,7 +124,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -135,7 +135,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -173,7 +173,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/09/update-theme-solution/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/11/dingxiang-suspend/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/09/update-theme-solution/" class="post-title-link" itemprop="url">Update Hexo theme solution</a>
+          <a href="/2022/08/11/dingxiang-suspend/" class="post-title-link" itemprop="url">丁香医生账号被禁言</a>
         </h2>
 
         <div class="post-meta-container">
@@ -202,7 +202,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-08-09 19:28:27" itemprop="dateCreated datePublished" datetime="2022-08-09T19:28:27+08:00">2022-08-09</time>
+      <time title="Created: 2022-08-11 01:28:40" itemprop="dateCreated datePublished" datetime="2022-08-11T01:28:40+08:00">2022-08-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -210,7 +210,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+          <a href="/categories/memo/" itemprop="url" rel="index"><span itemprop="name">memo</span></a>
         </span>
     </span>
 
@@ -224,238 +224,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h4 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h4><p>当使用Hexo时不可避免的我们要使用一些主题，当主题的默认设置无法满足我们要求时候我们不可避免的要对其进行一些修改。一般我是用git clone下来主题去掉他原来的git，将其纳入我的blog文件夹的git管理下。<br>当主题发布了新版本我们可能会需要升级主题，或者旧版本无法满足要求需要升级到新版本，这时候就涉及到“迁移之前对主题文件进行的修改”问题。<br>这时候我们就需要知道究竟修改了哪些文件，然后在把修改迁移到新的主题下。</p>
-<h4 id="1-一种朴素的方法，找出不同，手动迁移"><a href="#1-一种朴素的方法，找出不同，手动迁移" class="headerlink" title="1. 一种朴素的方法，找出不同，手动迁移"></a>1. 一种朴素的方法，找出不同，手动迁移</h4><p>在bolg仓库git下使用diff<br>head~3 是刚加入主题时的提交<br>将对比限定在对应主题文件夹下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff  head~3 themes/next</span><br></pre></td></tr></table></figure>
-<p>然后手动把修改的内容迁移到新下载的theme中</p>
-<h4 id="2-升级的半自动方法"><a href="#2-升级的半自动方法" class="headerlink" title="2.升级的半自动方法"></a>2.升级的半自动方法</h4><p>将现在的主题文件夹复制替换掉新版本的主题文件夹里的内容，只保留自己需要的迁移的一部分更改，git add 到贮存区，其余的全部restore状态。完成后去掉.git文件夹，回归到blog文件夹的git管理下。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add ****.**  ****.**</span><br><span class="line">git restore .</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-仍然使用主题自己的git管理，较自动的方法"><a href="#3-仍然使用主题自己的git管理，较自动的方法" class="headerlink" title="3. 仍然使用主题自己的git管理，较自动的方法"></a>3. 仍然使用主题自己的git管理，较自动的方法</h4><p>一开始就不去除主题仓库的git，每次更改进行提交，当主题有更新时候拉取，与你的本地提交进行合并。注意检查你的更改在合并之后是否正确。<br>缺点是theme主题的不在blog的git管理之下，并且更改不能进行push，只能在本地。。。但是也许可以通过新建另一个远端仓库来进行push。</p>
-<p>一般很长时间才会去升级主题，并且修改的内容也不多，所以目前我是使用第一种手动的方式，手动的也可以是很可靠的～</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/06/coding-iOS-Vim/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="organicCola">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="organicCola's House">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | organicCola's House">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/06/coding-iOS-Vim/" class="post-title-link" itemprop="url">Use Vim for iOS project development</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-08-06 21:58:30" itemprop="dateCreated datePublished" datetime="2022-08-06T21:58:30+08:00">2022-08-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="iOS-project-Editor"><a href="#iOS-project-Editor" class="headerlink" title="iOS project Editor"></a>iOS project Editor</h2><p>一般对于iOS开发者来说Xcode是进行开发的首选工具，这也是苹果官方的开发工具。<br>如果是非专职iOS开发者，那么也有极大的概率使用着其他开发工具。比如写flutter或者rn这种非native app，则可能会直接使用VSCode；对于native app除了vscode也有其他选择，比如jetBrains家的App Code，已经做的非常好，甚至集成了CocoaPods，不过AppCode貌似是收费的。<br>如果你是Vim爱好者，那么很容易在Xcode以外的这些工具中找到Vim插件，体验不错，常用的功能都有。<br>对于Xcode官方也已经在Xcode13中提供了Vim keybind支持，不过很基础，一些常用的功能体面没有提供，使用使用体验与原生Vim存在差距。  </p>
-<h2 id="Language-Server-Protocol"><a href="#Language-Server-Protocol" class="headerlink" title="Language Server Protocol"></a>Language Server Protocol</h2><p>其实现阶段在类似sublime、vscode、Emacs中跨行编辑代码并不是难事，多亏了微软主导的<a target="_blank" rel="noopener" href="https://langserver.org/">Language Server Protocol</a>，每个语言的开发者据此协议提供自己语言服务器以对外提供接口，然后编辑器只需要遵循这个协议即可轻松实现对各种语言的对接，编辑器只需要做好自己的使用体验，界面，输入优化等。</p>
-<pre><code class="highlight mermaid">graph TD;
-S(Swift) --&gt; D;
-A(Java) --&gt; D;
-B(JavaScript) --&gt; D;
-C(C/C++) --&gt; D;
-D(Language Server Protocol) --&gt; E(Vim);
-D --&gt; F(Sublime);
-D --&gt; G(VSCode);
-D --&gt; H(Emacs);</code></pre>
-<h2 id="Use-Vim-for-iOS-project-development"><a href="#Use-Vim-for-iOS-project-development" class="headerlink" title="Use Vim for iOS project development"></a>Use Vim for iOS project development</h2><p>而本文要讨论的则是一个更加朴素的环境，终端中的Vim，在终端中使用Vim来进行iOS工程的编写。<br>虽说是终端编写，但并不是说不需要Xcode了，Vim中做的只是编辑代码，仍需要使用Xcode来进行编译和运行以及Debug。<br>最终达成的效果是，用Xcode新建一个工程，编译，生成编译日志并将其解析为可供lsp-server使用的数据，在Vim中调用lsp-server提供自动补全、定义跳转等支持，在Vim中进行代码编写。</p>
-<pre><code class="highlight mermaid">graph TD;
-A(XcodeCompile/Debug)--&gt; |compile| B;
-
-subgraph prepare info for Language Server
-B(compile log)-.-&gt; |Objective-C| X;
-B(compile log)--&gt; |Swift| Xa;
-X(xcpretty/XCCompilationDB process) -.-&gt; |compile_commands.json| L;
-Xa(Xcode Build Server process) --&gt; |.compile| L;
-end
-
-subgraph Vim-lsp&lt;=&gt;Language server Interactive
-L((Vim-lsp)) -.- |json-compilation-database| Cl(Clangd);
-L --- |Build Server Protocol| S(Sourcekit);
-end
-
-L === |LSP support: autoCompleteion/goToDefinition...| C;
-C((Coding In Vim));</code></pre>
-<h2 id="A-simple-Screencast"><a href="#A-simple-Screencast" class="headerlink" title="A simple Screencast"></a>A simple Screencast</h2><script id="asciicast-jVh32tJK83zPuX3wZjR3MoVLL" src="https://asciinema.org/a/jVh32tJK83zPuX3wZjR3MoVLL.js" async></script>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/05/hexo_mermaid_support/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="organicCola">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="organicCola's House">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | organicCola's House">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/05/hexo_mermaid_support/" class="post-title-link" itemprop="url">Use mermaid in Hexo</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-08-05 20:32:11" itemprop="dateCreated datePublished" datetime="2022-08-05T20:32:11+08:00">2022-08-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="1-使用mermaid，大致上有两种方法："><a href="#1-使用mermaid，大致上有两种方法：" class="headerlink" title="1. 使用mermaid，大致上有两种方法："></a>1. 使用mermaid，大致上有两种方法：</h3><h4 id="1-1如果你的主题是Next，那么可以直接使用next主题内置的"><a href="#1-1如果你的主题是Next，那么可以直接使用next主题内置的" class="headerlink" title="1.1如果你的主题是Next，那么可以直接使用next主题内置的"></a>1.1如果你的主题是<a target="_blank" rel="noopener" href="https://theme-next.js.org/docs/tag-plugins/mermaid.html">Next</a>，那么可以直接使用next主题内置的</h4><p>直接修改next主题文件夹下“_config.yml”中mermaid属性为true，就可以直接使用了。</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Mermaid tag</span></span><br><span class="line"><span class="attr">mermaid:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Available themes: default | dark | forest | neutral</span></span><br><span class="line">  <span class="attr">theme:</span> <span class="string">neutral</span></span><br></pre></td></tr></table></figure>
-<p>注意：如果要使用```mermaid的语法，有一些需要注意的地方。<a href="#2.2"><code>见2.2</code></a></p>
-<h4 id="1-2-使用单独的mermaid插件的方式，比如hexo-filter-mermaid-diagrams"><a href="#1-2-使用单独的mermaid插件的方式，比如hexo-filter-mermaid-diagrams" class="headerlink" title="1.2 使用单独的mermaid插件的方式，比如hexo-filter-mermaid-diagrams"></a>1.2 使用单独的mermaid插件的方式，比如hexo-filter-mermaid-diagrams</h4><p>经试验，如果使用hexo-filter-mermaid-diagrams, 那就需要按照官方提供方法的方法进行设置<br>1.2.1 安装  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-filter-mermaid-diagrams --save  </span><br></pre></td></tr></table></figure>
-<p>1.2.2 修改js这一步按照官方操作无法成功的话可能是theme.mermaid.变量无法正常获取导致的，去掉原本的判断条件<br>下面是官方提供的片段  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="keyword">if</span> theme.<span class="property">mermaid</span>.<span class="property">enable</span> %&#125;</span><br><span class="line">  &lt;script src=<span class="string">&#x27;https://unpkg.com/mermaid@&#123;&#123; theme.mermaid.version &#125;&#125;/dist/mermaid.min.js&#x27;</span>&gt;&lt;/script&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-handlebars"><span class="language-xml"></span></span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars"><span class="language-xml">    if (window.mermaid) &#123;</span></span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars"><span class="language-xml">      mermaid.initialize(</span><span class="template-variable">&#123;&#123; <span class="name">JSON.stringify</span>(<span class="name">theme.mermaid.options</span>) &#125;&#125;</span><span class="language-xml">);</span></span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars"><span class="language-xml">    &#125;</span></span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars"><span class="language-xml">  </span></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
-<p>下面是修改后的</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&#x27;https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js&#x27;</span>&gt;&lt;/script&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">mermaid</span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  mermaid.<span class="title function_">initialize</span>(&#123; <span class="attr">theme</span>: <span class="string">&#x27;default&#x27;</span> &#125;);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<h3 id="2-关于语法"><a href="#2-关于语法" class="headerlink" title="2. 关于语法"></a>2. 关于语法</h3><h4 id="2-1-下面为next内置的一种写法，（与github默认支持的不兼容，无法在github预览中正常显示）"><a href="#2-1-下面为next内置的一种写法，（与github默认支持的不兼容，无法在github预览中正常显示）" class="headerlink" title="2.1 下面为next内置的一种写法，（与github默认支持的不兼容，无法在github预览中正常显示）"></a>2.1 下面为next内置的一种写法，（与github默认支持的不兼容，无法在github预览中正常显示）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;% mermaid graph TD %&#125;</span><br><span class="line">A[Hard] --&gt;|Text| B(Round)</span><br><span class="line">B --&gt; C&#123;Decision&#125;</span><br><span class="line">C --&gt;|One| D[Result 1]</span><br><span class="line">C --&gt;|Two| E[Result 2]</span><br><span class="line">&#123;% endmermaid %&#125;</span><br></pre></td></tr></table></figure>
-<pre class="mermaid">
-graph TD
-A[Hard] --&gt;|Text| B(Round)
-B --&gt; C{Decision}
-C --&gt;|One| D[Result 1]
-C --&gt;|Two| E[Result 2]
-</pre>
-
-
-<a id="2.2"/>
-
-<h4 id="2-2-下面为Fenced-Code-Blocks风格的写法，hexo-filter-mermaid-diagrams-中和next中都可以常显示（与github默认支持的兼容）"><a href="#2-2-下面为Fenced-Code-Blocks风格的写法，hexo-filter-mermaid-diagrams-中和next中都可以常显示（与github默认支持的兼容）" class="headerlink" title="2.2 下面为Fenced Code Blocks风格的写法，hexo-filter-mermaid-diagrams 中和next中都可以常显示（与github默认支持的兼容）"></a>2.2 下面为Fenced Code Blocks风格的写法，hexo-filter-mermaid-diagrams 中和next中都可以常显示（与github默认支持的兼容）</h4><h5 id="2-2-1-如果是较高版本，next本身已经提供了支持，不过需要在hexo中添加block高亮例外"><a href="#2-2-1-如果是较高版本，next本身已经提供了支持，不过需要在hexo中添加block高亮例外" class="headerlink" title="2.2.1 如果是较高版本，next本身已经提供了支持，不过需要在hexo中添加block高亮例外:"></a>2.2.1 如果是较高版本，next本身已经提供了支持，不过需要在hexo中添加block高亮例外:</h5><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;_config.yml&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">highlight:</span></span><br><span class="line">  <span class="attr">exclude_languages:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">mermaid</span></span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-theme-next/issues/347">reference: mermaid部分能不能像typora一样</a></p>
-<h5 id="2-2-2-较低版本则需要自己处理字符串或者安装hexo-filter-mermaid插件"><a href="#2-2-2-较低版本则需要自己处理字符串或者安装hexo-filter-mermaid插件" class="headerlink" title="2.2.2 较低版本则需要自己处理字符串或者安装hexo-filter-mermaid插件"></a>2.2.2 较低版本则需要自己处理字符串或者安装hexo-filter-mermaid插件</h5><p><code>npm install hexo-filter-mermaid-diagrams --save</code><br>关于 <code>hexo-filter-mermaid-diagrams</code>，本质是使得由markdown语法Fenced Code Blocks转写成&lt;pre&gt;标签，这个库并不真正的执行渲染，可以点进去看源码里面基本上就是一个字符串处理的过程</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">``` mermaid</span><br><span class="line">flowchart TD;</span><br><span class="line">A--&gt;B;</span><br><span class="line">A--&gt;C;</span><br><span class="line">B--&gt;D;</span><br><span class="line">C--&gt;D;</span><br><span class="line">D--&gt;E;</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
-
-<pre><code class="highlight mermaid">graph TD;
-A--&gt;B;
-A--&gt;C;
-B--&gt;D;
-C--&gt;D;
-D--&gt;E;</code></pre>
-
-
-<h3 id="3-调整mermaid显示效果"><a href="#3-调整mermaid显示效果" class="headerlink" title="3.调整mermaid显示效果"></a>3.调整mermaid显示效果</h3><h4 id="3-1-找到next主题mermaid初始化的地方，可以在这里对mermaid进行进一步的自定义设置"><a href="#3-1-找到next主题mermaid初始化的地方，可以在这里对mermaid进行进一步的自定义设置" class="headerlink" title="3.1 找到next主题mermaid初始化的地方，可以在这里对mermaid进行进一步的自定义设置"></a>3.1 找到next主题mermaid初始化的地方，可以在这里对mermaid进行进一步的自定义设置</h4><p>可能根据版本会有差异，大致是类似下面的一段代码<br>比如我把线条的直线改成来basis基础曲线</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mermaid.<span class="title function_">initialize</span>(&#123;</span><br><span class="line">  theme    : <span class="string">&#x27;&#123;&#123; theme.mermaid.theme &#125;&#125;&#x27;</span>,</span><br><span class="line">  logLevel : <span class="number">3</span>,</span><br><span class="line">  <span class="attr">flowchart</span>: &#123; curve     : <span class="string">&#x27;basis&#x27;</span> &#125;,</span><br><span class="line">  gantt    : &#123; <span class="attr">axisFormat</span>: <span class="string">&#x27;%m/%d/%Y&#x27;</span> &#125;,</span><br><span class="line">  sequence : &#123; <span class="attr">actorMargin</span>: <span class="number">50</span> &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-2-mermaid位置，居中显示"><a href="#3-2-mermaid位置，居中显示" class="headerlink" title="3.2 mermaid位置，居中显示,"></a>3.2 mermaid位置，居中显示,</h4><p>(如果是较高版本可能已经默认居中了，不需要手动修改)<br>通过添加css来实现<br>我是放在了 <code>themes/next/source/css/main.styl</code><br>添加居中</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*mermaid图居中*/</span></span><br><span class="line"><span class="selector-class">.mermaid</span>&#123;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h3 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h3><p>晚上才发现了这个事情。<br>具体为何原因被封没有给出官方解释，民间猜测归为“回形针”一类。<br>一些为此发声的公众号文章也被禁了。  </p>
+<h3 id="抢救存档了两个文章。（需科"><a href="#抢救存档了两个文章。（需科" class="headerlink" title="抢救存档了两个文章。（需科"></a>抢救存档了两个文章。（需科</h3><p><strong><a target="_blank" rel="noopener" href="https://archive.ph/aTr9L"><code>这些年，丁香医生都做了什么🔗</code></a></strong><br><strong><a target="_blank" rel="noopener" href="https://archive.ph/A6teJ"><code>丁香飘零🔗</code></a></strong></p>
 
       
     </div>
@@ -600,7 +370,7 @@ D--&gt;E;</code></pre>
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/29/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/06/coding-iOS-Vim/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -618,7 +388,7 @@ D--&gt;E;</code></pre>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/29/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+          <a href="/2021/08/06/coding-iOS-Vim/" class="post-title-link" itemprop="url">Use Vim for iOS project development</a>
         </h2>
 
         <div class="post-meta-container">
@@ -629,7 +399,316 @@ D--&gt;E;</code></pre>
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-07-29 00:00:00" itemprop="dateCreated datePublished" datetime="2022-07-29T00:00:00+08:00">2022-07-29</time>
+      <time title="Created: 2021-08-06 21:58:30" itemprop="dateCreated datePublished" datetime="2021-08-06T21:58:30+08:00">2021-08-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="iOS-project-Editor"><a href="#iOS-project-Editor" class="headerlink" title="iOS project Editor"></a>iOS project Editor</h2><p>一般对于iOS开发者来说Xcode是进行开发的首选工具，这也是苹果官方的开发工具。<br>如果是非专职iOS开发者，那么也有极大的概率使用着其他开发工具。比如写flutter或者rn这种非native app，则可能会直接使用VSCode；对于native app除了vscode也有其他选择，比如jetBrains家的App Code，已经做的非常好，甚至集成了CocoaPods，不过AppCode貌似是收费的。<br>如果你是Vim爱好者，那么很容易在Xcode以外的这些工具中找到Vim插件，体验不错，常用的功能都有。<br>对于Xcode官方也已经在Xcode13中提供了Vim keybind支持，不过很基础，一些常用的功能体面没有提供，使用使用体验与原生Vim存在差距。  </p>
+<h2 id="Language-Server-Protocol"><a href="#Language-Server-Protocol" class="headerlink" title="Language Server Protocol"></a>Language Server Protocol</h2><p>其实现阶段在类似sublime、vscode、Emacs中跨行编辑代码并不是难事，多亏了微软主导的<a target="_blank" rel="noopener" href="https://langserver.org/">Language Server Protocol</a>，每个语言的开发者据此协议提供自己语言服务器以对外提供接口，然后编辑器只需要遵循这个协议即可轻松实现对各种语言的对接，编辑器只需要做好自己的使用体验，界面，输入优化等。</p>
+<pre><code class="highlight mermaid">graph TD;
+S(Swift) --&gt; D;
+A(Java) --&gt; D;
+B(JavaScript) --&gt; D;
+C(C/C++) --&gt; D;
+D(Language Server Protocol) --&gt; E(Vim);
+D --&gt; F(Sublime);
+D --&gt; G(VSCode);
+D --&gt; H(Emacs);</code></pre>
+<h2 id="Use-Vim-for-iOS-project-development"><a href="#Use-Vim-for-iOS-project-development" class="headerlink" title="Use Vim for iOS project development"></a>Use Vim for iOS project development</h2><p>而本文要讨论的则是一个更加朴素的环境，终端中的Vim，在终端中使用Vim来进行iOS工程的编写。<br>虽说是终端编写，但并不是说不需要Xcode了，Vim中做的只是编辑代码，仍需要使用Xcode来进行编译和运行以及Debug。<br>最终达成的效果是，用Xcode新建一个工程，编译，生成编译日志并将其解析为可供lsp-server使用的数据，在Vim中调用lsp-server提供自动补全、定义跳转等支持，在Vim中进行代码编写。</p>
+<pre><code class="highlight mermaid">graph TD;
+A(XcodeCompile/Debug)--&gt; |compile| B;
+
+subgraph prepare info for Language Server
+B(compile log)-.-&gt; |Objective-C| X;
+B(compile log)--&gt; |Swift| Xa;
+X(xcpretty/XCCompilationDB process) -.-&gt; |compile_commands.json| L;
+Xa(Xcode Build Server process) --&gt; |.compile| L;
+end
+
+subgraph Vim-lsp&lt;=&gt;Language server Interactive
+L((Vim-lsp)) -.- |json-compilation-database| Cl(Clangd);
+L --- |Build Server Protocol| S(Sourcekit);
+end
+
+L === |LSP support: autoCompleteion/goToDefinition...| C;
+C((Coding In Vim));</code></pre>
+<h2 id="A-simple-Screencast"><a href="#A-simple-Screencast" class="headerlink" title="A simple Screencast"></a>A simple Screencast</h2><script id="asciicast-jVh32tJK83zPuX3wZjR3MoVLL" src="https://asciinema.org/a/jVh32tJK83zPuX3wZjR3MoVLL.js" async></script>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/27/update-theme-solution/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="organicCola">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/06/27/update-theme-solution/" class="post-title-link" itemprop="url">Update Hexo theme solution</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-27 19:28:27" itemprop="dateCreated datePublished" datetime="2021-06-27T19:28:27+08:00">2021-06-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h4><p>当使用Hexo时不可避免的我们要使用一些主题，当主题的默认设置无法满足我们要求时候我们不可避免的要对其进行一些修改。一般我是用git clone下来主题去掉他原来的git，将其纳入我的blog文件夹的git管理下。<br>当主题发布了新版本我们可能会需要升级主题，或者旧版本无法满足要求需要升级到新版本，这时候就涉及到“迁移之前对主题文件进行的修改”问题。<br>这时候我们就需要知道究竟修改了哪些文件，然后在把修改迁移到新的主题下。</p>
+<h4 id="1-一种朴素的方法，找出不同，手动迁移"><a href="#1-一种朴素的方法，找出不同，手动迁移" class="headerlink" title="1. 一种朴素的方法，找出不同，手动迁移"></a>1. 一种朴素的方法，找出不同，手动迁移</h4><p>在bolg仓库git下使用diff<br>head~3 是刚加入主题时的提交<br>将对比限定在对应主题文件夹下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff  head~3 themes/next</span><br></pre></td></tr></table></figure>
+<p>然后手动把修改的内容迁移到新下载的theme中</p>
+<h4 id="2-升级的半自动方法"><a href="#2-升级的半自动方法" class="headerlink" title="2.升级的半自动方法"></a>2.升级的半自动方法</h4><p>将现在的主题文件夹复制替换掉新版本的主题文件夹里的内容，只保留自己需要的迁移的一部分更改，git add 到贮存区，其余的全部restore状态。完成后去掉.git文件夹，回归到blog文件夹的git管理下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add ****.**  ****.**</span><br><span class="line">git restore .</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-仍然使用主题自己的git管理，较自动的方法"><a href="#3-仍然使用主题自己的git管理，较自动的方法" class="headerlink" title="3. 仍然使用主题自己的git管理，较自动的方法"></a>3. 仍然使用主题自己的git管理，较自动的方法</h4><p>一开始就不去除主题仓库的git，每次更改进行提交，当主题有更新时候拉取，与你的本地提交进行合并。注意检查你的更改在合并之后是否正确。<br>缺点是theme主题的不在blog的git管理之下，并且更改不能进行push，只能在本地。。。但是也许可以通过新建另一个远端仓库来进行push。</p>
+<p>一般很长时间才会去升级主题，并且修改的内容也不多，所以目前我是使用第一种手动的方式，手动的也可以是很可靠的～</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/23/hexo_mermaid_support/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="organicCola">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/06/23/hexo_mermaid_support/" class="post-title-link" itemprop="url">Use mermaid in Hexo</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-23 20:32:11" itemprop="dateCreated datePublished" datetime="2021-06-23T20:32:11+08:00">2021-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="1-使用mermaid，大致上有两种方法："><a href="#1-使用mermaid，大致上有两种方法：" class="headerlink" title="1. 使用mermaid，大致上有两种方法："></a>1. 使用mermaid，大致上有两种方法：</h3><h4 id="1-1如果你的主题是Next，那么可以直接使用next主题内置的"><a href="#1-1如果你的主题是Next，那么可以直接使用next主题内置的" class="headerlink" title="1.1如果你的主题是Next，那么可以直接使用next主题内置的"></a>1.1如果你的主题是<a target="_blank" rel="noopener" href="https://theme-next.js.org/docs/tag-plugins/mermaid.html">Next</a>，那么可以直接使用next主题内置的</h4><p>直接修改next主题文件夹下“_config.yml”中mermaid属性为true，就可以直接使用了。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Mermaid tag</span></span><br><span class="line"><span class="attr">mermaid:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Available themes: default | dark | forest | neutral</span></span><br><span class="line">  <span class="attr">theme:</span> <span class="string">neutral</span></span><br></pre></td></tr></table></figure>
+<p>注意：如果要使用```mermaid的语法，有一些需要注意的地方。<a href="#2.2"><code>见2.2</code></a></p>
+<h4 id="1-2-使用单独的mermaid插件的方式，比如hexo-filter-mermaid-diagrams"><a href="#1-2-使用单独的mermaid插件的方式，比如hexo-filter-mermaid-diagrams" class="headerlink" title="1.2 使用单独的mermaid插件的方式，比如hexo-filter-mermaid-diagrams"></a>1.2 使用单独的mermaid插件的方式，比如hexo-filter-mermaid-diagrams</h4><p>经试验，如果使用hexo-filter-mermaid-diagrams, 那就需要按照官方提供方法的方法进行设置<br>1.2.1 安装  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-filter-mermaid-diagrams --save  </span><br></pre></td></tr></table></figure>
+<p>1.2.2 修改js这一步按照官方操作无法成功的话可能是theme.mermaid.变量无法正常获取导致的，去掉原本的判断条件<br>下面是官方提供的片段  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="keyword">if</span> theme.<span class="property">mermaid</span>.<span class="property">enable</span> %&#125;</span><br><span class="line">  &lt;script src=<span class="string">&#x27;https://unpkg.com/mermaid@&#123;&#123; theme.mermaid.version &#125;&#125;/dist/mermaid.min.js&#x27;</span>&gt;&lt;/script&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-handlebars"><span class="language-xml"></span></span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars"><span class="language-xml">    if (window.mermaid) &#123;</span></span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars"><span class="language-xml">      mermaid.initialize(</span><span class="template-variable">&#123;&#123; <span class="name">JSON.stringify</span>(<span class="name">theme.mermaid.options</span>) &#125;&#125;</span><span class="language-xml">);</span></span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars"><span class="language-xml">    &#125;</span></span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars"><span class="language-xml">  </span></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是修改后的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&#x27;https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js&#x27;</span>&gt;&lt;/script&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">mermaid</span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  mermaid.<span class="title function_">initialize</span>(&#123; <span class="attr">theme</span>: <span class="string">&#x27;default&#x27;</span> &#125;);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="2-关于语法"><a href="#2-关于语法" class="headerlink" title="2. 关于语法"></a>2. 关于语法</h3><h4 id="2-1-下面为next内置的一种写法，（与github默认支持的不兼容，无法在github预览中正常显示）"><a href="#2-1-下面为next内置的一种写法，（与github默认支持的不兼容，无法在github预览中正常显示）" class="headerlink" title="2.1 下面为next内置的一种写法，（与github默认支持的不兼容，无法在github预览中正常显示）"></a>2.1 下面为next内置的一种写法，（与github默认支持的不兼容，无法在github预览中正常显示）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;% mermaid graph TD %&#125;</span><br><span class="line">A[Hard] --&gt;|Text| B(Round)</span><br><span class="line">B --&gt; C&#123;Decision&#125;</span><br><span class="line">C --&gt;|One| D[Result 1]</span><br><span class="line">C --&gt;|Two| E[Result 2]</span><br><span class="line">&#123;% endmermaid %&#125;</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+graph TD
+A[Hard] --&gt;|Text| B(Round)
+B --&gt; C{Decision}
+C --&gt;|One| D[Result 1]
+C --&gt;|Two| E[Result 2]
+</pre>
+
+
+<a id="2.2"/>
+
+<h4 id="2-2-下面为Fenced-Code-Blocks风格的写法，hexo-filter-mermaid-diagrams-中和next中都可以常显示（与github默认支持的兼容）"><a href="#2-2-下面为Fenced-Code-Blocks风格的写法，hexo-filter-mermaid-diagrams-中和next中都可以常显示（与github默认支持的兼容）" class="headerlink" title="2.2 下面为Fenced Code Blocks风格的写法，hexo-filter-mermaid-diagrams 中和next中都可以常显示（与github默认支持的兼容）"></a>2.2 下面为Fenced Code Blocks风格的写法，hexo-filter-mermaid-diagrams 中和next中都可以常显示（与github默认支持的兼容）</h4><h5 id="2-2-1-如果是较高版本，next本身已经提供了支持，不过需要在hexo中添加block高亮例外"><a href="#2-2-1-如果是较高版本，next本身已经提供了支持，不过需要在hexo中添加block高亮例外" class="headerlink" title="2.2.1 如果是较高版本，next本身已经提供了支持，不过需要在hexo中添加block高亮例外:"></a>2.2.1 如果是较高版本，next本身已经提供了支持，不过需要在hexo中添加block高亮例外:</h5><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;_config.yml&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">highlight:</span></span><br><span class="line">  <span class="attr">exclude_languages:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">mermaid</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-theme-next/issues/347">reference: mermaid部分能不能像typora一样</a></p>
+<h5 id="2-2-2-较低版本则需要自己处理字符串或者安装hexo-filter-mermaid插件"><a href="#2-2-2-较低版本则需要自己处理字符串或者安装hexo-filter-mermaid插件" class="headerlink" title="2.2.2 较低版本则需要自己处理字符串或者安装hexo-filter-mermaid插件"></a>2.2.2 较低版本则需要自己处理字符串或者安装hexo-filter-mermaid插件</h5><p><code>npm install hexo-filter-mermaid-diagrams --save</code><br>关于 <code>hexo-filter-mermaid-diagrams</code>，本质是使得由markdown语法Fenced Code Blocks转写成&lt;pre&gt;标签，这个库并不真正的执行渲染，可以点进去看源码里面基本上就是一个字符串处理的过程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">``` mermaid</span><br><span class="line">flowchart TD;</span><br><span class="line">A--&gt;B;</span><br><span class="line">A--&gt;C;</span><br><span class="line">B--&gt;D;</span><br><span class="line">C--&gt;D;</span><br><span class="line">D--&gt;E;</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
+
+<pre><code class="highlight mermaid">graph TD;
+A--&gt;B;
+A--&gt;C;
+B--&gt;D;
+C--&gt;D;
+D--&gt;E;</code></pre>
+
+
+<h3 id="3-调整mermaid显示效果"><a href="#3-调整mermaid显示效果" class="headerlink" title="3.调整mermaid显示效果"></a>3.调整mermaid显示效果</h3><h4 id="3-1-找到next主题mermaid初始化的地方，可以在这里对mermaid进行进一步的自定义设置"><a href="#3-1-找到next主题mermaid初始化的地方，可以在这里对mermaid进行进一步的自定义设置" class="headerlink" title="3.1 找到next主题mermaid初始化的地方，可以在这里对mermaid进行进一步的自定义设置"></a>3.1 找到next主题mermaid初始化的地方，可以在这里对mermaid进行进一步的自定义设置</h4><p>可能根据版本会有差异，大致是类似下面的一段代码<br>比如我把线条的直线改成来basis基础曲线</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mermaid.<span class="title function_">initialize</span>(&#123;</span><br><span class="line">  theme    : <span class="string">&#x27;&#123;&#123; theme.mermaid.theme &#125;&#125;&#x27;</span>,</span><br><span class="line">  logLevel : <span class="number">3</span>,</span><br><span class="line">  <span class="attr">flowchart</span>: &#123; curve     : <span class="string">&#x27;basis&#x27;</span> &#125;,</span><br><span class="line">  gantt    : &#123; <span class="attr">axisFormat</span>: <span class="string">&#x27;%m/%d/%Y&#x27;</span> &#125;,</span><br><span class="line">  sequence : &#123; <span class="attr">actorMargin</span>: <span class="number">50</span> &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-mermaid位置，居中显示"><a href="#3-2-mermaid位置，居中显示" class="headerlink" title="3.2 mermaid位置，居中显示,"></a>3.2 mermaid位置，居中显示,</h4><p>(如果是较高版本可能已经默认居中了，不需要手动修改)<br>通过添加css来实现<br>我是放在了 <code>themes/next/source/css/main.styl</code><br>添加居中</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*mermaid图居中*/</span></span><br><span class="line"><span class="selector-class">.mermaid</span>&#123;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/29/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="organicCola">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/01/29/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-29 00:00:00" itemprop="dateCreated datePublished" datetime="2021-01-29T00:00:00+08:00">2021-01-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
