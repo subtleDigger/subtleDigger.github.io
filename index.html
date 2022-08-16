@@ -386,8 +386,8 @@
 </ul>
 <h3 id="RelationShip-Diagram"><a href="#RelationShip-Diagram" class="headerlink" title="RelationShip Diagram"></a>RelationShip Diagram</h3><pre><code class="highlight mermaid">flowchart TB;
 
-subgraph Mac
-  F([Txt/Md/Org on Mac]) ---&gt; T;
+subgraph Mac[Mac local]
+  F([Txt/Md/Org on Mac]) --- T;
   subgraph R[Review/Edit]
     V(Vim on iTerm)
     E(Emacs: todo-list)
@@ -399,10 +399,10 @@ subgraph Mac
 end
 G -.-|Sync| Gc;
 Gc -.-|Sync| Gi;
-Gc(Git remote)
+Gc[(Git remote repository)]
 
-subgraph iOS
-  A([Txt/Md/Org in iOS Files]) ---&gt; Fi;
+subgraph iOS[iOS local]
+  A([Txt/Md/Org in iOS Files]) --- Fi;
   Fi(iOS Files app) --- I;
   I(iSH)
   subgraph Ri[Review/Edit]

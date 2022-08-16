@@ -28,7 +28,7 @@
 <meta property="og:description" content="现在人不写日记了（正经人谁写日记，你写吗？）但是好记性不如烂笔头， 工作生活免不了要写写笔记备忘录之类的。  Pre现状 Situation:很长一段时间我的笔记都处在一种自由生长的状态，电脑和手机都会用到，使用不同软件不同方法，各成体系，之间几乎不能同步。   电脑端：一组txt文本记录Notes，处在git控制之下，使用vim编辑；todo list也都以PlainText形式记录在这些文本">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-01T22:49:31.000Z">
-<meta property="article:modified_time" content="2022-08-16T16:50:59.052Z">
+<meta property="article:modified_time" content="2022-08-16T22:22:35.197Z">
 <meta property="article:author" content="organicCola">
 <meta property="article:tag" content="notes">
 <meta property="article:tag" content="GTD">
@@ -312,8 +312,8 @@
 </ul>
 <h3 id="RelationShip-Diagram"><a href="#RelationShip-Diagram" class="headerlink" title="RelationShip Diagram"></a>RelationShip Diagram</h3><pre><code class="highlight mermaid">flowchart TB;
 
-subgraph Mac
-  F([Txt/Md/Org on Mac]) ---&gt; T;
+subgraph Mac[Mac local]
+  F([Txt/Md/Org on Mac]) --- T;
   subgraph R[Review/Edit]
     V(Vim on iTerm)
     E(Emacs: todo-list)
@@ -325,10 +325,10 @@ subgraph Mac
 end
 G -.-|Sync| Gc;
 Gc -.-|Sync| Gi;
-Gc(Git remote)
+Gc[(Git remote repository)]
 
-subgraph iOS
-  A([Txt/Md/Org in iOS Files]) ---&gt; Fi;
+subgraph iOS[iOS local]
+  A([Txt/Md/Org in iOS Files]) --- Fi;
   Fi(iOS Files app) --- I;
   I(iSH)
   subgraph Ri[Review/Edit]
