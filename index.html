@@ -124,7 +124,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -135,7 +135,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -164,6 +164,190 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/16/A-basic-enough-solution-to-organize-GTD-dailyNOtes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="organicCola">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/08/16/A-basic-enough-solution-to-organize-GTD-dailyNOtes/" class="post-title-link" itemprop="url">一种朴素的笔记和GTD方案 - A basic enough solution to organize GTD and dailyNotes</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-08-16 06:49:31" itemprop="dateCreated datePublished" datetime="2022-08-16T06:49:31+08:00">2022-08-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>现在人不写日记了（正经人谁写日记，你写吗？）<br>但是好记性不如烂笔头， 工作生活免不了要写写笔记备忘录之类的。</p>
+</blockquote>
+<h3 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h3><h5 id="现状-Situation"><a href="#现状-Situation" class="headerlink" title="现状 Situation:"></a>现状 Situation:</h5><p>很长一段时间我的笔记都处在一种自由生长的状态，电脑和手机都会用到，使用不同软件不同方法，各成体系，之间几乎不能同步。</p>
+<blockquote>
+<ul>
+<li>电脑端：一组txt文本记录Notes，处在git控制之下，使用vim编辑；todo list也都以PlainText形式记录在这些文本中，做完手动更改状态。</li>
+<li>手机端：使用iOS自带的备忘录，做todo list，几乎不会写笔记，有也是塞进todo list里面。</li>
+</ul>
+</blockquote>
+<h5 id="存在问题-Issue"><a href="#存在问题-Issue" class="headerlink" title="存在问题 Issue:"></a>存在问题 Issue:</h5><blockquote>
+<ul>
+<li>一个早就有的痛点：不同平台无法同步，同步只能通过Apple的备忘录手动复制粘贴。</li>
+<li>有数据丢失风险，有时候网络不佳，刚写完的备忘录会在iCloud上同步失败，一条todo直接消失不见。</li>
+<li>手机上todo和电脑端的数据格式不同，这是也无法同步的原因之一，另一个是缺少同步手段。</li>
+</ul>
+</blockquote>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="分析-Analysis"><a href="#分析-Analysis" class="headerlink" title="分析 Analysis:"></a>分析 Analysis:</h4><blockquote>
+<ul>
+<li>不能同步的原因是不同平台间的内容储存和管理方式不同</li>
+<li>手机端用的是iOS自带的软件，数据被限制在app中，iCloud平台也不够通用，而且限制在Apple生态中</li>
+<li>电脑端用的是文本文件。</li>
+<li>数据稳定性受网络影响，并且手机端同步的状态只能通过肉眼查看内容来确认状态，没有一个显式的状态。</li>
+</ul>
+</blockquote>
+<h4 id="大纲-Requirments"><a href="#大纲-Requirments" class="headerlink" title="大纲 Requirments:"></a>大纲 Requirments:</h4><p>整理一下问题，现在可以大体罗列一下需求。</p>
+<ul>
+<li>需要最大程度解决兼容性问题，使用文本文件为中心 <code>txt/md</code><blockquote>
+<ul>
+<li>不能寻求一个All in one的app，以防锁死在其中，失去支持，不能导出数据，或者导出的数据很难处理与其他应用不兼容。</li>
+<li>不应该以任何App为中心来进行构建，因为你无法保证每个app之间能良好通信，共享数据。</li>
+<li>应该以一种最为基础的内容为中心。</li>
+<li>需要一种最基础简单的数据形式: 文本，最简单的即是TXT文本文件，相信它的兼容性是无可比拟的。笔记的本质是信息，而文字是一种高效率信息记录方式，小小的1M都蕴含着海量信息；图表为辅。</li>
+<li>txt文件的兼容性可以保证最大程度上在各种设备、应用中储存，打开，阅读。</li>
+</ul>
+</blockquote>
+</li>
+<li>需要一种最安全的储存&#x2F;同步方式：<code>git/syncthing(p2p)</code><blockquote>
+<ul>
+<li>需要可以在本地编辑。</li>
+<li>需要可以云端储存</li>
+<li>最好可以进行版本控制</li>
+</ul>
+</blockquote>
+</li>
+<li>对文件进行编辑，基于文本文件使用各种工具增强体验 <code>各种工具和应用</code><blockquote>
+<ul>
+<li>使用趁手的编辑器&#x2F;应用</li>
+<li>最好是可以支持md</li>
+<li>最好是可以用Vim</li>
+<li>最好是有一种基于简单格式文本的但有方便互动操作的GTD方案</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h3 id="工具-Tools"><a href="#工具-Tools" class="headerlink" title="工具 Tools"></a>工具 Tools</h3><p>这些工具都是免费的或免费版也已经够用的，大多数是开源的</p>
+<ul>
+<li><p>电脑端：</p>
+<blockquote>
+<ul>
+<li>环境：Cli <code>iTerm</code></li>
+<li>同步：<code>git</code></li>
+<li>编辑：<code>Vim</code>&#x2F;<code>Emacs</code>(用于todo-list)</li>
+</ul>
+</blockquote>
+</li>
+<li><p>移动端(iOS) </p>
+<blockquote>
+<ul>
+<li>同步：git(in iSH)</li>
+<li>编辑&#x2F;阅读：<code>iVim</code>&#x2F;<code>Obsidian</code>&#x2F;<code>beOrg</code>(用于todo-list)</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h3 id="Summary-Chart"><a href="#Summary-Chart" class="headerlink" title="Summary Chart"></a>Summary Chart</h3><pre><code class="highlight mermaid">flowchart TB;
+
+subgraph Mac
+  F([Txt/Md/Org on Mac]) ---&gt; T;
+  subgraph R[Review/Edit]
+    V(Vim on iTerm)
+    E(Emacs: todo-list)
+  end
+  R --- T; 
+  T(iTerm)
+  G((Git in iTerm))
+  T --- G;
+end
+G -.-|Sync| Gc;
+Gc -.-|Sync| Gi;
+Gc(Git remote)
+
+subgraph iOS
+  A([Txt/Md/Org in iOS Files]) ---&gt; Fi;
+  Fi(iOS Files app) --- I;
+  I(iSH)
+  subgraph Ri[Review/Edit]
+    Vi(iVim on iOS) 
+    B(beOrg: todo-list)
+    O(Obsidian on iOS)
+  end
+  Ri --- Fi;
+  I --- Gi;
+  Gi((Git in iSH))
+end
+</code></pre>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
