@@ -299,7 +299,7 @@
 </blockquote>
 </li>
 </ul>
-<h3 id="Summary-Chart"><a href="#Summary-Chart" class="headerlink" title="Summary Chart"></a>Summary Chart</h3><pre><code class="highlight mermaid">flowchart TB;
+<h3 id="RelationShip-Diagram"><a href="#RelationShip-Diagram" class="headerlink" title="RelationShip Diagram"></a>RelationShip Diagram</h3><pre><code class="highlight mermaid">flowchart TB;
 
 subgraph Mac
   F([Txt/Md/Org on Mac]) ---&gt; T;
@@ -331,6 +331,21 @@ subgraph iOS
 end
 </code></pre>
 
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><ol>
+<li>以文本文件为内容核心 <blockquote>
+<p>使用md文件和org文件作为memo和todo list。特点是完全text-based，md和org的特点决定了他们即使不通过任何特定工具，任何平台上都可以以文本文件的形式查看，并且很直观，没有复杂的格式，但是又具有扩展性，可以做更复杂的展示、图表统计等。</p>
+</blockquote>
+</li>
+<li>通过git&#x2F;syncthing等同步工具做全平台同步，<blockquote>
+<p>而git的同步储存、版本管理能力无需多言，通过git自然而然地又满足了多备份异地备份，抗灾能力强，还可以通过自建本地私有git服务来实现完全信息私有。</p>
+</blockquote>
+</li>
+<li>外围可以使用工具来增强体验。<blockquote>
+<p>使用beorg、obsidia之类的工具增强阅读和交互编辑体验在手机上简单的点选todi-list，obsidian可以建关系图。同时文件text-based的特性让你可以用你自己最喜欢的编辑器来编辑，比如vim，typora，emacs，vscode等。</p>
+</blockquote>
+</li>
+</ol>
+<p><em>缺点</em>：<br>要说简单肯定是不如notion&#x2F;飞书这种一站式方便，也有一些工具上的使用成本。<br><strong>优点</strong>：<br>总的来说文本文件系统是最通用基础的管理方式，能保证极大的兼容性，与各种特定的软件之间解耦，但又能广泛地通过软件加强其能力。长远看可以把控其中细节，其中的细节可以拆分，便于拓展替换，与特定软件解耦。<br>试想当你所有笔记都在All-in在app中，某天你发现某个功能无法满足你的要求需要使用其他软件来配合，却发现该软件很难与其他app互动，因为他们数据格式不能互通。。。又或者某天他忽然挂了，网络卡住，或软件本身卡住，你却无法查看其中内容，或者你想转移数据却发现只有付费Pro版才能这么做，转出来了却发现内容根本不可读。。。又或者他数据根本不提供本地导出，你所有的数据都以一种你无法读取无法触及的方式存在一个遥远的服务器上，然后陷入深深的绝望。。。<br><strong>这时候你才想起来，你本可以对自己的数据更有掌握权的。</strong></p>
 
       
     </div>
