@@ -276,7 +276,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/02/A-basic-enough-solution-to-organize-GTD-dailyNOtes/" class="post-title-link" itemprop="url">一种朴素的笔记和GTD方案 - A basic enough solution to organize GTD and dailyNotes</a>
+          <a href="/2022/07/02/A-basic-enough-solution-to-organize-GTD-dailyNOtes/" class="post-title-link" itemprop="url">一种朴素的几乎纯文本笔记和GTD方案 - A basic enough solution to organize GTD and dailyNotes</a>
         </h2>
 
         <div class="post-meta-container">
@@ -364,26 +364,6 @@
 </blockquote>
 </li>
 </ul>
-<h3 id="工具-Tools"><a href="#工具-Tools" class="headerlink" title="工具 Tools"></a>工具 Tools</h3><p>这些工具都是免费的或免费版也已经够用的，大多数是开源的</p>
-<ul>
-<li><p>电脑端：</p>
-<blockquote>
-<ul>
-<li>环境：Cli <code>iTerm</code></li>
-<li>同步：<code>git</code></li>
-<li>编辑：<code>Vim</code>&#x2F;<code>Emacs</code>(用于todo-list)</li>
-</ul>
-</blockquote>
-</li>
-<li><p>移动端(iOS) </p>
-<blockquote>
-<ul>
-<li>同步：git(in iSH)</li>
-<li>编辑&#x2F;阅读：<code>iVim</code>&#x2F;<code>Obsidian</code>&#x2F;<code>beOrg</code>(用于todo-list)</li>
-</ul>
-</blockquote>
-</li>
-</ul>
 <h3 id="RelationShip-Diagram"><a href="#RelationShip-Diagram" class="headerlink" title="RelationShip Diagram"></a>RelationShip Diagram</h3><pre><code class="highlight mermaid">flowchart TB;
 
 subgraph Mac[Mac local]
@@ -415,7 +395,26 @@ subgraph iOS[iOS local]
   Gi((Git in iSH))
 end
 </code></pre>
-
+<h3 id="工具-Tools"><a href="#工具-Tools" class="headerlink" title="工具 Tools"></a>工具 Tools</h3><p>这些工具都是免费的或免费版也已经够用的，大多数是开源的</p>
+<ul>
+<li><p>电脑端：</p>
+<blockquote>
+<ul>
+<li>环境：Cli <code>iTerm</code></li>
+<li>同步：<code>git</code></li>
+<li>编辑：<code>Vim</code>&#x2F;<code>Emacs</code>(用于todo-list)</li>
+</ul>
+</blockquote>
+</li>
+<li><p>移动端(iOS) </p>
+<blockquote>
+<ul>
+<li>同步：git(in iSH)<br><del>iOS端因为封闭的文件系统要在app间共享文件和使用git比较麻烦，iOS上的git app最知名的有Working Copy，不过想要连接Working Copy以外其他App的文件夹和全部git功能都需要Pro订阅，弃之。</del><br>然后发现了一个神器iSH。iSH内运行alpine linux，可以安装一个完整的git，和电脑端的别无二至。因为直接是linux环境，运行脚本，修改alias这些不在话下，用起来甚至比GUI的WorkingCopy更方便。<br>对于连接iSH文件夹以外的位置，iSH可以通过mount命令做到。<br><code>mount -t ios-unsafe . /root/mountFolder/</code><br>注意这里最好写ios-unsafe，否则使用git的时候可能会经常进行index并且非常慢。<br>并且注意因为alpine是单线程的，在iOS下使用可能会有问题，解决方法是<code>git</code>的<code>.gitconfig</code>文件里加上  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[pack]</span><br><span class="line">    threads = 1</span><br></pre></td></tr></table></figure></li>
+<li>编辑&#x2F;阅读：<code>iVim</code>&#x2F;<code>Obsidian</code>&#x2F;<code>beOrg</code>(用于todo-list)<br>iVim：在键盘上方添加了一些常用符号，操作起来虽然没有真键盘方便但是比原键盘舒服多了。<br>Obsidian：移动端屏幕比较小，直接在终端里操作并不方便，还是需要Obsidian这种能够渲染md文件的app来进行阅读比较舒适，其实也有别的md渲染app，为什么选Obsidian？并不是因为他有双向连接什么的，只是紫色黑曜石的icon比较好看～ 事实上电脑上我也并不会使用Obsidian，笔记&#x2F;todo&#x2F;代码 终端一把梭。<br>beOrg：可以识别你的Emacs Org文件，todo-list，也可以使用agenda，因为没有键盘，在移动端还是这种GUI更方便，点选就可以改变state、deadline和新建todo。文本格式和Emacs兼容的还行，偶尔会有多少一两行空行啥的，问题不大。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
 <h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><ol>
 <li>以文本文件为内容核心 <blockquote>
 <p>使用md文件和org文件作为memo和todo list。特点是完全text-based，md和org的特点决定了他们即使不通过任何特定工具，任何平台上都可以以文本文件的形式查看，并且很直观，没有复杂的格式，但是又具有扩展性，可以做更复杂的展示、图表统计等。</p>
@@ -430,8 +429,8 @@ end
 </blockquote>
 </li>
 </ol>
-<p><em>缺点</em>：<br>要说简单肯定是不如notion&#x2F;飞书这种一站式方便，也有一些工具上的使用成本。<br><strong>优点</strong>：<br>总的来说文本文件系统是最通用基础的管理方式，能保证极大的兼容性，与各种特定的软件之间解耦，但又能广泛地通过软件加强其能力。长远看可以把控其中细节，其中的细节可以拆分，便于拓展替换，与特定软件解耦。<br>试想当你所有笔记都在All-in在app中，某天你发现某个功能无法满足你的要求需要使用其他软件来配合，却发现该软件很难与其他app互动，因为他们数据格式不能互通。。。又或者某天他忽然挂了，网络卡住，或软件本身卡住，你却无法查看其中内容，或者你想转移数据却发现只有付费Pro版才能这么做，转出来了却发现内容根本不可读。。。又或者他数据根本不提供本地导出，你所有的数据都以一种你无法读取无法触及的方式存在一个遥远的服务器上，然后陷入深深的绝望。。。<br><strong>这时候你才想起来，你本可以对自己的数据更有掌握权的。</strong></p>
-
+<p><em>缺点</em>：<br>要说简单肯定是不如notion&#x2F;飞书这种一站式方便，也有一些工具上的使用成本。<br><strong>优点</strong>：<br>总的来说文本文件系统是最通用基础的管理方式，能保证极大的兼容性，与各种特定的软件之间解耦，但又能广泛地通过软件加强其能力。长远看可以把控其中细节，其中的细节可以拆分，便于拓展替换，与特定软件解耦。<br>试想当你所有笔记都在All-in在app中，某天你发现某个功能无法满足你的要求需要使用其他软件来配合，却发现该软件很难与其他app互动，因为他们数据格式不能互通。。。又或者某天他忽然挂了，网络卡住，或软件本身卡住，你却无法查看其中内容，或者你想转移数据却发现只有付费Pro版才能这么做，转出来了却发现内容根本不可读。。。又或者他数据根本不提供本地导出，你所有的数据都以一种你无法读取无法触及的方式存在一个遥远的服务器上，然后陷入深深的绝望。。。</p>
+<h3 id="这时候你才想起来，你本可以对自己的数据更有掌握权的。"><a href="#这时候你才想起来，你本可以对自己的数据更有掌握权的。" class="headerlink" title="这时候你才想起来，你本可以对自己的数据更有掌握权的。"></a>这时候你才想起来，你本可以对自己的数据更有掌握权的。</h3>
       
     </div>
 
