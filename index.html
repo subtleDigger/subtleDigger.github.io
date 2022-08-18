@@ -508,7 +508,7 @@ end
     
     <div class="post-body" itemprop="articleBody">
           <h3 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h3><p>一般平时的环境可以直连国际万维网，所以没有什么问题。但某天在家中使用git时，虽然开着ClashX，却发现速度还是龟速，忍不了了，遂着手解决一下。</p>
-<h3 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h3><p><a href="#Solution"><code>Solution</code></a></p>
+<h3 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h3><p><a href="#02-19-Solution"><code>Solution</code></a></p>
 <h3 id="TroubleShooting"><a href="#TroubleShooting" class="headerlink" title="TroubleShooting"></a>TroubleShooting</h3><h4 id="首先是看一下，检查一下全局的代理值"><a href="#首先是看一下，检查一下全局的代理值" class="headerlink" title="首先是看一下，检查一下全局的代理值"></a>首先是看一下，检查一下全局的代理值</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> <span class="variable">$https_proxy</span></span></span><br><span class="line">http://127.0.0.1:7890</span><br></pre></td></tr></table></figure>
 <p>心中一惊，这意味者全局的代理是正常的，然而速度还是慢，说明原因还没找到，need to go deeper…</p>
 <h4 id="检查-gitconfig文件"><a href="#检查-gitconfig文件" class="headerlink" title="检查.gitconfig文件"></a>检查<code>.gitconfig</code>文件</h4><p><code>git config --global -e</code></p>
@@ -516,10 +516,10 @@ end
 <p>所有的设置也都正常，按理说只要全局设置了git自动就会走代理，但是现在两个都设置了还不行。<br>忽然想到会不会问题不在git设置，而是在clash？</p>
 <h4 id="查看ClashX的Connections"><a href="#查看ClashX的Connections" class="headerlink" title="查看ClashX的Connections"></a>查看<code>ClashX</code>的<code>Connections</code></h4><p>打开ClashX dashboard 查看 <code>Connections</code> 一栏。当我使用git clone 来进行测试时，发现里面居然找不到git的相关连接。<br>到这里为止可算是找到了一点蛛丝马迹，但这只是表象，具体问题现在还不知道，不过猜测可能是网站不在Clash的规则里面？于是查找了规则名单，一些大型的git托管网站都在里面，所以问题不在这里。</p>
 <h4 id="ssh的锅"><a href="#ssh的锅" class="headerlink" title="ssh的锅"></a>ssh的锅</h4><p>搞来搞去还是不行，想吐。但这时候我忽然想起来，会不会是ssh的锅？<br>于是git clone一个https形式的repository。发现Clash <code>Connections</code>中出现了连接，到这里算是确定了问题所在。</p>
-<a id="Solution"/>
+<a id="02-19-Solution"/>
 
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>首先想到的是我只接使用https形式的地址不就行了吗，但是忽然发现这托管网站不支持https的地址，至少是需要支持ssh形式的。于是放弃奇技淫巧，还是走正道。本来https也不够方便，还有可能要时不时输个密码。<br>于是网上搜索一番，ssh走代理的方式：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~/.ssh/config</span><br><span class="line"></span><br><span class="line">Host github.com</span><br><span class="line">  Hostname ssh.github.com</span><br><span class="line">  Port 22</span><br><span class="line">  ProxyCommand nc -v -x 127.0.0.1:7890 %h %p</span><br></pre></td></tr></table></figure>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>首先想到的是我只接使用https形式的地址不就行了吗，但是忽然发现bitbucket似乎不支持https的地址，至少是需要支持ssh形式的。于是放弃奇技淫巧，还是走正道。本来https也不够方便，还有可能要时不时输个密码。<br>于是网上搜索一番，ssh走代理的方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~/.ssh/config</span><br><span class="line"></span><br><span class="line">Host bitbucket.org</span><br><span class="line">  Hostname ssh.bitbucket.org</span><br><span class="line">  Port 22</span><br><span class="line">  ProxyCommand nc -v -x 127.0.0.1:7890 %h %p</span><br></pre></td></tr></table></figure>
 <p>nc 也就是网上所说的“瑞士军刀”netcat<br>再次执行git clone 测试，丝滑～</p>
 <h3 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h3><p>注意终端里各个程序不一定都会走全局代理，这个ssh就是典型，需要看具体应用的代理方式是如何设置的。</p>
 
