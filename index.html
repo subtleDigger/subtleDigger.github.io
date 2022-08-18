@@ -124,7 +124,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -135,7 +135,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -431,6 +431,98 @@ end
 </ol>
 <p><em>缺点</em>：<br>要说简单肯定是不如notion&#x2F;飞书这种一站式方便，也有一些工具上的使用成本。<br><strong>优点</strong>：<br>总的来说文本文件系统是最通用基础的管理方式，能保证极大的兼容性，与各种特定的软件之间解耦，但又能广泛地通过软件加强其能力。长远看可以把控其中细节，其中的细节可以拆分，便于拓展替换，与特定软件解耦。<br>试想当你所有笔记都在All-in在app中，某天你发现某个功能无法满足你的要求需要使用其他软件来配合，却发现该软件很难与其他app互动，因为他们数据格式不能互通。。。又或者某天他忽然挂了，网络卡住，或软件本身卡住，你却无法查看其中内容，或者你想转移数据却发现只有付费Pro版才能这么做，转出来了却发现内容根本不可读。。。又或者他数据根本不提供本地导出，你所有的数据都以一种你无法读取无法触及的方式存在一个遥远的服务器上，然后陷入深深的绝望。。。</p>
 <h3 id="这时候你才想起来，你本可以对自己的数据更有掌握权的。"><a href="#这时候你才想起来，你本可以对自己的数据更有掌握权的。" class="headerlink" title="这时候你才想起来，你本可以对自己的数据更有掌握权的。"></a>这时候你才想起来，你本可以对自己的数据更有掌握权的。</h3>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/19/Using-git-with-ssh-throuhgh-proxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="organicCola">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/19/Using-git-with-ssh-throuhgh-proxy/" class="post-title-link" itemprop="url">Using git with ssh throuhgh proxy</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-02-19 03:56:51" itemprop="dateCreated datePublished" datetime="2022-02-19T03:56:51+08:00">2022-02-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h3><p>一般平时的环境可以直连国际万维网，所以没有什么问题。但某天在家中使用git时，虽然开着ClashX，却发现速度还是龟速，忍不了了，遂着手解决一下。</p>
+<h3 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h3><p><a href="#Solution"><code>Solution</code></a></p>
+<h3 id="TroubleShooting"><a href="#TroubleShooting" class="headerlink" title="TroubleShooting"></a>TroubleShooting</h3><h4 id="首先是看一下，检查一下全局的代理值"><a href="#首先是看一下，检查一下全局的代理值" class="headerlink" title="首先是看一下，检查一下全局的代理值"></a>首先是看一下，检查一下全局的代理值</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> <span class="variable">$https_proxy</span></span></span><br><span class="line">http://127.0.0.1:7890</span><br></pre></td></tr></table></figure>
+<p>心中一惊，这意味者全局的代理是正常的，然而速度还是慢，说明原因还没找到，need to go deeper…</p>
+<h4 id="检查-gitconfig文件"><a href="#检查-gitconfig文件" class="headerlink" title="检查.gitconfig文件"></a>检查<code>.gitconfig</code>文件</h4><p><code>git config --global -e</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[http]</span><br><span class="line">	sslBackend = openssl</span><br><span class="line">	proxy = http://127.0.0.1:7890</span><br><span class="line">[https]</span><br><span class="line">	proxy = http://127.0.0.1:7890</span><br><span class="line">[socks5]</span><br><span class="line">	proxy = socks5://127.0.0.1:7890</span><br></pre></td></tr></table></figure>
+<p>所有的设置也都正常，按理说只要全局设置了git自动就会走代理，但是现在两个都设置了还不行。<br>忽然想到会不会问题不在git设置，而是在clash？</p>
+<h4 id="查看ClashX的Connections"><a href="#查看ClashX的Connections" class="headerlink" title="查看ClashX的Connections"></a>查看<code>ClashX</code>的<code>Connections</code></h4><p>打开ClashX dashboard 查看 <code>Connections</code> 一栏。当我使用git clone 来进行测试时，发现里面居然找不到git的相关连接。<br>到这里为止可算是找到了一点蛛丝马迹，但这只是表象，具体问题现在还不知道，不过猜测可能是网站不在Clash的规则里面？于是查找了规则名单，一些大型的git托管网站都在里面，所以问题不在这里。</p>
+<h4 id="ssh的锅"><a href="#ssh的锅" class="headerlink" title="ssh的锅"></a>ssh的锅</h4><p>搞来搞去还是不行，想吐。但这时候我忽然想起来，会不会是ssh的锅？<br>于是git clone一个https形式的repository。发现Clash <code>Connections</code>中出现了连接，到这里算是确定了问题所在。</p>
+<a id="Solution"/>
+
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>首先想到的是我只接使用https形式的地址不就行了吗，但是忽然发现这托管网站不支持https的地址，至少是需要支持ssh形式的。于是放弃奇技淫巧，还是走正道。本来https也不够方便，还有可能要时不时输个密码。<br>于是网上搜索一番，ssh走代理的方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~/.ssh/config</span><br><span class="line"></span><br><span class="line">Host github.com</span><br><span class="line">  Hostname ssh.github.com</span><br><span class="line">  Port 22</span><br><span class="line">  ProxyCommand nc -v -x 127.0.0.1:7890 %h %p</span><br></pre></td></tr></table></figure>
+<p>nc 也就是网上所说的“瑞士军刀”netcat<br>再次执行git clone 测试，丝滑～</p>
+<h3 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h3><p>注意终端里各个程序不一定都会走全局代理，这个ssh就是典型，需要看具体应用的代理方式是如何设置的。</p>
+
       
     </div>
 

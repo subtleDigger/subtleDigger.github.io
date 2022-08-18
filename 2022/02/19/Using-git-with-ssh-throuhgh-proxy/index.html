@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha256-xejo6yLi6vGtAjcMIsY8BHdKsLg7QynVlFMzdQgUuy8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Pre一般平时的环境可以直连国际万维网，所以没有什么问题。但某天在家中使用git时，虽然开着ClashX，却发现速度还是龟速，忍不了了，遂着手解决一下。 TL;DRSolution TroubleShooting首先是看一下，检查一下全局的代理值12$ echo $https_proxyhttp:&#x2F;&#x2F;127.0.0.1:7890 心中一惊，这意味者全局的代理是正常的，然而速度还是慢，说明原因还没找">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Using git with ssh throuhgh proxy">
+<meta property="og:url" content="http://example.com/2022/02/19/Using-git-with-ssh-throuhgh-proxy/index.html">
+<meta property="og:site_name" content="organicCola&#39;s House">
+<meta property="og:description" content="Pre一般平时的环境可以直连国际万维网，所以没有什么问题。但某天在家中使用git时，虽然开着ClashX，却发现速度还是龟速，忍不了了，遂着手解决一下。 TL;DRSolution TroubleShooting首先是看一下，检查一下全局的代理值12$ echo $https_proxyhttp:&#x2F;&#x2F;127.0.0.1:7890 心中一惊，这意味者全局的代理是正常的，然而速度还是慢，说明原因还没找">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-18T19:56:51.000Z">
+<meta property="article:modified_time" content="2022-08-18T21:30:06.754Z">
+<meta property="article:author" content="organicCola">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="ssh">
+<meta property="article:tag" content="proxy">
+<meta property="article:tag" content="nc">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/02/19/Using-git-with-ssh-throuhgh-proxy/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/02/19/Using-git-with-ssh-throuhgh-proxy/","path":"2022/02/19/Using-git-with-ssh-throuhgh-proxy/","title":"Using git with ssh throuhgh proxy"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Using git with ssh throuhgh proxy | organicCola's House</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">organicCola's House</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Organic cola is good for your happiness</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pre"><span class="nav-number">1.</span> <span class="nav-text">Pre</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TL-DR"><span class="nav-number">2.</span> <span class="nav-text">TL;DR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TroubleShooting"><span class="nav-number">3.</span> <span class="nav-text">TroubleShooting</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A6%96%E5%85%88%E6%98%AF%E7%9C%8B%E4%B8%80%E4%B8%8B%EF%BC%8C%E6%A3%80%E6%9F%A5%E4%B8%80%E4%B8%8B%E5%85%A8%E5%B1%80%E7%9A%84%E4%BB%A3%E7%90%86%E5%80%BC"><span class="nav-number">3.1.</span> <span class="nav-text">首先是看一下，检查一下全局的代理值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5-gitconfig%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">检查.gitconfig文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BClashX%E7%9A%84Connections"><span class="nav-number">3.3.</span> <span class="nav-text">查看ClashX的Connections</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ssh%E7%9A%84%E9%94%85"><span class="nav-number">3.4.</span> <span class="nav-text">ssh的锅</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">4.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Appendix"><span class="nav-number">5.</span> <span class="nav-text">Appendix</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">organicCola</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/19/Using-git-with-ssh-throuhgh-proxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="organicCola">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Using git with ssh throuhgh proxy | organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Using git with ssh throuhgh proxy
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-02-19 03:56:51" itemprop="dateCreated datePublished" datetime="2022-02-19T03:56:51+08:00">2022-02-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h3><p>一般平时的环境可以直连国际万维网，所以没有什么问题。但某天在家中使用git时，虽然开着ClashX，却发现速度还是龟速，忍不了了，遂着手解决一下。</p>
+<h3 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h3><p><a href="#Solution"><code>Solution</code></a></p>
+<h3 id="TroubleShooting"><a href="#TroubleShooting" class="headerlink" title="TroubleShooting"></a>TroubleShooting</h3><h4 id="首先是看一下，检查一下全局的代理值"><a href="#首先是看一下，检查一下全局的代理值" class="headerlink" title="首先是看一下，检查一下全局的代理值"></a>首先是看一下，检查一下全局的代理值</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> <span class="variable">$https_proxy</span></span></span><br><span class="line">http://127.0.0.1:7890</span><br></pre></td></tr></table></figure>
+<p>心中一惊，这意味者全局的代理是正常的，然而速度还是慢，说明原因还没找到，need to go deeper…</p>
+<h4 id="检查-gitconfig文件"><a href="#检查-gitconfig文件" class="headerlink" title="检查.gitconfig文件"></a>检查<code>.gitconfig</code>文件</h4><p><code>git config --global -e</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[http]</span><br><span class="line">	sslBackend = openssl</span><br><span class="line">	proxy = http://127.0.0.1:7890</span><br><span class="line">[https]</span><br><span class="line">	proxy = http://127.0.0.1:7890</span><br><span class="line">[socks5]</span><br><span class="line">	proxy = socks5://127.0.0.1:7890</span><br></pre></td></tr></table></figure>
+<p>所有的设置也都正常，按理说只要全局设置了git自动就会走代理，但是现在两个都设置了还不行。<br>忽然想到会不会问题不在git设置，而是在clash？</p>
+<h4 id="查看ClashX的Connections"><a href="#查看ClashX的Connections" class="headerlink" title="查看ClashX的Connections"></a>查看<code>ClashX</code>的<code>Connections</code></h4><p>打开ClashX dashboard 查看 <code>Connections</code> 一栏。当我使用git clone 来进行测试时，发现里面居然找不到git的相关连接。<br>到这里为止可算是找到了一点蛛丝马迹，但这只是表象，具体问题现在还不知道，不过猜测可能是网站不在Clash的规则里面？于是查找了规则名单，一些大型的git托管网站都在里面，所以问题不在这里。</p>
+<h4 id="ssh的锅"><a href="#ssh的锅" class="headerlink" title="ssh的锅"></a>ssh的锅</h4><p>搞来搞去还是不行，想吐。但这时候我忽然想起来，会不会是ssh的锅？<br>于是git clone一个https形式的repository。发现Clash <code>Connections</code>中出现了连接，到这里算是确定了问题所在。</p>
+<a id="Solution"/>
+
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>首先想到的是我只接使用https形式的地址不就行了吗，但是忽然发现这托管网站不支持https的地址，至少是需要支持ssh形式的。于是放弃奇技淫巧，还是走正道。本来https也不够方便，还有可能要时不时输个密码。<br>于是网上搜索一番，ssh走代理的方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~/.ssh/config</span><br><span class="line"></span><br><span class="line">Host github.com</span><br><span class="line">  Hostname ssh.github.com</span><br><span class="line">  Port 22</span><br><span class="line">  ProxyCommand nc -v -x 127.0.0.1:7890 %h %p</span><br></pre></td></tr></table></figure>
+<p>nc 也就是网上所说的“瑞士军刀”netcat<br>再次执行git clone 测试，丝滑～</p>
+<h3 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h3><p>注意终端里各个程序不一定都会走全局代理，这个ssh就是典型，需要看具体应用的代理方式是如何设置的。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/ssh/" rel="tag"># ssh</a>
+              <a href="/tags/proxy/" rel="tag"># proxy</a>
+              <a href="/tags/nc/" rel="tag"># nc</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/08/06/coding-iOS-Vim/" rel="prev" title="Use Vim for iOS project development">
+                  <i class="fa fa-chevron-left"></i> Use Vim for iOS project development
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/07/02/A-basic-enough-solution-to-organize-GTD-dailyNOtes/" rel="next" title="一种朴素的几乎纯文本笔记和GTD方案 - A basic enough solution to organize GTD and dailyNotes">
+                  一种朴素的几乎纯文本笔记和GTD方案 - A basic enough solution to organize GTD and dailyNotes <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">organicCola</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"neutral","dark":"default"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js","integrity":"sha256-TIYL00Rhw/8WaoUhYTLX9SKIEFdXxg+yMWSLVUbhiLg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
