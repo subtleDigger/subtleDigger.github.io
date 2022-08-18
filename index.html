@@ -518,7 +518,7 @@ end
 <h4 id="ssh的锅"><a href="#ssh的锅" class="headerlink" title="ssh的锅"></a>ssh的锅</h4><p>搞来搞去还是不行，想吐。但这时候我忽然想起来，会不会是ssh的锅？<br>于是git clone一个https形式的repository。发现Clash <code>Connections</code>中出现了连接，到这里算是确定了问题所在。</p>
 <a id="02-19-Solution"/>
 
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>首先想到的是我只接使用https形式的地址不就行了吗，但是忽然发现bitbucket似乎不支持https的地址，至少是需要支持ssh形式的。于是放弃奇技淫巧，还是走正道。本来https也不够方便，还有可能要时不时输个密码。<br>于是网上搜索一番，ssh走代理的方式：</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>首先想到的是我直接使用https形式的地址不就行了吗，但是忽然发现bitbucket似乎不支持https的地址，至少是需要支持ssh形式的。于是放弃奇技淫巧，还是走正道。本来https也不够方便，还有可能要时不时输个密码。<br>于是网上搜索一番，ssh走代理的方式：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~/.ssh/config</span><br><span class="line"></span><br><span class="line">Host bitbucket.org</span><br><span class="line">  Hostname ssh.bitbucket.org</span><br><span class="line">  Port 22</span><br><span class="line">  ProxyCommand nc -v -x 127.0.0.1:7890 %h %p</span><br></pre></td></tr></table></figure>
 <p>nc 也就是网上所说的“瑞士军刀”netcat<br>再次执行git clone 测试，丝滑～</p>
 <h3 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h3><p>注意终端里各个程序不一定都会走全局代理，这个ssh就是典型，需要看具体应用的代理方式是如何设置的。</p>

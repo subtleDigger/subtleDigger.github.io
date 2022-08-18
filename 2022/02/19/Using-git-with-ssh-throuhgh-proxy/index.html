@@ -28,7 +28,7 @@
 <meta property="og:description" content="Pre一般平时的环境可以直连国际万维网，所以没有什么问题。但某天在家中使用git时，虽然开着ClashX，却发现速度还是龟速，忍不了了，遂着手解决一下。 TL;DRSolution TroubleShooting首先是看一下，检查一下全局的代理值12$ echo $https_proxyhttp:&#x2F;&#x2F;127.0.0.1:7890 心中一惊，这意味者全局的代理是正常的，然而速度还是慢，说明原因还没找">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-02-18T19:56:51.000Z">
-<meta property="article:modified_time" content="2022-08-18T21:44:01.958Z">
+<meta property="article:modified_time" content="2022-08-18T21:45:32.678Z">
 <meta property="article:author" content="organicCola">
 <meta property="article:tag" content="git">
 <meta property="article:tag" content="ssh">
@@ -246,7 +246,7 @@
 <h4 id="ssh的锅"><a href="#ssh的锅" class="headerlink" title="ssh的锅"></a>ssh的锅</h4><p>搞来搞去还是不行，想吐。但这时候我忽然想起来，会不会是ssh的锅？<br>于是git clone一个https形式的repository。发现Clash <code>Connections</code>中出现了连接，到这里算是确定了问题所在。</p>
 <a id="02-19-Solution"/>
 
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>首先想到的是我只接使用https形式的地址不就行了吗，但是忽然发现bitbucket似乎不支持https的地址，至少是需要支持ssh形式的。于是放弃奇技淫巧，还是走正道。本来https也不够方便，还有可能要时不时输个密码。<br>于是网上搜索一番，ssh走代理的方式：</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>首先想到的是我直接使用https形式的地址不就行了吗，但是忽然发现bitbucket似乎不支持https的地址，至少是需要支持ssh形式的。于是放弃奇技淫巧，还是走正道。本来https也不够方便，还有可能要时不时输个密码。<br>于是网上搜索一番，ssh走代理的方式：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~/.ssh/config</span><br><span class="line"></span><br><span class="line">Host bitbucket.org</span><br><span class="line">  Hostname ssh.bitbucket.org</span><br><span class="line">  Port 22</span><br><span class="line">  ProxyCommand nc -v -x 127.0.0.1:7890 %h %p</span><br></pre></td></tr></table></figure>
 <p>nc 也就是网上所说的“瑞士军刀”netcat<br>再次执行git clone 测试，丝滑～</p>
 <h3 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h3><p>注意终端里各个程序不一定都会走全局代理，这个ssh就是典型，需要看具体应用的代理方式是如何设置的。</p>
