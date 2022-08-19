@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Pre一般平时的环境可以直连国际万维网，所以没有什么问题。但某天在家中使用git时，虽然开着ClashX，却发现速度还是龟速，忍不了了，遂着手解决一下。 TL;DRSolution TroubleShooting首先是看一下，检查一下全局的代理值12$ echo $https_proxyhttp:&#x2F;&#x2F;127.0.0.1:7890 心中一惊，这意味者全局的代理是正常的，然而速度还是慢，说明原因还没找">
+    <meta name="description" content="Pre一般平时的环境可以直连国际万维网，所以没有什么问题。但某天在家中使用git时，虽然开着ClashX，却发现速度还是龟速，忍不了了，遂着手解决一下。 TL;DRSolution🚀 TroubleShooting首先是看一下，检查一下全局的代理值12$ echo $https_proxyhttp:&#x2F;&#x2F;127.0.0.1:7890 心中一惊，这意味者全局的代理是正常的，然而速度还是慢，说明原因还">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Using git with ssh throuhgh proxy">
 <meta property="og:url" content="http://example.com/2022/02/19/Using-git-with-ssh-throuhgh-proxy/index.html">
 <meta property="og:site_name" content="organicCola&#39;s House">
-<meta property="og:description" content="Pre一般平时的环境可以直连国际万维网，所以没有什么问题。但某天在家中使用git时，虽然开着ClashX，却发现速度还是龟速，忍不了了，遂着手解决一下。 TL;DRSolution TroubleShooting首先是看一下，检查一下全局的代理值12$ echo $https_proxyhttp:&#x2F;&#x2F;127.0.0.1:7890 心中一惊，这意味者全局的代理是正常的，然而速度还是慢，说明原因还没找">
+<meta property="og:description" content="Pre一般平时的环境可以直连国际万维网，所以没有什么问题。但某天在家中使用git时，虽然开着ClashX，却发现速度还是龟速，忍不了了，遂着手解决一下。 TL;DRSolution🚀 TroubleShooting首先是看一下，检查一下全局的代理值12$ echo $https_proxyhttp:&#x2F;&#x2F;127.0.0.1:7890 心中一惊，这意味者全局的代理是正常的，然而速度还是慢，说明原因还">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-02-18T19:56:51.000Z">
-<meta property="article:modified_time" content="2022-08-19T09:57:46.141Z">
+<meta property="article:modified_time" content="2022-08-19T12:12:46.004Z">
 <meta property="article:author" content="organicCola">
 <meta property="article:tag" content="git">
 <meta property="article:tag" content="ssh">
@@ -236,7 +236,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <h3 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h3><p>一般平时的环境可以直连国际万维网，所以没有什么问题。但某天在家中使用git时，虽然开着ClashX，却发现速度还是龟速，忍不了了，遂着手解决一下。</p>
-<h3 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h3><p><a href="#02-19-Solution"><code>Solution</code></a></p>
+<h3 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h3><p><a href="#02-19-Solution"><code>Solution🚀</code></a></p>
 <h3 id="TroubleShooting"><a href="#TroubleShooting" class="headerlink" title="TroubleShooting"></a>TroubleShooting</h3><h4 id="首先是看一下，检查一下全局的代理值"><a href="#首先是看一下，检查一下全局的代理值" class="headerlink" title="首先是看一下，检查一下全局的代理值"></a>首先是看一下，检查一下全局的代理值</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> <span class="variable">$https_proxy</span></span></span><br><span class="line">http://127.0.0.1:7890</span><br></pre></td></tr></table></figure>
 <p>心中一惊，这意味者全局的代理是正常的，然而速度还是慢，说明原因还没找到，need to go deeper…</p>
 <h4 id="检查-gitconfig文件"><a href="#检查-gitconfig文件" class="headerlink" title="检查.gitconfig文件"></a>检查<code>.gitconfig</code>文件</h4><p><code>git config --global -e</code></p>
