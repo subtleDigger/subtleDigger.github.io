@@ -124,7 +124,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -135,7 +135,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -164,6 +164,154 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/05/An-introduction-to-GnuPG/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="organicCola">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/09/05/An-introduction-to-GnuPG/" class="post-title-link" itemprop="url">An introduction to GnuPG</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-09-05 05:50:45" itemprop="dateCreated datePublished" datetime="2022-09-05T05:50:45+08:00">2022-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="G-nu-pg"><a href="#G-nu-pg" class="headerlink" title="G(nu)pg"></a>G(nu)pg</h3><p>PGP vs GPG<br>PGP 是最早先的加密商业软件<br>一般现在提起PGP是指PGP协议<br>G(nu)pg is for Gnu Privacy Guard<br>GPG是GNU下的PGP实现</p>
+<h3 id="GPG采用主私钥-若干子密钥设计"><a href="#GPG采用主私钥-若干子密钥设计" class="headerlink" title="GPG采用主私钥 + 若干子密钥设计"></a>GPG采用主私钥 + 若干子密钥设计</h3><p>平时一般使用子密钥来进行具体操作。主密钥只用来进行签发新的子密钥，或对密钥进行修改。可以认为主密钥是你在网上的主要身份凭证，如果因此要保护好，一般因为泄漏或者丢失而不得不对其进行revoke将会使你失去身份。所以在所有设置都正常的情况下，日常使用不需要用到Primary key，应该将其保存在一个安全的地方，隔离与电脑的设备，甚至是纸张。</p>
+<h3 id="一些常见缩写含义"><a href="#一些常见缩写含义" class="headerlink" title="一些常见缩写含义"></a>一些常见缩写含义</h3><h5 id="密钥能力"><a href="#密钥能力" class="headerlink" title="密钥能力"></a>密钥能力</h5><table>
+<thead>
+<tr>
+<th>Abb</th>
+<th>Ability</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[C]</td>
+<td>Certifitating 认证，用于签发子密钥</td>
+</tr>
+<tr>
+<td>[S]</td>
+<td>Signing 签名</td>
+</tr>
+<tr>
+<td>[E]</td>
+<td>Encrypting 加密</td>
+</tr>
+<tr>
+<td>[A]</td>
+<td>Authenticating 身份验证</td>
+</tr>
+</tbody></table>
+<h5 id="密钥缩写含义"><a href="#密钥缩写含义" class="headerlink" title="密钥缩写含义"></a>密钥缩写含义</h5><table>
+<thead>
+<tr>
+<th>Abb</th>
+<th>Explain</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>pub</strong></td>
+<td>Public Key</td>
+</tr>
+<tr>
+<td><strong>sec</strong></td>
+<td>Secret Key</td>
+</tr>
+<tr>
+<td><strong>sub</strong></td>
+<td>Public SubKey</td>
+</tr>
+<tr>
+<td><strong>ssb</strong></td>
+<td>Secret Subkey</td>
+</tr>
+</tbody></table>
+<h3 id="一些命令"><a href="#一些命令" class="headerlink" title="一些命令"></a>一些命令</h3><h5 id="生成主密钥"><a href="#生成主密钥" class="headerlink" title="生成主密钥"></a>生成主密钥</h5><p><code>gpg --gen-key</code></p>
+<h5 id="本地密钥保护密码"><a href="#本地密钥保护密码" class="headerlink" title="本地密钥保护密码"></a>本地密钥保护密码</h5><p>生成密钥时会同时让你设定一个用于保护本地密钥的密码，每个主密钥的保护密码是相互独立的，在不同设备上密码是独立，也就是说这个密钥是gpg的本地设置，与钥匙串无关，所以在你修改了密码手动save的话，系统会告诉你钥匙串没有更新，没有save的必要。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gpg --edit-key userId</span><br><span class="line">&gt; passwd</span><br></pre></td></tr></table></figure>
+
+<h5 id="list-keys"><a href="#list-keys" class="headerlink" title="list keys"></a>list keys</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gpg --list-keys (简写 -k)</span><br><span class="line">gpg --list-serect-keys (简写 -K)</span><br><span class="line">gpg -k --keyid-format long  (显示sub keyid)</span><br><span class="line">gpg -k --fingerprint (指纹)</span><br></pre></td></tr></table></figure>
+
+<h5 id="edit-key-撤销密钥-x2F-修改密钥有效期-x2F-删除密钥"><a href="#edit-key-撤销密钥-x2F-修改密钥有效期-x2F-删除密钥" class="headerlink" title="edit key 撤销密钥&#x2F;修改密钥有效期&#x2F;删除密钥"></a>edit key 撤销密钥&#x2F;修改密钥有效期&#x2F;删除密钥</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gpg --edit-key --keyid-format long uid (进入edit交互)</span><br><span class="line">&gt; key 1 选择第(1)个subkey（不选择key会默认对整个primary key所包含的所有key进行操作)</span><br><span class="line">&gt; key 2 选择第(2)个subkey</span><br><span class="line">&gt; expire 将会对key1 / key2 (进行过期日期设置，已经过期的key仍然可以加解密，只是会给你过期的提示)</span><br><span class="line">&gt; revkey 吊销key1 / key2 (已经revoke的key仍然可以加解密，他只是一个标记，告诉你使用这个的人已经不会再继续使用它)</span><br><span class="line">&gt; delkey (删除key1 / key2)</span><br><span class="line">&gt; save (不保存修改无法生效)</span><br></pre></td></tr></table></figure>
+<h5 id="uid编辑"><a href="#uid编辑" class="headerlink" title="uid编辑"></a>uid编辑</h5><p>修改uid，uid只作为你的信息，对加密没有影响。uid只能添加，和删除，不能修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gpg --edit-key</span><br><span class="line">&gt; adduid 新增按提示操作</span><br><span class="line">&gt; uid 1 （与key类似，uid 1 表示选中了uid 1</span><br><span class="line">&gt; deluid 删除uid</span><br></pre></td></tr></table></figure>
+
+<h5 id="导出密钥"><a href="#导出密钥" class="headerlink" title="导出密钥"></a>导出密钥</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gpg -ao public-key.txt --export &lt;UserId&gt;</span><br><span class="line">gpg -ao encrypt-subkey --export-secret-subkeys &lt;keyId&gt;</span><br></pre></td></tr></table></figure>
+<p>注意，在keyId后面加上!可以强指定此id而不会全部导出子密钥。</p>
+<h5 id="删除密钥-按userID删除key-不进入交互"><a href="#删除密钥-按userID删除key-不进入交互" class="headerlink" title="删除密钥 按userID删除key(不进入交互)"></a>删除密钥 按userID删除key(不进入交互)</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gpg --delete-secret-keys &lt;UserId&gt;  # 删除私钥，UID 也可以替换成子密钥ID, 主密钥Key ID</span><br><span class="line">gpg --delete-keys &lt;UserId&gt;  # 删除公钥	</span><br></pre></td></tr></table></figure>
+
+<h3 id="一些解释"><a href="#一些解释" class="headerlink" title="一些解释"></a>一些解释</h3><h5 id="revoke和delte的区别"><a href="#revoke和delte的区别" class="headerlink" title="revoke和delte的区别"></a>revoke和delte的区别</h5><p>revoke相当于打上吊销标记，delete才是删除。<br>revoke还有个作用就是通过send-key到key-server，让keyserver同步状态来声明revoke</p>
+<h5 id="对于revoke-解释"><a href="#对于revoke-解释" class="headerlink" title="对于revoke 解释"></a>对于revoke 解释</h5><p>由于pgp是针对传输的加密，对于密钥丢失&#x2F;泄漏的情况，一般流程是，用户revoke密钥后作出声名,上传revoke过后的key到key server，大家更新之后之后就会知道此key已经revoke，接下来不会再继续使用。但是你不能控制用户是否去更新你的key设置。如果用户没有去更新，然后删掉这个公钥，那么他手上的公钥依然可以解密已revoke的key之前加密过的文件。</p>
+<h5 id="加解密"><a href="#加解密" class="headerlink" title="加解密"></a>加解密</h5><p>对称加解密，不带密码缓存，每次都输入的方法<br><code>gpg -c --no-symkey-cache test.txt.gpg</code><br>非对称加密<br>-r参数 指定接受者id 会使用这个id下的一个公钥来加密，需要对方有这个公钥对应的密钥才能解密。<br><code>gpg -e -r uesrId test.txt</code></p>
+<h5 id="修改私钥读取提示需要密码的时间（秒）"><a href="#修改私钥读取提示需要密码的时间（秒）" class="headerlink" title="修改私钥读取提示需要密码的时间（秒）"></a>修改私钥读取提示需要密码的时间（秒）</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~/.gnupg/gpg-agent.conf</span><br><span class="line">default-cache-ttl 600</span><br><span class="line">max-cache-ttl 7200</span><br></pre></td></tr></table></figure>
+
+<h5 id="关于密钥指定"><a href="#关于密钥指定" class="headerlink" title="关于密钥指定"></a>关于密钥指定</h5><p>在GPG中密钥一般是由系统自动选择的，比如根据你填写的UserId或者当前要进行的动作(Sign&#x2F;Ecrypt)来自动选择名下最新的一个公钥来进行加密。不过也可以在keyId后加上!来强制指定，当你有多个key时这个做法很有效。<br><code>gpg -e -r CF12434DC! test.txt</code></p>
+<h3 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h3><h5 id="一些想法"><a href="#一些想法" class="headerlink" title="一些想法"></a>一些想法</h5><p>其实非对称加密比较适用于通信加密，只要文件在远离密钥的地方，目前来说几乎是不可解密的；但是假如攻击者获取了存有密钥的设备，对于本地文件的加密，就只剩下本地对于密钥的对称加密保护这一道防线了。这时候就需要一个强密码保护，但是强密码保护很难用人脑记住，肯定存放于某个保存密钥的app甚至是文件内，而这个app的保护密码设定又是一个难题，肯定是人脑能记住的，相对容易输入的，相对不太复杂，这种密码被攻破的概率也很大。<br>如果能随时更改这个密码的话就好了，于是想到一个方案：在一个云端存放子密钥，每端在想要加解密gpg文件前下载gpg子密钥，使用完之后删除。这样，如果设备遗失了第一时间删除网络上的子密钥，设备上的内容就无法读取了。前提是攻击者不会提前知道这个网址，不过提前知道的概率不大，因为只有进入了设备才能知道，网址的存在，但是一旦设备遗失我们已经将网址内的密钥清除了。<br>其实除了算法加密，通过改变加密流程，加密思路，乃至社工的办法，都是算是一种加密，只要能保护文件内容的方法就是好方法。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -237,8 +385,11 @@
 </blockquote>
 <h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>其实对比两种方案，本质的区别也就是同步范围的区别。一个是通过更多人能接触的中心服务器，一个是限制范围只在本地小范围内同步。如果可以结合云上同步的便捷与本地同步的隐私就好了。</p>
 <h5 id="压缩加密文件"><a href="#压缩加密文件" class="headerlink" title="压缩加密文件"></a>压缩加密文件</h5><p>其实早就有了一种简单朴素的保护文件隐私的办法，那就是文件加密。于是文件的隐私通过对文件加密折中实现。<br>一种经典方法便是压缩文件并加上密码保护, zip&#x2F;rar等。<br>于是，将文件加密并上传至云，并在各个设备间同步，似乎是一个不错的选择。</p>
-<h5 id="使用非对称加密"><a href="#使用非对称加密" class="headerlink" title="使用非对称加密"></a>使用非对称加密</h5><p>zip等压缩加密办法使用的是对称加密，通常面临暴力破解的问题，当然你也可以通过增加密码的复杂度来提升安全性。除了对称加密外还有非对称加密可以选择，ecc&#x2F;rsa都可以。目前来看理论上只要你的密钥不外泄，加密文件是十分安全的。<br>推荐一个密钥管理工具 GPG</p>
-<h5 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h5><p>将文件压缩，并对其进行加密，上传至云。同步至设备时再反向操作解密解压文件。<br>这样就可以完美和之前的笔记方法融合在一起。</p>
+<h5 id="使用非对称加密"><a href="#使用非对称加密" class="headerlink" title="使用非对称加密"></a>使用非对称加密</h5><p>zip等压缩加密办法使用的是对称加密，通常面临暴力破解的问题，当然你也可以通过增加密码的复杂度来提升安全性。除了对称加密外还有非对称加密可以选择，ecc&#x2F;rsa都可以。目前来看理论上只要你的密钥不外泄，加密文件是十分安全的。</p>
+<h3 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h3><p>推荐一个工具 GnuPG<br>其实加解密只是GPG的一个用途，其主要用途是用于用于身份认证，并提供了密钥管理。</p>
+<a href="/2022/09/05/An-introduction-to-GnuPG/" title="An introduction to GnuPG">An introduction to GnuPG</a>
+
+<h3 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h3><p>将文件压缩，并对其进行加密，上传至云。同步至设备时再反向操作解密解压文件。<br>这样就可以完美和之前的笔记方法融合在一起。</p>
 <blockquote>
 <a href="/2022/07/02/A-basic-enough-solution-to-organize-GTD-dailyNOtes/" title="一种朴素的几乎纯文本笔记和GTD方案 - A basic enough solution to organize GTD and dailyNotes">一种朴素的几乎纯文本笔记和GTD方案 - A basic enough solution to organize GTD and dailyNotes</a>
 </blockquote>
@@ -1178,96 +1329,9 @@ D--&gt;E;</code></pre>
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/29/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="organicCola">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="organicCola's House">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | organicCola's House">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/01/29/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-01-29 00:00:00" itemprop="dateCreated datePublished" datetime="2021-01-29T00:00:00+08:00">2021-01-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 </div>
   </main>
