@@ -124,7 +124,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -135,7 +135,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -164,6 +164,123 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/05/A-simple-solution-to-do-Privacy-Diary-Sync/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="organicCola">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/09/05/A-simple-solution-to-do-Privacy-Diary-Sync/" class="post-title-link" itemprop="url">一种朴素的私密文件同步方案 A simple solution to do Privacy Diary Sync</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-09-05 01:04:05" itemprop="dateCreated datePublished" datetime="2022-09-05T01:04:05+08:00">2022-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h3><p>现在可能还有人写日记。。。或者不算日记，但是是一些私密的东西，不想让人看的东西。</p>
+<h3 id="Issue"><a href="#Issue" class="headerlink" title="Issue"></a>Issue</h3><p>不想让人看很简单，你只写在本地就行了。<br>但是一般你不会只在一个设备上记录，有可能还会在别的设备上记录或查看，于是涉及到了同步。<br>隐私内容的同步是个问题，不过无非几种方式:</p>
+<blockquote>
+<ul>
+<li>云上中心化的存储方式:各大云盘，各大app，搭建服务器存储。<br>缺点是传到网上内容就由不得你了，尽管所有笔记都声称自己加密了用户数据，也保证不会偷窥用户隐私，但是这种保障等于空气。至于搭建的服务器，机器是服务商提供的，仍然没有办法保证服务商不偷窥我们的内容。即使没有偷窥问题，如果服务器被攻击了隐私就会暴露。</li>
+<li>本地文件同步方案。由于没有上云，隐私安全性有所提高。<blockquote>
+<p>p2p: 通过Syncthing一类的同步软件，进行同步。不过本地p2p需要一个常驻的在线设备。不过p2p的粗暴有可能会遇到多设备同时修改造成冲突的问题。<br>git: 本地自建git server，可以很好地解决多设备修改冲突的问题。不过也同样需要git server常驻在线。<br>如果不采用随时地可以同步的方法，就可以不需要常驻在线设备，只在需要同步的时候进行同步。不过这样需要不能随时随地备份最新的数据，总是感觉有点不放心。</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>其实对比两种方案，本质的区别也就是同步范围的区别。一个是通过更多人能接触的中心服务器，一个是限制范围只在本地小范围内同步。如果可以结合云上同步的便捷与本地同步的隐私就好了。</p>
+<h5 id="压缩加密文件"><a href="#压缩加密文件" class="headerlink" title="压缩加密文件"></a>压缩加密文件</h5><p>其实早就有了一种简单朴素的保护文件隐私的办法，那就是文件加密。于是文件的隐私通过对文件加密折中实现。<br>一种经典方法便是压缩文件并加上密码保护, zip&#x2F;rar等。<br>于是，将文件加密并上传至云，并在各个设备间同步，似乎是一个不错的选择。</p>
+<h5 id="使用非对称加密"><a href="#使用非对称加密" class="headerlink" title="使用非对称加密"></a>使用非对称加密</h5><p>zip等压缩加密办法使用的是对称加密，通常面临暴力破解的问题，当然你也可以通过增加密码的复杂度来提升安全性。除了对称加密外还有非对称加密可以选择，ecc&#x2F;rsa都可以。目前来看理论上只要你的密钥不外泄，加密文件是十分安全的。<br>推荐一个密钥管理工具 GPG</p>
+<h5 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h5><p>将文件压缩，并对其进行加密，上传至云。同步至设备时再反向操作解密解压文件。<br>这样就可以完美和之前的笔记方法融合在一起。</p>
+<blockquote>
+<a href="/2022/07/02/A-basic-enough-solution-to-organize-GTD-dailyNOtes/" title="一种朴素的几乎纯文本笔记和GTD方案 - A basic enough solution to organize GTD and dailyNotes">一种朴素的几乎纯文本笔记和GTD方案 - A basic enough solution to organize GTD and dailyNotes</a>
+</blockquote>
+<h4 id="Diagram"><a href="#Diagram" class="headerlink" title="Diagram"></a>Diagram</h4><pre><code class="highlight mermaid">flowchart LR;
+
+subgraph A[Client A]
+  F((Privacy File)) --&gt; |Zip| Z(zipped file);
+  subgraph GPG[GnuPG]
+    Z --&gt; E[[Encrypted File]]
+    P(Public key) --&gt; |encrypt with Public Key| E
+  end
+end
+
+subgraph B[Client B]
+  subgraph GPGa[GnuPG]
+    Ea[[Encrypted File]] --&gt; Za
+    S(Secret key) --&gt; |decrypt with Secret Key| Za;
+  end
+  Za(zipped file) --&gt; |Unzip| Fa((Privacy File))
+end
+
+A &lt;-.-&gt; |Sync| G;
+G[(Git repository)];
+G &lt;-.-&gt; |Sync| B;</code></pre>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
