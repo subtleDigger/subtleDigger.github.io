@@ -236,12 +236,12 @@
 </ul>
 </blockquote>
 <h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>其实对比两种方案，本质的区别也就是同步范围的区别。一个是通过更多人能接触的中心服务器，一个是限制范围只在本地小范围内同步。如果可以结合云上同步的便捷与本地同步的隐私就好了。</p>
-<h5 id="压缩加密文件"><a href="#压缩加密文件" class="headerlink" title="压缩加密文件"></a>压缩加密文件</h5><p>其实早就有了一种简单朴素的保护文件隐私的办法，那就是文件加密。于是文件的隐私通过对文件加密折中实现。<br>一种经典方法便是压缩文件并加上密码保护, zip&#x2F;rar等。<br>于是，将文件加密并上传至云，并在各个设备间同步，似乎是一个不错的选择。</p>
+<h5 id="压缩加密文件"><a href="#压缩加密文件" class="headerlink" title="压缩加密文件"></a>压缩加密文件</h5><p>其实早就有了一种简单朴素的保护文件隐私的办法，那就是文件加密，相信其实有不少人都是这么做的。<br>我想这个方法虽然简单，但是其实经过上面的分析后却会发现这其实是一个很好的，简单又实用的方法。<br>于是文件的隐私通过对文件加密折中实现。<br>一种经典方法便是压缩文件并加上密码保护, zip&#x2F;rar等。<br>于是，将文件加密并上传至云，并在各个设备间同步，似乎是一个不错的选择。</p>
 <h5 id="使用非对称加密"><a href="#使用非对称加密" class="headerlink" title="使用非对称加密"></a>使用非对称加密</h5><p>zip等压缩加密办法使用的是对称加密，通常面临暴力破解的问题，当然你也可以通过增加密码的复杂度来提升安全性。除了对称加密外还有非对称加密可以选择，ecc&#x2F;rsa都可以。目前来看理论上只要你的密钥不外泄，加密文件是十分安全的。</p>
 <h3 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h3><p>推荐一个工具 GnuPG<br>其实加解密只是GPG的一个用途，其主要用途是用于用于身份认证，并提供了密钥管理。</p>
 <a href="/2022/09/04/An-introduction-to-GnuPG/" title="An introduction to GnuPG">An introduction to GnuPG</a>
 
-<h3 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h3><p>将文件压缩，并对其进行加密，上传至云。同步至设备时再反向操作解密解压文件。<br>这样就可以完美和之前的笔记方法融合在一起。</p>
+<h3 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h3><p>将文件压缩，并对其进行加密，上传至云。同步至设备时再反向操作解密解压文件。<br>不过有个问题要注意，就是因为加密的缘故，git对它也不适用了，因为会被当作二进制文件。针对这个问题可以在文件夹内部建一个内部git用于控制，压缩加密时连同.git文件夹一起打包加密，这样就既可以使用git控制版本，又不影响加密了。<br>如此就可以完美和之前的笔记方法融合在一起。</p>
 <blockquote>
 <a href="/2022/07/02/A-basic-enough-solution-to-organize-GTD-dailyNOtes/" title="一种朴素的几乎纯文本笔记和GTD方案 - A basic enough solution to organize GTD and dailyNotes">一种朴素的几乎纯文本笔记和GTD方案 - A basic enough solution to organize GTD and dailyNotes</a>
 </blockquote>
