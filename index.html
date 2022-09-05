@@ -248,7 +248,7 @@
 <h4 id="Diagram"><a href="#Diagram" class="headerlink" title="Diagram"></a>Diagram</h4><pre><code class="highlight mermaid">flowchart LR;
 
 subgraph A[Client A]
-  F((Privacy File)) --&gt; |Zip| Z(zipped file);
+  F((Privacy File with Built-in Git)) --&gt; |Zip| Z(zipped file);
   subgraph GPG[GnuPG]
     Z --&gt; E[[Encrypted File]]
     P(Public key) --&gt; |encrypt with Public Key| E
@@ -260,7 +260,7 @@ subgraph B[Client B]
     Ea[[Encrypted File]] --&gt; Za
     S(Secret key) --&gt; |decrypt with Secret Key| Za;
   end
-  Za(zipped file) --&gt; |Unzip| Fa((Privacy File))
+  Za(zipped file) --&gt; |Unzip| Fa((Privacy File with Built-in Git))
 end
 
 A &lt;-.-&gt; |Sync| G;
