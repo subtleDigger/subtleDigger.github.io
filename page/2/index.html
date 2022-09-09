@@ -124,7 +124,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -164,6 +164,98 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/29/set-multiple-ssh-key-for-different-github-accounts/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="organicCola">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/01/29/set-multiple-ssh-key-for-different-github-accounts/" class="post-title-link" itemprop="url">Set multiple ssh-key for different github accounts</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-29 09:32:38" itemprop="dateCreated datePublished" datetime="2021-01-29T09:32:38+08:00">2021-01-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h3><p>使用github pages搭建博客的时候突发奇想新建一个账户。<br>原因是pages域名直接和你的账号名挂钩，一是直觉上让我不舒服，二是想换个别的名字。</p>
+<h3 id="Issue"><a href="#Issue" class="headerlink" title="Issue"></a>Issue</h3><p>新建账户很简单按流程操作，不过当添加ssh-key的时候遇到了问题。<br><img src="/../imgs/ssh-key_is_alreay_in_use.png" alt="ssh-key is alreay in use"><br>意思这个key已经被添加进github过了。github规定一个key只允许被一个账户使用，只能添加一次，就是说不同的账户必须用不同的key。</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>解决思路也很简单，就是在新建另外一个key用于新建的账号。<br>不过有个问题要注意下，那就是当我们电脑中只有一个ssh-key的时候可能一路默认配置就完事了，但是当存在多个key的时候怎么在不同情况下使用特定的key呢？<br>答案是ssh-agent以及ssh的config文件，它们就是用来控制ssh相关的种种行为的。</p>
+<h3 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a><code>Steps</code></h3><h4 id="生成key，注意保存为新的rsa文件，防止覆盖了你的原先的。"><a href="#生成key，注意保存为新的rsa文件，防止覆盖了你的原先的。" class="headerlink" title="生成key，注意保存为新的rsa文件，防止覆盖了你的原先的。"></a>生成key，注意保存为新的rsa文件，防止覆盖了你的原先的。</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/.ssh</span><br><span class="line">ssh-keygen -t rsa -b 4096 -C &quot;new@github.com&quot;</span><br><span class="line">$ Enter file in which to save the key (/Users/******/.ssh/id_rsa): id_rsa_new</span><br></pre></td></tr></table></figure>
+<h4 id="将key-加入ssh-agent"><a href="#将key-加入ssh-agent" class="headerlink" title="将key 加入ssh-agent"></a>将key 加入ssh-agent</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eval &quot;$(ssh-agent -s)&quot;</span><br><span class="line">Agent pid 2897</span><br><span class="line">ssh-add -K ~/.ssh/id_rsa_new</span><br></pre></td></tr></table></figure>
+<h4 id="Edit-config-file"><a href="#Edit-config-file" class="headerlink" title="Edit config file"></a>Edit config file</h4><p>为新的账号配置进行连接要使用的key。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host new.github.com</span><br><span class="line">  HostName github.com</span><br><span class="line">  User git</span><br><span class="line">  IdentityFile ~/.ssh/id_rsa_new</span><br></pre></td></tr></table></figure>
+<p>这里解释下<code>Host</code>和<code>HostName</code>的作用，<br>Host是你进行连接时你输入给系统的字面值，系统会根据Host来找到HostName，实际连接用的是Hostname的值。<br>看一段解释</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&quot;About difference between host and hostname&quot;</span><br><span class="line"></span><br><span class="line">  Host host1</span><br><span class="line">      HostName host1.example.com</span><br><span class="line">  Host host2</span><br><span class="line">      HostName anotherdomain.com</span><br><span class="line"></span><br><span class="line">&quot;Then when you type&quot;</span><br><span class="line">&quot;ssh host1 : you actually login to host1.example.com&quot;</span><br><span class="line">&quot;ssh host2 : login to anotherdomain.com&quot;</span><br></pre></td></tr></table></figure>
+<p>有可能你会疑惑为什么要多此一举，直接HostName不就行了？<br>事实一般也确实没有要多一道这个转换的，所以一般情况下这两个值是一样的。不过有时候这个设置会很有用，比如现在我们遇到的情况：<br>我们要区分的两个账号都是github账号，没有办法按照域名来区分，虽然我们知道哪个仓库该用哪个地址，但是对系统来说都是连接的同一个Host，也只会使用同一个ssh-key，这样会因为key不对而连接失败。<br>这时候Host就派上用场了，注意我上面配置文件里，<code>Host</code>写的是<code>new.github.com</code>，但是<code>HostName</code>是<code>github.com</code>。<br><a id="Use_Example" style="none"/></p>
+<h5 id=""><a href="#" class="headerlink" title=""></a></h5><p>当我连接新账号的仓库时我会这么写，<br><code>git clone git@new.github.com:****/*****.git</code><br>当我连接旧账号的仓库时我会这么写，<br><code>git clone git@github.com:****/*****.git</code><br>它们实际上都还是连接的正常的github.com，但是会使用不同<code>Host</code>里的配置，从而使用不同的key，这样就成功进行了区分。</p>
+<h4 id="Add-Public-key-to-your-new-created-account"><a href="#Add-Public-key-to-your-new-created-account" class="headerlink" title="Add Public key to your new created account"></a>Add Public key to your new created account</h4><p><code>cat ~/.ssh/id_rsa_new.pub | pbcopy .</code></p>
+<h4 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br><span class="line">Hi OriginUserName! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br><span class="line">$ ssh -T git@new.github.com</span><br><span class="line">Hi NewUserName! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
+
+<h3 id="⚠️-Pay-Attention-When-Use"><a href="#⚠️-Pay-Attention-When-Use" class="headerlink" title="⚠️ Pay Attention When Use"></a>⚠️ <em>Pay Attention When Use</em></h3><p>当你想使用新账户下仓库时，你连接时写的仓库url就需要改成<code>Host</code>的值， <a href="#Use_Example"><code>上面提到过</code></a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

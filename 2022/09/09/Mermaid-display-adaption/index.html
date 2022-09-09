@@ -20,29 +20,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="randomly type something here 12$ hexo generate$ git commit   12let varOne &#x3D; &quot;string test&quot;varOne.append(&quot;anotherString&quot;)     tableSample name amount    person zhangsan 3   person zh">
+    <meta name="description" content="PreMermaid语法简单，使用方便，但是对具体布局的调整比较难以把控，在一些专业画图软件里的布局在mermaid里也难以实习。只能遵循一些规则尽量让布局符合我们的预期。 关于mermaid布局 尽量使用TB而不是TD，TD不一定能按照top&#x2F;bottom排列 flowchart 支持嵌套&#x2F; graph 不支持嵌套subgraph 代码顺序不影响拓扑关系，但是有可能会影响布局">
 <meta property="og:type" content="article">
-<meta property="og:title" content="A lovely cat memo">
-<meta property="og:url" content="http://example.com/2021/01/30/cat_memo/index.html">
+<meta property="og:title" content="Mermaid display adaption">
+<meta property="og:url" content="http://example.com/2022/09/09/Mermaid-display-adaption/index.html">
 <meta property="og:site_name" content="organicCola&#39;s House">
-<meta property="og:description" content="randomly type something here 12$ hexo generate$ git commit   12let varOne &#x3D; &quot;string test&quot;varOne.append(&quot;anotherString&quot;)     tableSample name amount    person zhangsan 3   person zh">
+<meta property="og:description" content="PreMermaid语法简单，使用方便，但是对具体布局的调整比较难以把控，在一些专业画图软件里的布局在mermaid里也难以实习。只能遵循一些规则尽量让布局符合我们的预期。 关于mermaid布局 尽量使用TB而不是TD，TD不一定能按照top&#x2F;bottom排列 flowchart 支持嵌套&#x2F; graph 不支持嵌套subgraph 代码顺序不影响拓扑关系，但是有可能会影响布局">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://www.rd.com/wp-content/uploads/2021/01/GettyImages-1175550351.jpg?resize=2048,1339">
-<meta property="article:published_time" content="2021-01-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-08-10T19:07:29.188Z">
+<meta property="article:published_time" content="2022-09-09T07:40:06.000Z">
+<meta property="article:modified_time" content="2022-09-09T07:54:28.505Z">
 <meta property="article:author" content="organicCola">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.rd.com/wp-content/uploads/2021/01/GettyImages-1175550351.jpg?resize=2048,1339">
 
 
-<link rel="canonical" href="http://example.com/2021/01/30/cat_memo/">
+<link rel="canonical" href="http://example.com/2022/09/09/Mermaid-display-adaption/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/01/30/cat_memo/","path":"2021/01/30/cat_memo/","title":"A lovely cat memo"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/09/09/Mermaid-display-adaption/","path":"2022/09/09/Mermaid-display-adaption/","title":"Mermaid display adaption"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>A lovely cat memo | organicCola's House</title>
+<title>Mermaid display adaption | organicCola's House</title>
   
 
 
@@ -105,7 +103,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -118,6 +116,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pre"><span class="nav-number">1.</span> <span class="nav-text">Pre</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Emermaid%E5%B8%83%E5%B1%80"><span class="nav-number">2.</span> <span class="nav-text">关于mermaid布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Example"><span class="nav-number">3.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">4.</span> <span class="nav-text">分析</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -180,7 +179,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/30/cat_memo/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/09/Mermaid-display-adaption/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -193,12 +192,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="A lovely cat memo | organicCola's House">
+      <meta itemprop="name" content="Mermaid display adaption | organicCola's House">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          A lovely cat memo
+          Mermaid display adaption
         </h1>
 
         <div class="post-meta-container">
@@ -209,16 +208,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-01-30 00:00:00" itemprop="dateCreated datePublished" datetime="2021-01-30T00:00:00+08:00">2021-01-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/memo/" itemprop="url" rel="index"><span itemprop="name">memo</span></a>
-        </span>
+      <time title="Created: 2022-09-09 15:40:06" itemprop="dateCreated datePublished" datetime="2022-09-09T15:40:06+08:00">2022-09-09</time>
     </span>
 
   
@@ -231,47 +221,52 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>randomly type something here</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ git commit</span><br></pre></td></tr></table></figure>
+        <h3 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h3><p>Mermaid语法简单，使用方便，但是对具体布局的调整比较难以把控，在一些专业画图软件里的布局在mermaid里也难以实习。只能遵循一些规则尽量让布局符合我们的预期。</p>
+<h3 id="关于mermaid布局"><a href="#关于mermaid布局" class="headerlink" title="关于mermaid布局"></a>关于mermaid布局</h3><ol>
+<li>尽量使用TB而不是TD，TD不一定能按照top&#x2F;bottom排列</li>
+<li>flowchart 支持嵌套&#x2F; graph 不支持嵌套subgraph</li>
+<li>代码顺序不影响拓扑关系，但是有可能会影响布局。</li>
+<li>flowchart TB 支持 subgpaph direction BT，而graph TB不支持</li>
+<li>mermaid 中只要是相邻元素的连线方向会尽量保持与主方向。虽然拓扑不受影响，但是布局会受影响的，必须时刻注意，否则被强行调整元素位置可能会生成非期望的布局；未与外界直接相连的subgraph内的元素，可以通过direction控制方向。</li>
+<li>注意元素之间在没有连线的情况下，默认与主轴交错防抢排列，并且默认顺序与添加语句顺序是颠倒的，最后添加的排在最前面；</li>
+<li>mermaid连线时可能会强行调整元素位置，目前发现以下一些原则：</li>
+</ol>
+<ul>
+<li>会将流程靠前的元素放到主轴方向的开端</li>
+<li>位置靠前的元素以及其内部元素更不容易被调整位置</li>
+<li>会尽量调整元素布局以使得连线最短</li>
+</ul>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">```mermaid</span><br><span class="line">flowchart　TB</span><br><span class="line">subgraph a[Right]</span><br><span class="line">  direction TB</span><br><span class="line">  A&#x27; --&gt; B&#x27; --&gt; C&#x27; --&gt; D&#x27; --&gt; A&#x27;</span><br><span class="line">end</span><br><span class="line">subgraph b[Left]</span><br><span class="line">  direction TB</span><br><span class="line">  A --&gt; B --&gt; C --&gt; D</span><br><span class="line">end</span><br><span class="line">A&#x27; --&gt; D</span><br><span class="line">A --&gt; D&#x27;</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
 
+<pre><code class="highlight mermaid">flowchart　TB
+subgraph a[Right]
+  direction TB
+  A&#x27; --&gt; B&#x27; --&gt; C&#x27; --&gt; D&#x27; --&gt; A&#x27;
+end
+subgraph b[Left]
+  direction TB
+  A --&gt; B --&gt; C --&gt; D
+end
+A&#x27; --&gt; D
+A --&gt; D&#x27;</code></pre>
 
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> varOne <span class="operator">=</span> <span class="string">&quot;string test&quot;</span></span><br><span class="line">varOne.append(<span class="string">&quot;anotherString&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><ul>
+<li>由于a的布局位置考后，更容易被调整位置，并且其内部是首尾相接的结构，允许其调整元素顺序而拓扑结构不变，为了使A –&gt; D’ 连线尽量短，会把D’调整位置到顶端，所以看起来元素顺序有点不符合预期。</li>
+<li>subgraph a 和 subgraph b 如果交换代码位置，subgraph a 由于代码位置靠后，所以布局靠前，更不易被调整位置，所以abcd按照主轴方向依次向下排列，这样看起来顺眼多了。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">```mermaid</span><br><span class="line">flowchart　TB</span><br><span class="line">subgraph b[Left]</span><br><span class="line">  direction TB</span><br><span class="line">  A --&gt; B --&gt; C --&gt; D</span><br><span class="line">end</span><br><span class="line">subgraph a[Right]</span><br><span class="line">  direction TB</span><br><span class="line">  A&#x27; --&gt; B&#x27; --&gt; C&#x27; --&gt; D&#x27; --&gt; A&#x27;</span><br><span class="line">end</span><br><span class="line">A&#x27; --&gt; D</span><br><span class="line">A --&gt; D&#x27;</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
 
-<table>
-<thead>
-<tr>
-<th>tableSample</th>
-<th>name</th>
-<th>amount</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>person</td>
-<td>zhangsan</td>
-<td>3</td>
-</tr>
-<tr>
-<td>person</td>
-<td>zhaosi</td>
-<td>4</td>
-</tr>
-<tr>
-<td>person</td>
-<td>wangwu</td>
-<td>5</td>
-</tr>
-<tr>
-<td>person</td>
-<td>whoisthat</td>
-<td>6</td>
-</tr>
-<tr>
-<td>person</td>
-<td>shitman</td>
-<td>7</td>
-</tr>
-</tbody></table>
-<p><img src="https://www.rd.com/wp-content/uploads/2021/01/GettyImages-1175550351.jpg?resize=2048,1339" alt="avatar"></p>
+<pre><code class="highlight mermaid">flowchart　TB
+subgraph b[Left]
+  direction TB
+  A --&gt; B --&gt; C --&gt; D
+end
+subgraph a[Right]
+  direction TB
+  A&#x27; --&gt; B&#x27; --&gt; C&#x27; --&gt; D&#x27; --&gt; A&#x27;
+end
+A&#x27; --&gt; D
+A --&gt; D&#x27;</code></pre>
 
     </div>
 
@@ -285,14 +280,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/01/29/set-multiple-ssh-key-for-different-github-accounts/" rel="prev" title="Set multiple ssh-key for different github accounts">
-                  <i class="fa fa-chevron-left"></i> Set multiple ssh-key for different github accounts
+                <a href="/2022/09/05/A-simple-solution-to-do-Privacy-Diary-Sync/" rel="prev" title="一种朴素的私密文件同步方案 A simple solution to do Privacy Diary Sync">
+                  <i class="fa fa-chevron-left"></i> 一种朴素的私密文件同步方案 A simple solution to do Privacy Diary Sync
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/06/23/hexo_mermaid_support/" rel="next" title="Use mermaid in Hexo">
-                  Use mermaid in Hexo <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
