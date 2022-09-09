@@ -173,120 +173,6 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/09/Mermaid-display-adaption/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="organicCola">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="organicCola's House">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | organicCola's House">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/09/09/Mermaid-display-adaption/" class="post-title-link" itemprop="url">Mermaid display adaption</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-09-09 15:40:06" itemprop="dateCreated datePublished" datetime="2022-09-09T15:40:06+08:00">2022-09-09</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h3><p>Mermaid语法简单，使用方便，但是对具体布局的调整比较难以把控，在一些专业画图软件里的布局在mermaid里也难以实习。只能遵循一些规则尽量让布局符合我们的预期。</p>
-<h3 id="关于mermaid布局"><a href="#关于mermaid布局" class="headerlink" title="关于mermaid布局"></a>关于mermaid布局</h3><ol>
-<li>尽量使用TB而不是TD，TD不一定能按照top&#x2F;bottom排列</li>
-<li>flowchart 支持嵌套&#x2F; graph 不支持嵌套subgraph</li>
-<li>代码顺序不影响拓扑关系，但是有可能会影响布局。</li>
-<li>flowchart TB 支持 subgpaph direction BT，而graph TB不支持</li>
-<li>mermaid 中只要是相邻元素的连线方向会尽量保持与主方向。虽然拓扑不受影响，但是布局会受影响的，必须时刻注意，否则被强行调整元素位置可能会生成非期望的布局；未与外界直接相连的subgraph内的元素，可以通过direction控制方向。</li>
-<li>注意元素之间在没有连线的情况下，默认与主轴交错防抢排列，并且默认顺序与添加语句顺序是颠倒的，最后添加的排在最前面；</li>
-<li>mermaid连线时可能会强行调整元素位置，目前发现以下一些原则：</li>
-</ol>
-<ul>
-<li>会将流程靠前的元素放到主轴方向的开端</li>
-<li>位置靠前的元素以及其内部元素更不容易被调整位置</li>
-<li>会尽量调整元素布局以使得连线最短</li>
-</ul>
-<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">```mermaid</span><br><span class="line">flowchart　TB</span><br><span class="line">subgraph a[Right]</span><br><span class="line">  direction TB</span><br><span class="line">  A&#x27; --&gt; B&#x27; --&gt; C&#x27; --&gt; D&#x27; --&gt; A&#x27;</span><br><span class="line">end</span><br><span class="line">subgraph b[Left]</span><br><span class="line">  direction TB</span><br><span class="line">  A --&gt; B --&gt; C --&gt; D</span><br><span class="line">end</span><br><span class="line">A&#x27; --&gt; D</span><br><span class="line">A --&gt; D&#x27;</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
-
-<pre><code class="highlight mermaid">flowchart　TB
-subgraph a[Right]
-  direction TB
-  A&#x27; --&gt; B&#x27; --&gt; C&#x27; --&gt; D&#x27; --&gt; A&#x27;
-end
-subgraph b[Left]
-  direction TB
-  A --&gt; B --&gt; C --&gt; D
-end
-A&#x27; --&gt; D
-A --&gt; D&#x27;</code></pre>
-
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><ul>
-<li>由于a的布局位置考后，更容易被调整位置，并且其内部是首尾相接的结构，允许其调整元素顺序而拓扑结构不变，为了使A –&gt; D’ 连线尽量短，会把D’调整位置到顶端，所以看起来元素顺序有点不符合预期。</li>
-<li>subgraph a 和 subgraph b 如果交换代码位置，subgraph a 由于代码位置靠后，所以布局靠前，更不易被调整位置，所以abcd按照主轴方向依次向下排列，这样看起来顺眼多了。</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">```mermaid</span><br><span class="line">flowchart　TB</span><br><span class="line">subgraph b[Left]</span><br><span class="line">  direction TB</span><br><span class="line">  A --&gt; B --&gt; C --&gt; D</span><br><span class="line">end</span><br><span class="line">subgraph a[Right]</span><br><span class="line">  direction TB</span><br><span class="line">  A&#x27; --&gt; B&#x27; --&gt; C&#x27; --&gt; D&#x27; --&gt; A&#x27;</span><br><span class="line">end</span><br><span class="line">A&#x27; --&gt; D</span><br><span class="line">A --&gt; D&#x27;</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
-
-<pre><code class="highlight mermaid">flowchart　TB
-subgraph b[Left]
-  direction TB
-  A --&gt; B --&gt; C --&gt; D
-end
-subgraph a[Right]
-  direction TB
-  A&#x27; --&gt; B&#x27; --&gt; C&#x27; --&gt; D&#x27; --&gt; A&#x27;
-end
-A&#x27; --&gt; D
-A --&gt; D&#x27;</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/05/A-simple-solution-to-do-Privacy-Diary-Sync/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1043,6 +929,120 @@ C((Coding In Vim));</code></pre>
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/01/Mermaid-display-adaption/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="organicCola">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/07/01/Mermaid-display-adaption/" class="post-title-link" itemprop="url">Mermaid display adaption</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-07-01 15:40:06" itemprop="dateCreated datePublished" datetime="2021-07-01T15:40:06+08:00">2021-07-01</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h3><p>Mermaid语法简单，使用方便，但是对具体布局的调整比较难以把控，在一些专业画图软件里的布局在mermaid里也难以实习。只能遵循一些规则尽量让布局符合我们的预期。</p>
+<h3 id="关于mermaid布局"><a href="#关于mermaid布局" class="headerlink" title="关于mermaid布局"></a>关于mermaid布局</h3><ol>
+<li>尽量使用TB而不是TD，TD不一定能按照top&#x2F;bottom排列</li>
+<li>flowchart 支持嵌套&#x2F; graph 不支持嵌套subgraph</li>
+<li>代码顺序不影响拓扑关系，但是有可能会影响布局。</li>
+<li>flowchart TB 支持 subgpaph direction BT，而graph TB不支持</li>
+<li>mermaid 中只要是相邻元素的连线方向会尽量保持与主方向。虽然拓扑不受影响，但是布局会受影响的，必须时刻注意，否则被强行调整元素位置可能会生成非期望的布局；未与外界直接相连的subgraph内的元素，可以通过direction控制方向。</li>
+<li>注意元素之间在没有连线的情况下，默认与主轴交错防抢排列，并且默认顺序与添加语句顺序是颠倒的，最后添加的排在最前面；</li>
+<li>mermaid连线时可能会强行调整元素位置，目前发现以下一些原则：</li>
+</ol>
+<ul>
+<li>会将流程靠前的元素放到主轴方向的开端</li>
+<li>位置靠前的元素以及其内部元素更不容易被调整位置</li>
+<li>会尽量调整元素布局以使得连线最短</li>
+</ul>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">```mermaid</span><br><span class="line">flowchart　TB</span><br><span class="line">subgraph a[Right]</span><br><span class="line">  direction TB</span><br><span class="line">  A&#x27; --&gt; B&#x27; --&gt; C&#x27; --&gt; D&#x27; --&gt; A&#x27;</span><br><span class="line">end</span><br><span class="line">subgraph b[Left]</span><br><span class="line">  direction TB</span><br><span class="line">  A --&gt; B --&gt; C --&gt; D</span><br><span class="line">end</span><br><span class="line">A&#x27; --&gt; D</span><br><span class="line">A --&gt; D&#x27;</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
+
+<pre><code class="highlight mermaid">flowchart　TB
+subgraph a[Right]
+  direction TB
+  A&#x27; --&gt; B&#x27; --&gt; C&#x27; --&gt; D&#x27; --&gt; A&#x27;
+end
+subgraph b[Left]
+  direction TB
+  A --&gt; B --&gt; C --&gt; D
+end
+A&#x27; --&gt; D
+A --&gt; D&#x27;</code></pre>
+
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><ul>
+<li>由于a的布局位置考后，更容易被调整位置，并且其内部是首尾相接的结构，允许其调整元素顺序而拓扑结构不变，为了使A –&gt; D’ 连线尽量短，会把D’调整位置到顶端，所以看起来元素顺序有点不符合预期。</li>
+<li>subgraph a 和 subgraph b 如果交换代码位置，subgraph a 由于代码位置靠后，所以布局靠前，更不易被调整位置，所以abcd按照主轴方向依次向下排列，这样看起来顺眼多了。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">```mermaid</span><br><span class="line">flowchart　TB</span><br><span class="line">subgraph b[Left]</span><br><span class="line">  direction TB</span><br><span class="line">  A --&gt; B --&gt; C --&gt; D</span><br><span class="line">end</span><br><span class="line">subgraph a[Right]</span><br><span class="line">  direction TB</span><br><span class="line">  A&#x27; --&gt; B&#x27; --&gt; C&#x27; --&gt; D&#x27; --&gt; A&#x27;</span><br><span class="line">end</span><br><span class="line">A&#x27; --&gt; D</span><br><span class="line">A --&gt; D&#x27;</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
+
+<pre><code class="highlight mermaid">flowchart　TB
+subgraph b[Left]
+  direction TB
+  A --&gt; B --&gt; C --&gt; D
+end
+subgraph a[Right]
+  direction TB
+  A&#x27; --&gt; B&#x27; --&gt; C&#x27; --&gt; D&#x27; --&gt; A&#x27;
+end
+A&#x27; --&gt; D
+A --&gt; D&#x27;</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/27/update-theme-solution/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1245,7 +1245,7 @@ D--&gt;E;</code></pre>
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/30/cat_memo/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/10/set-multiple-ssh-key-for-different-github-accounts/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1263,7 +1263,7 @@ D--&gt;E;</code></pre>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/01/30/cat_memo/" class="post-title-link" itemprop="url">A lovely cat memo</a>
+          <a href="/2021/02/10/set-multiple-ssh-key-for-different-github-accounts/" class="post-title-link" itemprop="url">Set multiple ssh-key for different github accounts</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1274,7 +1274,7 @@ D--&gt;E;</code></pre>
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-01-30 00:00:00" itemprop="dateCreated datePublished" datetime="2021-01-30T00:00:00+08:00">2021-01-30</time>
+      <time title="Created: 2021-02-10 09:32:38" itemprop="dateCreated datePublished" datetime="2021-02-10T09:32:38+08:00">2021-02-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1282,7 +1282,7 @@ D--&gt;E;</code></pre>
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/memo/" itemprop="url" rel="index"><span itemprop="name">memo</span></a>
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
         </span>
     </span>
 
@@ -1296,47 +1296,21 @@ D--&gt;E;</code></pre>
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>randomly type something here</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ git commit</span><br></pre></td></tr></table></figure>
+          <h3 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h3><p>使用github pages搭建博客的时候突发奇想新建一个账户。<br>原因是pages域名直接和你的账号名挂钩，一是直觉上让我不舒服，二是想换个别的名字。</p>
+<h3 id="Issue"><a href="#Issue" class="headerlink" title="Issue"></a>Issue</h3><p>新建账户很简单按流程操作，不过当添加ssh-key的时候遇到了问题。<br><img src="/../imgs/ssh-key_is_alreay_in_use.png" alt="ssh-key is alreay in use"><br>意思这个key已经被添加进github过了。github规定一个key只允许被一个账户使用，只能添加一次，就是说不同的账户必须用不同的key。</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>解决思路也很简单，就是在新建另外一个key用于新建的账号。<br>不过有个问题要注意下，那就是当我们电脑中只有一个ssh-key的时候可能一路默认配置就完事了，但是当存在多个key的时候怎么在不同情况下使用特定的key呢？<br>答案是ssh-agent以及ssh的config文件，它们就是用来控制ssh相关的种种行为的。</p>
+<h3 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a><code>Steps</code></h3><h4 id="生成key，注意保存为新的rsa文件，防止覆盖了你的原先的。"><a href="#生成key，注意保存为新的rsa文件，防止覆盖了你的原先的。" class="headerlink" title="生成key，注意保存为新的rsa文件，防止覆盖了你的原先的。"></a>生成key，注意保存为新的rsa文件，防止覆盖了你的原先的。</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/.ssh</span><br><span class="line">ssh-keygen -t rsa -b 4096 -C &quot;new@github.com&quot;</span><br><span class="line">$ Enter file in which to save the key (/Users/******/.ssh/id_rsa): id_rsa_new</span><br></pre></td></tr></table></figure>
+<h4 id="将key-加入ssh-agent"><a href="#将key-加入ssh-agent" class="headerlink" title="将key 加入ssh-agent"></a>将key 加入ssh-agent</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eval &quot;$(ssh-agent -s)&quot;</span><br><span class="line">Agent pid 2897</span><br><span class="line">ssh-add -K ~/.ssh/id_rsa_new</span><br></pre></td></tr></table></figure>
+<h4 id="Edit-config-file"><a href="#Edit-config-file" class="headerlink" title="Edit config file"></a>Edit config file</h4><p>为新的账号配置进行连接要使用的key。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host new.github.com</span><br><span class="line">  HostName github.com</span><br><span class="line">  User git</span><br><span class="line">  IdentityFile ~/.ssh/id_rsa_new</span><br></pre></td></tr></table></figure>
+<p>这里解释下<code>Host</code>和<code>HostName</code>的作用，<br>Host是你进行连接时你输入给系统的字面值，系统会根据Host来找到HostName，实际连接用的是Hostname的值。<br>看一段解释</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&quot;About difference between host and hostname&quot;</span><br><span class="line"></span><br><span class="line">  Host host1</span><br><span class="line">      HostName host1.example.com</span><br><span class="line">  Host host2</span><br><span class="line">      HostName anotherdomain.com</span><br><span class="line"></span><br><span class="line">&quot;Then when you type&quot;</span><br><span class="line">&quot;ssh host1 : you actually login to host1.example.com&quot;</span><br><span class="line">&quot;ssh host2 : login to anotherdomain.com&quot;</span><br></pre></td></tr></table></figure>
+<p>有可能你会疑惑为什么要多此一举，直接HostName不就行了？<br>事实一般也确实没有要多一道这个转换的，所以一般情况下这两个值是一样的。不过有时候这个设置会很有用，比如现在我们遇到的情况：<br>我们要区分的两个账号都是github账号，没有办法按照域名来区分，虽然我们知道哪个仓库该用哪个地址，但是对系统来说都是连接的同一个Host，也只会使用同一个ssh-key，这样会因为key不对而连接失败。<br>这时候Host就派上用场了，注意我上面配置文件里，<code>Host</code>写的是<code>new.github.com</code>，但是<code>HostName</code>是<code>github.com</code>。<br><a id="Use_Example" style="none"/></p>
+<h5 id=""><a href="#" class="headerlink" title=""></a></h5><p>当我连接新账号的仓库时我会这么写，<br><code>git clone git@new.github.com:****/*****.git</code><br>当我连接旧账号的仓库时我会这么写，<br><code>git clone git@github.com:****/*****.git</code><br>它们实际上都还是连接的正常的github.com，但是会使用不同<code>Host</code>里的配置，从而使用不同的key，这样就成功进行了区分。</p>
+<h4 id="Add-Public-key-to-your-new-created-account"><a href="#Add-Public-key-to-your-new-created-account" class="headerlink" title="Add Public key to your new created account"></a>Add Public key to your new created account</h4><p><code>cat ~/.ssh/id_rsa_new.pub | pbcopy .</code></p>
+<h4 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br><span class="line">Hi OriginUserName! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br><span class="line">$ ssh -T git@new.github.com</span><br><span class="line">Hi NewUserName! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
 
-
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> varOne <span class="operator">=</span> <span class="string">&quot;string test&quot;</span></span><br><span class="line">varOne.append(<span class="string">&quot;anotherString&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>tableSample</th>
-<th>name</th>
-<th>amount</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>person</td>
-<td>zhangsan</td>
-<td>3</td>
-</tr>
-<tr>
-<td>person</td>
-<td>zhaosi</td>
-<td>4</td>
-</tr>
-<tr>
-<td>person</td>
-<td>wangwu</td>
-<td>5</td>
-</tr>
-<tr>
-<td>person</td>
-<td>whoisthat</td>
-<td>6</td>
-</tr>
-<tr>
-<td>person</td>
-<td>shitman</td>
-<td>7</td>
-</tr>
-</tbody></table>
-<p><img src="https://www.rd.com/wp-content/uploads/2021/01/GettyImages-1175550351.jpg?resize=2048,1339" alt="avatar"></p>
+<h3 id="⚠️-Pay-Attention-When-Use"><a href="#⚠️-Pay-Attention-When-Use" class="headerlink" title="⚠️ Pay Attention When Use"></a>⚠️ <em>Pay Attention When Use</em></h3><p>当你想使用新账户下仓库时，你连接时写的仓库url就需要改成<code>Host</code>的值， <a href="#Use_Example"><code>上面提到过</code></a></p>
 
       
     </div>
