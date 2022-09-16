@@ -20,30 +20,33 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="iOS project Editor一般对于iOS开发者来说Xcode是进行开发的首选工具，这也是苹果官方的开发工具。如果是非专职iOS开发者，那么也有极大的概率使用着其他开发工具。比如写flutter或者rn这种非native app，则可能会直接使用VSCode；对于native app除了vscode也有其他选择，比如jetBrains家的App Code，已经做的非常好，甚至集成了Coco">
+    <meta name="description" content="Pre一个魔性三消微信小程序游戏。由于游戏第二关是真随机，导致很难通关。既然制作者不讲武德也别怪玩家不客气。 Solution通过抓包可以看到为数不多的请求里有个很扎眼的map_id，是关卡地图，于是可以从rewrite request入手，把所有关卡的地图全变成第一关最简单的地图。 Environment &amp; Tool  iOS + desktop ProxyTool(Charles&amp;#">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Use Vim for iOS project development">
-<meta property="og:url" content="http://example.com/2021/08/06/coding-iOS-Vim/index.html">
+<meta property="og:title" content="Sheep_hack">
+<meta property="og:url" content="http://example.com/2022/09/16/sheep-hack/index.html">
 <meta property="og:site_name" content="organicCola&#39;s House">
-<meta property="og:description" content="iOS project Editor一般对于iOS开发者来说Xcode是进行开发的首选工具，这也是苹果官方的开发工具。如果是非专职iOS开发者，那么也有极大的概率使用着其他开发工具。比如写flutter或者rn这种非native app，则可能会直接使用VSCode；对于native app除了vscode也有其他选择，比如jetBrains家的App Code，已经做的非常好，甚至集成了Coco">
+<meta property="og:description" content="Pre一个魔性三消微信小程序游戏。由于游戏第二关是真随机，导致很难通关。既然制作者不讲武德也别怪玩家不客气。 Solution通过抓包可以看到为数不多的请求里有个很扎眼的map_id，是关卡地图，于是可以从rewrite request入手，把所有关卡的地图全变成第一关最简单的地图。 Environment &amp; Tool  iOS + desktop ProxyTool(Charles&amp;#">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-08-06T13:58:30.000Z">
-<meta property="article:modified_time" content="2022-08-10T18:34:59.945Z">
+<meta property="og:image" content="http://example.com/imgs/Charles_proxy.png">
+<meta property="og:image" content="http://example.com/imgs/ShadowRocket_add_SocksProxy.jpeg">
+<meta property="og:image" content="http://example.com/imgs/Charles_rewrite_setting.png">
+<meta property="og:image" content="http://example.com/imgs/Charles_verify_result.png">
+<meta property="article:published_time" content="2022-09-15T22:15:36.000Z">
+<meta property="article:modified_time" content="2022-09-16T00:27:59.652Z">
 <meta property="article:author" content="organicCola">
-<meta property="article:tag" content="vim">
-<meta property="article:tag" content="iOS">
-<meta property="article:tag" content="Language Server Protocol">
+<meta property="article:tag" content="羊了个羊，sniff network traffic">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/imgs/Charles_proxy.png">
 
 
-<link rel="canonical" href="http://example.com/2021/08/06/coding-iOS-Vim/">
+<link rel="canonical" href="http://example.com/2022/09/16/sheep-hack/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/08/06/coding-iOS-Vim/","path":"2021/08/06/coding-iOS-Vim/","title":"Use Vim for iOS project development"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/09/16/sheep-hack/","path":"2022/09/16/sheep-hack/","title":"Sheep_hack"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Use Vim for iOS project development | organicCola's House</title>
+<title>Sheep_hack | organicCola's House</title>
   
 
 
@@ -119,7 +122,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS-project-Editor"><span class="nav-number">1.</span> <span class="nav-text">iOS project Editor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Language-Server-Protocol"><span class="nav-number">2.</span> <span class="nav-text">Language Server Protocol</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-Vim-for-iOS-project-development"><span class="nav-number">3.</span> <span class="nav-text">Use Vim for iOS project development</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-simple-Screencast"><span class="nav-number">4.</span> <span class="nav-text">A simple Screencast</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pre"><span class="nav-number">1.</span> <span class="nav-text">Pre</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">2.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Environment-amp-Tool"><span class="nav-number">3.</span> <span class="nav-text">Environment &amp; Tool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step"><span class="nav-number">4.</span> <span class="nav-text">Step</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -182,7 +185,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/06/coding-iOS-Vim/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/16/sheep-hack/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -195,12 +198,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Use Vim for iOS project development | organicCola's House">
+      <meta itemprop="name" content="Sheep_hack | organicCola's House">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Use Vim for iOS project development
+          Sheep_hack
         </h1>
 
         <div class="post-meta-container">
@@ -211,7 +214,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-08-06 21:58:30" itemprop="dateCreated datePublished" datetime="2021-08-06T21:58:30+08:00">2021-08-06</time>
+      <time title="Created: 2022-09-16 06:15:36" itemprop="dateCreated datePublished" datetime="2022-09-16T06:15:36+08:00">2022-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -233,36 +236,38 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="iOS-project-Editor"><a href="#iOS-project-Editor" class="headerlink" title="iOS project Editor"></a>iOS project Editor</h2><p>一般对于iOS开发者来说Xcode是进行开发的首选工具，这也是苹果官方的开发工具。<br>如果是非专职iOS开发者，那么也有极大的概率使用着其他开发工具。比如写flutter或者rn这种非native app，则可能会直接使用VSCode；对于native app除了vscode也有其他选择，比如jetBrains家的App Code，已经做的非常好，甚至集成了CocoaPods，不过AppCode貌似是收费的。<br>如果你是Vim爱好者，那么很容易在Xcode以外的这些工具中找到Vim插件，体验不错，常用的功能都有。<br>对于Xcode官方也已经在Xcode13中提供了Vim keybind支持，不过很基础，一些常用的功能体面没有提供，使用使用体验与原生Vim存在差距。  </p>
-<h2 id="Language-Server-Protocol"><a href="#Language-Server-Protocol" class="headerlink" title="Language Server Protocol"></a>Language Server Protocol</h2><p>其实现阶段在类似sublime、vscode、Emacs中跨行编辑代码并不是难事，多亏了微软主导的<a target="_blank" rel="noopener" href="https://langserver.org/">Language Server Protocol</a>，每个语言的开发者据此协议提供自己语言服务器以对外提供接口，然后编辑器只需要遵循这个协议即可轻松实现对各种语言的对接，编辑器只需要做好自己的使用体验，界面，输入优化等。</p>
-<pre><code class="highlight mermaid">graph TD;
-S(Swift) --&gt; D;
-A(Java) --&gt; D;
-B(JavaScript) --&gt; D;
-C(C/C++) --&gt; D;
-D(Language Server Protocol) --&gt; E(Vim);
-D --&gt; F(Sublime);
-D --&gt; G(VSCode);
-D --&gt; H(Emacs);</code></pre>
-<h2 id="Use-Vim-for-iOS-project-development"><a href="#Use-Vim-for-iOS-project-development" class="headerlink" title="Use Vim for iOS project development"></a>Use Vim for iOS project development</h2><p>而本文要讨论的则是一个更加朴素的环境，终端中的Vim，在终端中使用Vim来进行iOS工程的编写。<br>虽说是终端编写，但并不是说不需要Xcode了，Vim中做的只是编辑代码，仍需要使用Xcode来进行编译和运行以及Debug。<br>最终达成的效果是，用Xcode新建一个工程，编译，生成编译日志并将其解析为可供lsp-server使用的数据，在Vim中调用lsp-server提供自动补全、定义跳转等支持，在Vim中进行代码编写。</p>
-<pre><code class="highlight mermaid">graph TD;
-A(XcodeCompile/Debug)--&gt; |compile| B;
-
-subgraph prepare info for Language Server
-B(compile log)-.-&gt; |Objective-C| X;
-B(compile log)--&gt; |Swift| Xa;
-X(xcpretty/XCCompilationDB process) -.-&gt; |compile_commands.json| L;
-Xa(Xcode Build Server process) --&gt; |.compile| L;
-end
-
-subgraph Vim-lsp&lt;=&gt;Language server Interactive
-L((Vim-lsp)) -.- |json-compilation-database| Cl(Clangd);
-L --- |Build Server Protocol| S(Sourcekit);
-end
-
-L === |LSP support: autoCompleteion/goToDefinition...| C;
-C((Coding In Vim));</code></pre>
-<h2 id="A-simple-Screencast"><a href="#A-simple-Screencast" class="headerlink" title="A simple Screencast"></a>A simple Screencast</h2><script id="asciicast-jVh32tJK83zPuX3wZjR3MoVLL" src="https://asciinema.org/a/jVh32tJK83zPuX3wZjR3MoVLL.js" async></script>
+        <h3 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h3><p>一个魔性三消微信小程序游戏。由于游戏第二关是真随机，导致很难通关。既然制作者不讲武德也别怪玩家不客气。</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>通过抓包可以看到为数不多的请求里有个很扎眼的map_id，是关卡地图，于是可以从rewrite request入手，把所有关卡的地图全变成第一关最简单的地图。</p>
+<h3 id="Environment-amp-Tool"><a href="#Environment-amp-Tool" class="headerlink" title="Environment &amp; Tool"></a>Environment &amp; Tool</h3><blockquote>
+<ul>
+<li>iOS + desktop ProxyTool(Charles&#x2F;Fidder…) + mobile ProxyTool supporting Socks(ShadowRocket&#x2F;Quantumult…)<br>or</li>
+<li>iOS + mobile Traffic Sniffer with rewrite function (Http Cacher…)</li>
+<li>安卓没有试，但理论上方法一样<br>注意：<br>ShadowRocket Quantumult 为收费软件<br>Charles 不注册也可以免费试用<br>Http Cacher 免费下载，但是https和rewrite 需要内购<br>我用的Charles + ShadowRocket 因为我刚好有</li>
+</ul>
+</blockquote>
+<h3 id="Step"><a href="#Step" class="headerlink" title="Step"></a>Step</h3><ol>
+<li><p>使用Charles在桌面端开启代理注意要使用SocksProxy (菜单栏 -&gt; Proxy -&gt; ProxySetting)<br><img src="/../imgs/Charles_proxy.png" alt="Charles_proxy"></p>
+</li>
+<li><p>按照Charles的提示安装CA证书在你的手机上。（菜单栏 Help -&gt; SSL Proxying -&gt; Install Charles Root Certification on a Mobile Device or Remote Browser)</p>
+</li>
+<li><p>iOS使用ShadowRocket添加Charles的代理，注意类型填socks类型，这里ip如果不知道填什么可以在Charles里查看(菜单栏 -&gt; Help -&gt; Local IP Address)<br><img src="/../imgs/ShadowRocket_add_SocksProxy.jpeg" alt="ShadowRocket_add_SocksProxy"></p>
+</li>
+<li><p>打开Charles的rewrite功能，url’s parameter, key map_id 的 value 不用填，自动全部替换统一改为 80001 (菜单栏 -&gt; Tools -&gt; rewrite)<br><img src="/../imgs/Charles_rewrite_setting.png" alt="Charles_rewrite_setting"></p>
+</li>
+<li><p>(Optional)接下来按顺序操作，验证是否操作成功，不过此时如果顺利直接进游戏也可以。</p>
+<blockquote>
+<ol>
+<li>删除微信里羊了个羊</li>
+<li>打开Charles的Recoring (菜单栏 -&gt; Proxy -&gt; Start Recoring)</li>
+<li>Charles中点击Clear Session(菜单栏 -&gt; File -&gt; Clear Session)</li>
+<li>再进入羊了个羊，一直进入到第一关</li>
+<li>检查左侧是否出现了红框里的数据，如果所有的id都是80001，恭喜你，成功了。<br>如果不行可能是检查步骤出错，回到第一步重新操作；如果多次不行则前面设置代理有问题，返回检查。<br><img src="/../imgs/Charles_verify_result.png" alt="Charles_verify_result"></li>
+</ol>
+</blockquote>
+</li>
+<li><p>进游戏过了第一关之后来到第二关，但是第二关也变成了第一关的模样，15秒速通。</p>
+</li>
+</ol>
 
     </div>
 
@@ -272,23 +277,18 @@ C((Coding In Vim));</code></pre>
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/vim/" rel="tag"># vim</a>
-              <a href="/tags/iOS/" rel="tag"># iOS</a>
-              <a href="/tags/Language-Server-Protocol/" rel="tag"># Language Server Protocol</a>
+              <a href="/tags/%E7%BE%8A%E4%BA%86%E4%B8%AA%E7%BE%8A%EF%BC%8Csniff-network-traffic/" rel="tag"># 羊了个羊，sniff network traffic</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/07/01/Mermaid-display-adaption/" rel="prev" title="Mermaid display adaption">
-                  <i class="fa fa-chevron-left"></i> Mermaid display adaption
+                <a href="/2022/09/05/A-simple-solution-to-do-Privacy-Diary-Sync/" rel="prev" title="一种朴素的私密文件同步方案 A simple solution to do Privacy Diary Sync">
+                  <i class="fa fa-chevron-left"></i> 一种朴素的私密文件同步方案 A simple solution to do Privacy Diary Sync
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/02/19/Using-git-with-ssh-throuhgh-proxy/" rel="next" title="Using git with ssh throuhgh proxy">
-                  Using git with ssh throuhgh proxy <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
