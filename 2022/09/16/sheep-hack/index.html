@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://example.com/imgs/Charles_rewrite_setting.png">
 <meta property="og:image" content="http://example.com/imgs/Charles_verify_result.png">
 <meta property="article:published_time" content="2022-09-15T22:15:36.000Z">
-<meta property="article:modified_time" content="2022-09-17T03:54:34.370Z">
+<meta property="article:modified_time" content="2022-09-17T04:33:05.269Z">
 <meta property="article:author" content="organicCola">
 <meta property="article:tag" content="羊了个羊，sniff network traffic">
 <meta property="article:tag" content="Charles">
@@ -243,10 +243,68 @@
 <h3 id="Environment-amp-Tool"><a href="#Environment-amp-Tool" class="headerlink" title="Environment &amp; Tool"></a>Environment &amp; Tool</h3><blockquote>
 <ul>
 <li>iOS + desktop ProxyTool(Charles&#x2F;Fidder…) + mobile ProxyTool supporting Socks(ShadowRocket&#x2F;Quantumult&#x2F;Surge…)<br>or</li>
-<li>iOS + mobile Traffic Sniffer with rewrite function (Http Cacher&#x2F;Thor&#x2F;Storm Sniffer…)</li>
-<li>安卓没有试，但理论上方法一样<br>注意：<br>ShadowRocket Quantumult 为收费软件<br>Charles 不注册也可以免费试用<br>Http Cacher 免费下载，但是https和rewrite 需要内购<br>我用的Charles + ShadowRocket 因为我刚好有</li>
+<li>iOS + mobile Traffic Sniffer with rewrite function (Http Cacher&#x2F;Thor&#x2F;Storm Sniffer&#x2F;Surge…)</li>
+<li>安卓没有试，但理论上方法一样。<br>  安装证书Charles证书之后，通过wifi连接Charles，似乎因为SSL Pinning，https无法抓取，解决办法是Android上安装Xposed+JustTrustMe来绕过SSL Pinning</li>
 </ul>
 </blockquote>
+<p>注意：</p>
+<table>
+<thead>
+<tr>
+<th>Mac Proxy App</th>
+<th>Price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Charles</td>
+<td>不注册也可以免费试用, 有免费注册方法，sniff，rewirte全功能可用</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>iOS Proxy App</th>
+<th>Price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ShadowRocket</td>
+<td>paid</td>
+</tr>
+<tr>
+<td>Quantumult</td>
+<td>paid</td>
+</tr>
+<tr>
+<td>Surge</td>
+<td>免费下载，抓包免费 proxy rewrite内购</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>iOS on-deivce Sniffer App</th>
+<th>Price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HttpCacher</td>
+<td>免费下载，http抓包免费，https抓包内购，rewrite内购</td>
+</tr>
+<tr>
+<td>Thor</td>
+<td>付费下载</td>
+</tr>
+<tr>
+<td>StormSniffer</td>
+<td>下载免费 http抓包免费，https抓包内购，rewrite 需要内购</td>
+</tr>
+<tr>
+<td>Surge</td>
+<td>免费下载，抓包免费 proxy rewrite内购</td>
+</tr>
+</tbody></table>
+<p>我用的Charles + ShadowRocket 因为我刚好有</p>
 <h3 id="Step"><a href="#Step" class="headerlink" title="Step"></a>Step</h3><ol>
 <li><p>使用Charles在桌面端开启代理注意要使用SocksProxy (菜单栏 -&gt; Proxy -&gt; ProxySetting)<br><img src="/../imgs/Charles_proxy.png" alt="Charles_proxy"></p>
 </li>
