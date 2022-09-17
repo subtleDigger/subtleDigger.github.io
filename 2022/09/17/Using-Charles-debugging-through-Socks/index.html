@@ -20,35 +20,30 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Pre一个魔性三消微信小程序游戏。由于游戏第二关是真随机，导致很难通关。既然制作者不讲武德也别怪玩家不客气。 Solution通过抓包可以看到为数不多的请求里有个很扎眼的map_id，是关卡地图，于是可以从rewrite request入手，把所有关卡的地图全变成第一关最简单的地图。 Several solution    Solution 1 Desktop + iOS device    De">
+    <meta name="description" content="PreCharles 除了经典的通过http执行代理debug之外还可以使用sock，两种方式的区别可以看Charles官方的说明，而实际使用中明显的区别就是有些http下遇到的无法抓包情况socks下可以正常执行。 Solution1. 使用iOS自带的代理  使用iOS wifi 自带的代理设置一般只能设置http类型  如果想要socks类型可以使用自动代理，可以利用自动代理模式 1. 1.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Sheep_hack 羊了个羊速通">
-<meta property="og:url" content="http://example.com/2022/09/16/sheep-hack/index.html">
+<meta property="og:title" content="Using Charles debugging through Socks">
+<meta property="og:url" content="http://example.com/2022/09/17/Using-Charles-debugging-through-Socks/index.html">
 <meta property="og:site_name" content="organicCola&#39;s House">
-<meta property="og:description" content="Pre一个魔性三消微信小程序游戏。由于游戏第二关是真随机，导致很难通关。既然制作者不讲武德也别怪玩家不客气。 Solution通过抓包可以看到为数不多的请求里有个很扎眼的map_id，是关卡地图，于是可以从rewrite request入手，把所有关卡的地图全变成第一关最简单的地图。 Several solution    Solution 1 Desktop + iOS device    De">
+<meta property="og:description" content="PreCharles 除了经典的通过http执行代理debug之外还可以使用sock，两种方式的区别可以看Charles官方的说明，而实际使用中明显的区别就是有些http下遇到的无法抓包情况socks下可以正常执行。 Solution1. 使用iOS自带的代理  使用iOS wifi 自带的代理设置一般只能设置http类型  如果想要socks类型可以使用自动代理，可以利用自动代理模式 1. 1.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/imgs/Charles_proxy.png">
-<meta property="og:image" content="http://example.com/imgs/ShadowRocket_add_SocksProxy.jpeg">
-<meta property="og:image" content="http://example.com/imgs/Charles_rewrite_setting.png">
-<meta property="og:image" content="http://example.com/imgs/Charles_verify_result.png">
-<meta property="article:published_time" content="2022-09-15T22:15:36.000Z">
-<meta property="article:modified_time" content="2022-09-17T08:50:22.520Z">
+<meta property="article:published_time" content="2022-09-17T11:15:39.000Z">
+<meta property="article:modified_time" content="2022-09-17T11:30:23.048Z">
 <meta property="article:author" content="organicCola">
 <meta property="article:tag" content="Charles">
-<meta property="article:tag" content="羊了个羊，sniff network traffic">
-<meta property="article:tag" content="ShadowRocket">
+<meta property="article:tag" content="Proxy">
+<meta property="article:tag" content="Socks">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/imgs/Charles_proxy.png">
 
 
-<link rel="canonical" href="http://example.com/2022/09/16/sheep-hack/">
+<link rel="canonical" href="http://example.com/2022/09/17/Using-Charles-debugging-through-Socks/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/09/16/sheep-hack/","path":"2022/09/16/sheep-hack/","title":"Sheep_hack 羊了个羊速通"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/09/17/Using-Charles-debugging-through-Socks/","path":"2022/09/17/Using-Charles-debugging-through-Socks/","title":"Using Charles debugging through Socks"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Sheep_hack 羊了个羊速通 | organicCola's House</title>
+<title>Using Charles debugging through Socks | organicCola's House</title>
   
 
 
@@ -124,7 +119,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pre"><span class="nav-number">1.</span> <span class="nav-text">Pre</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">2.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Several-solution"><span class="nav-number">3.</span> <span class="nav-text">Several solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cost"><span class="nav-number">3.1.</span> <span class="nav-text">Cost</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step"><span class="nav-number">4.</span> <span class="nav-text">Step</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pre"><span class="nav-number">1.</span> <span class="nav-text">Pre</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BD%BF%E7%94%A8iOS%E8%87%AA%E5%B8%A6%E7%9A%84%E4%BB%A3%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">1. 使用iOS自带的代理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-%E8%87%AA%E5%BB%BAPac%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.1.</span> <span class="nav-text">1. 1. 自建Pac文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-%E6%9C%AC%E5%9C%B0%E5%90%AF%E5%8A%A8%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9D%A5%E6%8F%90%E4%BE%9Bpac%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.2.</span> <span class="nav-text">1. 2. 本地启动一个服务器来提供pac文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-%E5%9C%A8wifi%E4%BB%A3%E7%90%86%E9%87%8C%E9%9D%A2%E9%80%89%E5%8D%8A%E8%87%AA%E5%8A%A8%E4%BB%A3%E7%90%86%EF%BC%8C%E5%A1%AB%E5%85%A5pac%E6%96%87%E4%BB%B6%E5%9C%B0%E5%9D%80"><span class="nav-number">2.1.3.</span> <span class="nav-text">1. 3. 在wifi代理里面选半自动代理，填入pac文件地址</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8Socks-Proxy-Client"><span class="nav-number">2.2.</span> <span class="nav-text">2. 使用Socks Proxy Client</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -187,7 +182,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/16/sheep-hack/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/17/Using-Charles-debugging-through-Socks/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -200,12 +195,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Sheep_hack 羊了个羊速通 | organicCola's House">
+      <meta itemprop="name" content="Using Charles debugging through Socks | organicCola's House">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Sheep_hack 羊了个羊速通
+          Using Charles debugging through Socks
         </h1>
 
         <div class="post-meta-container">
@@ -216,7 +211,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-09-16 06:15:36" itemprop="dateCreated datePublished" datetime="2022-09-16T06:15:36+08:00">2022-09-16</time>
+      <time title="Created: 2022-09-17 19:15:39" itemprop="dateCreated datePublished" datetime="2022-09-17T19:15:39+08:00">2022-09-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -238,131 +233,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h3><p>一个魔性三消微信小程序游戏。由于游戏第二关是真随机，导致很难通关。既然制作者不讲武德也别怪玩家不客气。</p>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>通过抓包可以看到为数不多的请求里有个很扎眼的map_id，是关卡地图，于是可以从rewrite request入手，把所有关卡的地图全变成第一关最简单的地图。</p>
-<h3 id="Several-solution"><a href="#Several-solution" class="headerlink" title="Several solution"></a>Several solution</h3><blockquote>
-<table>
-<thead>
-<tr>
-<th>Solution 1</th>
-<th>Desktop + iOS device</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Desktop</td>
-<td>DebuggingProxyTool(Charles&#x2F;Fidder…)</td>
-</tr>
-<tr>
-<td>iOS device</td>
-<td>ProxyTool supporting Socks(Brook&#x2F;Surge&#x2F;ShadowRocket&#x2F;Quantumult…)</td>
-</tr>
-</tbody></table>
-</blockquote>
-<blockquote>
-<p>or</p>
-</blockquote>
-<blockquote>
-<table>
-<thead>
-<tr>
-<th>Solution 2</th>
-<th>iOS Traffic Sniffer App with rewrite function</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>iOS device</td>
-<td>Http Cacher&#x2F;Storm Sniffer&#x2F;Surge&#x2F;Thor…</td>
-</tr>
-</tbody></table>
-</blockquote>
-<blockquote>
-<p> 安卓没有试，但理论上方法一样。安装证书Charles证书之后，通过wifi连接Charles，有可能会遇到SSL Pinning导致https无法抓取，解决办法是Android上安装Xposed+JustTrustMe来绕过SSL Pinning</p>
-</blockquote>
-<h4 id="Cost"><a href="#Cost" class="headerlink" title="Cost"></a>Cost</h4><table>
-<thead>
-<tr>
-<th>Mac Proxy App</th>
-<th>Price</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Charles</td>
-<td>不注册也可以免费试用, 有免费注册方法，sniff，rewirte全功能可用</td>
-</tr>
-</tbody></table>
-<p>proxy app 国区没有幸存者</p>
-<table>
-<thead>
-<tr>
-<th>iOS Proxy App</th>
-<th>Price</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Brook</td>
-<td>freeCharge(国区没有)</td>
-</tr>
-<tr>
-<td>Surge</td>
-<td>freeDownload，抓包免费 proxy rewrite内购，(国区没有)</td>
-</tr>
-<tr>
-<td>ShadowRocket</td>
-<td>paid(国区没有)</td>
-</tr>
-<tr>
-<td>Quantumult</td>
-<td>paid(国区没有)</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>iOS on-deivce Sniffer App</th>
-<th>Price</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>HttpCacher</td>
-<td>freeDownload，http抓包免费，https抓包内购，rewrite内购</td>
-</tr>
-<tr>
-<td>StormSniffer</td>
-<td>freeDownload，http抓包免费，https抓包内购，rewrite 需要内购</td>
-</tr>
-<tr>
-<td>Surge</td>
-<td>freeDownload，抓包免费，proxy rewrite内购(国区没有)</td>
-</tr>
-<tr>
-<td>Thor</td>
-<td>paid，(似乎现在appStore搜不到)</td>
-</tr>
-</tbody></table>
-<p>推荐 Charles + Brook 免费组合<br>我用的Charles + ShadowRocket 因为我刚好有</p>
-<h3 id="Step"><a href="#Step" class="headerlink" title="Step"></a>Step</h3><ol>
-<li><p>使用Charles在桌面端开启代理注意要使用SocksProxy (菜单栏 -&gt; Proxy -&gt; ProxySetting)<br><img src="/../imgs/Charles_proxy.png" alt="Charles_proxy"></p>
-</li>
-<li><p>按照Charles的提示安装CA证书在你的手机上。（菜单栏 Help -&gt; SSL Proxying -&gt; Install Charles Root Certification on a Mobile Device or Remote Browser)</p>
-</li>
-<li><p>iOS使用ShadowRocket添加Charles的代理，注意类型填socks类型，这里ip如果不知道填什么可以在Charles里查看(菜单栏 -&gt; Help -&gt; Local IP Address)。代理要设置为全局代理。<br><img src="/../imgs/ShadowRocket_add_SocksProxy.jpeg" alt="ShadowRocket_add_SocksProxy"></p>
-</li>
-<li><p>打开Charles的rewrite功能，url’s parameter, key map_id 的 value 不用填，自动全部替换统一改为 80001 (菜单栏 -&gt; Tools -&gt; rewrite)<br><img src="/../imgs/Charles_rewrite_setting.png" alt="Charles_rewrite_setting"></p>
-</li>
-<li><p>(Optional)接下来按顺序操作，验证是否操作成功，不过此时如果顺利直接进游戏也可以。</p>
-<blockquote>
-<ol>
-<li>删除微信里羊了个羊</li>
-<li>打开Charles的Recoring (菜单栏 -&gt; Proxy -&gt; Start Recoring)</li>
-<li>Charles中点击Clear Session(菜单栏 -&gt; File -&gt; Clear Session)</li>
-<li>再进入羊了个羊，一直进入到第一关</li>
-<li>检查左侧是否出现了红框里的数据，如果所有的id都是80001，恭喜你，成功了。<br>如果不行可能是检查步骤出错，回到第一步重新操作；如果多次不行则前面设置代理有问题，返回检查。<br><img src="/../imgs/Charles_verify_result.png" alt="Charles_verify_result"></li>
-</ol>
-</blockquote>
-</li>
-<li><p>进游戏过了第一关之后来到第二关，但是第二关也变成了第一关的模样，15秒速通。</p>
-</li>
-</ol>
+        <h3 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h3><p>Charles 除了经典的通过http执行代理debug之外还可以使用sock，两种方式的区别可以看Charles官方的说明，而实际使用中明显的区别就是有些http下遇到的无法抓包情况socks下可以正常执行。</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-使用iOS自带的代理"><a href="#1-使用iOS自带的代理" class="headerlink" title="1. 使用iOS自带的代理"></a>1. 使用iOS自带的代理</h4><p>  使用iOS wifi 自带的代理设置一般只能设置http类型<br>  如果想要socks类型可以使用自动代理，可以利用自动代理模式</p>
+<h5 id="1-1-自建Pac文件"><a href="#1-1-自建Pac文件" class="headerlink" title="1. 1. 自建Pac文件"></a>1. 1. 自建Pac文件</h5>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">charles_socks.pac</span><br><span class="line">function FindProxyForURL(url, host) &#123; return &#x27;SOCKS 192.168.199.105:8881; SOCKS5 192.168.199.105:8881&#x27;; &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="1-2-本地启动一个服务器来提供pac文件"><a href="#1-2-本地启动一个服务器来提供pac文件" class="headerlink" title="1. 2. 本地启动一个服务器来提供pac文件"></a>1. 2. 本地启动一个服务器来提供pac文件</h5>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd pathToPacFile</span><br><span class="line">python -m SimpleHTTPServer </span><br></pre></td></tr></table></figure>
+<h5 id="1-3-在wifi代理里面选半自动代理，填入pac文件地址"><a href="#1-3-在wifi代理里面选半自动代理，填入pac文件地址" class="headerlink" title="1. 3. 在wifi代理里面选半自动代理，填入pac文件地址"></a>1. 3. 在wifi代理里面选半自动代理，填入pac文件地址</h5><p>  <code>http://127.0.0.1:8000/pathToPacFile</code><br>  但是经测试如果这个socks使用时仍有问题，他跟http一样会在某些时候卡住无法继续，也许是iOS自带的socks支持程度与charles的不同。</p>
+<h4 id="2-使用Socks-Proxy-Client"><a href="#2-使用Socks-Proxy-Client" class="headerlink" title="2. 使用Socks Proxy Client"></a>2. 使用Socks Proxy Client</h4><p>  目前发现的能提供正常可用的sock5连接iOS客户端有以下几个，当然这些国区AppStore都没有。<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ShadowRocket(paid)</span><br><span class="line">Surge(paid)</span><br><span class="line">Brook(a free &amp; open-source one)</span><br></pre></td></tr></table></figure></p>
 
     </div>
 
@@ -373,22 +249,19 @@
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Charles/" rel="tag"># Charles</a>
-              <a href="/tags/%E7%BE%8A%E4%BA%86%E4%B8%AA%E7%BE%8A%EF%BC%8Csniff-network-traffic/" rel="tag"># 羊了个羊，sniff network traffic</a>
-              <a href="/tags/ShadowRocket/" rel="tag"># ShadowRocket</a>
+              <a href="/tags/Proxy/" rel="tag"># Proxy</a>
+              <a href="/tags/Socks/" rel="tag"># Socks</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/09/05/A-simple-solution-to-do-Privacy-Diary-Sync/" rel="prev" title="一种朴素的私密文件同步方案 A simple solution to do Privacy Diary Sync">
-                  <i class="fa fa-chevron-left"></i> 一种朴素的私密文件同步方案 A simple solution to do Privacy Diary Sync
+                <a href="/2022/09/16/sheep-hack/" rel="prev" title="Sheep_hack 羊了个羊速通">
+                  <i class="fa fa-chevron-left"></i> Sheep_hack 羊了个羊速通
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/09/17/Using-Charles-debugging-through-Socks/" rel="next" title="Using Charles debugging through Socks">
-                  Using Charles debugging through Socks <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
