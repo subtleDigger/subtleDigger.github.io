@@ -226,15 +226,45 @@
     <div class="post-body" itemprop="articleBody">
           <h3 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h3><p>一个魔性三消微信小程序游戏。由于游戏第二关是真随机，导致很难通关。既然制作者不讲武德也别怪玩家不客气。</p>
 <h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>通过抓包可以看到为数不多的请求里有个很扎眼的map_id，是关卡地图，于是可以从rewrite request入手，把所有关卡的地图全变成第一关最简单的地图。</p>
-<h3 id="Environment-amp-Tool"><a href="#Environment-amp-Tool" class="headerlink" title="Environment &amp; Tool"></a>Environment &amp; Tool</h3><blockquote>
-<ul>
-<li>iOS + desktop ProxyTool(Charles&#x2F;Fidder…) + mobile ProxyTool supporting Socks(Brook&#x2F;Surge&#x2F;ShadowRocket&#x2F;Quantumult…)<br>or</li>
-<li>iOS + mobile Traffic Sniffer with rewrite function (Http Cacher&#x2F;Storm Sniffer&#x2F;Surge&#x2F;Thor…)</li>
-<li>安卓没有试，但理论上方法一样。<br>  安装证书Charles证书之后，通过wifi连接Charles，似乎因为SSL Pinning，https无法抓取，解决办法是Android上安装Xposed+JustTrustMe来绕过SSL Pinning</li>
-</ul>
-</blockquote>
-<p>注意：</p>
+<h3 id="Several-solution"><a href="#Several-solution" class="headerlink" title="Several solution"></a>Several solution</h3><blockquote>
 <table>
+<thead>
+<tr>
+<th>Solution 1</th>
+<th>Desktop + iOS device</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Desktop</td>
+<td>DebuggingProxyTool(Charles&#x2F;Fidder…)</td>
+</tr>
+<tr>
+<td>iOS device</td>
+<td>ProxyTool supporting Socks(Brook&#x2F;Surge&#x2F;ShadowRocket&#x2F;Quantumult…)</td>
+</tr>
+</tbody></table>
+</blockquote>
+<blockquote>
+<p>or</p>
+</blockquote>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>Solution 2</th>
+<th>iOS Traffic Sniffer App with rewrite function</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>iOS device</td>
+<td>Http Cacher&#x2F;Storm Sniffer&#x2F;Surge&#x2F;Thor…</td>
+</tr>
+</tbody></table>
+</blockquote>
+<blockquote>
+<p> 安卓没有试，但理论上方法一样。安装证书Charles证书之后，通过wifi连接Charles，有可能会遇到SSL Pinning导致https无法抓取，解决办法是Android上安装Xposed+JustTrustMe来绕过SSL Pinning</p>
+</blockquote>
+<h4 id="Cost"><a href="#Cost" class="headerlink" title="Cost"></a>Cost</h4><table>
 <thead>
 <tr>
 <th>Mac Proxy App</th>
