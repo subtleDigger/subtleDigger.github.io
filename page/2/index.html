@@ -124,7 +124,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -135,7 +135,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -164,6 +164,92 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/27/update-theme-solution/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="organicCola">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | organicCola's House">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/06/27/update-theme-solution/" class="post-title-link" itemprop="url">Update Hexo theme solution</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-27 19:28:27" itemprop="dateCreated datePublished" datetime="2021-06-27T19:28:27+08:00">2021-06-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h4><p>当使用Hexo时不可避免的我们要使用一些主题，当主题的默认设置无法满足我们要求时候我们不可避免的要对其进行一些修改。一般我是用git clone下来主题去掉他原来的git，将其纳入我的blog文件夹的git管理下。<br>当主题发布了新版本我们可能会需要升级主题，或者旧版本无法满足要求需要升级到新版本，这时候就涉及到“迁移之前对主题文件进行的修改”问题。<br>这时候我们就需要知道究竟修改了哪些文件，然后在把修改迁移到新的主题下。</p>
+<h4 id="1-一种朴素的方法，找出不同，手动迁移"><a href="#1-一种朴素的方法，找出不同，手动迁移" class="headerlink" title="1. 一种朴素的方法，找出不同，手动迁移"></a>1. 一种朴素的方法，找出不同，手动迁移</h4><p>在bolg仓库git下使用diff<br>head~3 是刚加入主题时的提交<br>将对比限定在对应主题文件夹下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff  head~3 themes/next</span><br></pre></td></tr></table></figure>
+<p>然后手动把修改的内容迁移到新下载的theme中</p>
+<h4 id="2-升级的半自动方法"><a href="#2-升级的半自动方法" class="headerlink" title="2.升级的半自动方法"></a>2.升级的半自动方法</h4><p>将现在的主题文件夹复制替换掉新版本的主题文件夹里的内容，只保留自己需要的迁移的一部分更改，git add 到贮存区，其余的全部restore状态。完成后去掉.git文件夹，回归到blog文件夹的git管理下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add ****.**  ****.**</span><br><span class="line">git restore .</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-仍然使用主题自己的git管理，较自动的方法"><a href="#3-仍然使用主题自己的git管理，较自动的方法" class="headerlink" title="3. 仍然使用主题自己的git管理，较自动的方法"></a>3. 仍然使用主题自己的git管理，较自动的方法</h4><p>一开始就不去除主题仓库的git，每次更改进行提交，当主题有更新时候拉取，与你的本地提交进行合并。注意检查你的更改在合并之后是否正确。<br>缺点是theme主题的不在blog的git管理之下，并且更改不能进行push，只能在本地。。。但是也许可以通过新建另一个远端仓库来进行push。</p>
+<p>一般很长时间才会去升级主题，并且修改的内容也不多，所以目前我是使用第一种手动的方式，手动的也可以是很可靠的～</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
