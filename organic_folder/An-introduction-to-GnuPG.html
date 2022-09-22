@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha256-xejo6yLi6vGtAjcMIsY8BHdKsLg7QynVlFMzdQgUuy8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="G(nu)pgPGP vs GPGPGP 是最早先的加密商业软件一般现在提起PGP是指PGP协议G(nu)pg is for Gnu Privacy GuardGPG是GNU下的PGP实现 GPG采用主私钥 + 若干子密钥设计平时一般使用子密钥来进行具体操作。主密钥只用来进行签发新的子密钥，或对密钥进行修改。可以认为主密钥是你在网上的主要身份凭证，如果因此要保护好，一般因为泄漏或者丢失而不得不对其">
+<meta property="og:type" content="website">
+<meta property="og:title" content="An introduction to GnuPG">
+<meta property="og:url" content="http://example.com/organic_folder/An-introduction-to-GnuPG.html">
+<meta property="og:site_name" content="SubtleDigger&#39;s Warehouse">
+<meta property="og:description" content="G(nu)pgPGP vs GPGPGP 是最早先的加密商业软件一般现在提起PGP是指PGP协议G(nu)pg is for Gnu Privacy GuardGPG是GNU下的PGP实现 GPG采用主私钥 + 若干子密钥设计平时一般使用子密钥来进行具体操作。主密钥只用来进行签发新的子密钥，或对密钥进行修改。可以认为主密钥是你在网上的主要身份凭证，如果因此要保护好，一般因为泄漏或者丢失而不得不对其">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-03T21:50:45.000Z">
+<meta property="article:modified_time" content="2022-09-22T20:15:33.487Z">
+<meta property="article:author" content="SubtleDigger">
+<meta property="article:tag" content="GPG">
+<meta property="article:tag" content="PGP">
+<meta property="article:tag" content="Encryption">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/organic_folder/An-introduction-to-GnuPG">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":true,"permalink":"http://example.com/organic_folder/An-introduction-to-GnuPG.html","path":"organic_folder/An-introduction-to-GnuPG.html","title":"An introduction to GnuPG"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>An introduction to GnuPG | SubtleDigger's Warehouse
+</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SubtleDigger's Warehouse</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">SubtleDigger dig for something good</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#G-nu-pg"><span class="nav-number">1.</span> <span class="nav-text">G(nu)pg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GPG%E9%87%87%E7%94%A8%E4%B8%BB%E7%A7%81%E9%92%A5-%E8%8B%A5%E5%B9%B2%E5%AD%90%E5%AF%86%E9%92%A5%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.</span> <span class="nav-text">GPG采用主私钥 + 若干子密钥设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E7%BC%A9%E5%86%99%E5%90%AB%E4%B9%89"><span class="nav-number">3.</span> <span class="nav-text">一些常见缩写含义</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%86%E9%92%A5%E8%83%BD%E5%8A%9B"><span class="nav-number">3.0.1.</span> <span class="nav-text">密钥能力</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%86%E9%92%A5%E7%BC%A9%E5%86%99%E5%90%AB%E4%B9%89"><span class="nav-number">3.0.2.</span> <span class="nav-text">密钥缩写含义</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">一些命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E4%B8%BB%E5%AF%86%E9%92%A5"><span class="nav-number">4.0.1.</span> <span class="nav-text">生成主密钥</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%AF%86%E9%92%A5%E4%BF%9D%E6%8A%A4%E5%AF%86%E7%A0%81"><span class="nav-number">4.0.2.</span> <span class="nav-text">本地密钥保护密码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#list-keys"><span class="nav-number">4.0.3.</span> <span class="nav-text">list keys</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#edit-key-%E6%92%A4%E9%94%80%E5%AF%86%E9%92%A5-x2F-%E4%BF%AE%E6%94%B9%E5%AF%86%E9%92%A5%E6%9C%89%E6%95%88%E6%9C%9F-x2F-%E5%88%A0%E9%99%A4%E5%AF%86%E9%92%A5"><span class="nav-number">4.0.4.</span> <span class="nav-text">edit key 撤销密钥&#x2F;修改密钥有效期&#x2F;删除密钥</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#uid%E7%BC%96%E8%BE%91"><span class="nav-number">4.0.5.</span> <span class="nav-text">uid编辑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA%E5%AF%86%E9%92%A5"><span class="nav-number">4.0.6.</span> <span class="nav-text">导出密钥</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%AF%86%E9%92%A5-%E6%8C%89userID%E5%88%A0%E9%99%A4key-%E4%B8%8D%E8%BF%9B%E5%85%A5%E4%BA%A4%E4%BA%92"><span class="nav-number">4.0.7.</span> <span class="nav-text">删除密钥 按userID删除key(不进入交互)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8A%A0%E8%A7%A3%E5%AF%86"><span class="nav-number">4.0.8.</span> <span class="nav-text">加解密</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%A7%81%E9%92%A5%E8%AF%BB%E5%8F%96%E6%8F%90%E7%A4%BA%E9%9C%80%E8%A6%81%E5%AF%86%E7%A0%81%E7%9A%84%E6%97%B6%E9%97%B4%EF%BC%88%E7%A7%92%EF%BC%89"><span class="nav-number">4.0.9.</span> <span class="nav-text">修改私钥读取提示需要密码的时间（秒）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E8%A7%A3%E9%87%8A"><span class="nav-number">5.</span> <span class="nav-text">一些解释</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#revoke%E5%92%8Cdelte%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">5.0.1.</span> <span class="nav-text">revoke和delte的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Expire"><span class="nav-number">5.0.2.</span> <span class="nav-text">Expire</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8Erevoke-%E8%A7%A3%E9%87%8A"><span class="nav-number">5.0.3.</span> <span class="nav-text">对于revoke 解释</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%AF%86%E9%92%A5%E6%8C%87%E5%AE%9A"><span class="nav-number">5.0.4.</span> <span class="nav-text">关于密钥指定</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Appendix"><span class="nav-number">6.</span> <span class="nav-text">Appendix</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95"><span class="nav-number">6.0.1.</span> <span class="nav-text">一些想法</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">SubtleDigger</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner page posts-expand">
+
+
+    
+    
+    
+    <div class="post-block" lang="en"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">An introduction to GnuPG
+</h1>
+
+<div class="post-meta-container">
+</div>
+
+</header>
+
+      
+      
+      <div class="post-body">
+          <h3 id="G-nu-pg"><a href="#G-nu-pg" class="headerlink" title="G(nu)pg"></a>G(nu)pg</h3><p>PGP vs GPG<br>PGP 是最早先的加密商业软件<br>一般现在提起PGP是指PGP协议<br>G(nu)pg is for Gnu Privacy Guard<br>GPG是GNU下的PGP实现</p>
+<h3 id="GPG采用主私钥-若干子密钥设计"><a href="#GPG采用主私钥-若干子密钥设计" class="headerlink" title="GPG采用主私钥 + 若干子密钥设计"></a>GPG采用主私钥 + 若干子密钥设计</h3><p>平时一般使用子密钥来进行具体操作。主密钥只用来进行签发新的子密钥，或对密钥进行修改。可以认为主密钥是你在网上的主要身份凭证，如果因此要保护好，一般因为泄漏或者丢失而不得不对其进行revoke将会使你失去身份。所以在所有设置都正常的情况下，日常使用不需要用到Primary key，应该将其保存在一个安全的地方，隔离与电脑的设备，甚至是纸张。</p>
+<h3 id="一些常见缩写含义"><a href="#一些常见缩写含义" class="headerlink" title="一些常见缩写含义"></a>一些常见缩写含义</h3><h5 id="密钥能力"><a href="#密钥能力" class="headerlink" title="密钥能力"></a>密钥能力</h5><table>
+<thead>
+<tr>
+<th>Abb</th>
+<th>Ability</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[C]</td>
+<td>Certifitating 认证，用于签发子密钥</td>
+</tr>
+<tr>
+<td>[S]</td>
+<td>Signing 签名</td>
+</tr>
+<tr>
+<td>[E]</td>
+<td>Encrypting 加密</td>
+</tr>
+<tr>
+<td>[A]</td>
+<td>Authenticating 身份验证</td>
+</tr>
+</tbody></table>
+<h5 id="密钥缩写含义"><a href="#密钥缩写含义" class="headerlink" title="密钥缩写含义"></a>密钥缩写含义</h5><table>
+<thead>
+<tr>
+<th>Abb</th>
+<th>Explain</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>pub</strong></td>
+<td>Public Key</td>
+</tr>
+<tr>
+<td><strong>sec</strong></td>
+<td>Secret Key</td>
+</tr>
+<tr>
+<td><strong>sub</strong></td>
+<td>Public SubKey</td>
+</tr>
+<tr>
+<td><strong>ssb</strong></td>
+<td>Secret Subkey</td>
+</tr>
+</tbody></table>
+<h3 id="一些命令"><a href="#一些命令" class="headerlink" title="一些命令"></a>一些命令</h3><h5 id="生成主密钥"><a href="#生成主密钥" class="headerlink" title="生成主密钥"></a>生成主密钥</h5><p><code>gpg --gen-key</code></p>
+<h5 id="本地密钥保护密码"><a href="#本地密钥保护密码" class="headerlink" title="本地密钥保护密码"></a>本地密钥保护密码</h5><p>生成密钥时会同时让你设定一个用于保护本地密钥的密码，每个主密钥的保护密码是相互独立的，在不同设备上密码是独立，也就是说这个密钥是gpg的本地设置，与钥匙串无关，所以在你修改了密码手动save的话，系统会告诉你钥匙串没有更新，没有save的必要。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gpg --edit-key userId</span><br><span class="line">&gt; passwd</span><br></pre></td></tr></table></figure>
+
+<h5 id="list-keys"><a href="#list-keys" class="headerlink" title="list keys"></a>list keys</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gpg --list-keys (简写 -k)</span><br><span class="line">gpg --list-serect-keys (简写 -K)</span><br><span class="line">gpg -k --keyid-format long  (显示sub keyid)</span><br><span class="line">gpg -k --fingerprint (指纹)</span><br></pre></td></tr></table></figure>
+
+<h5 id="edit-key-撤销密钥-x2F-修改密钥有效期-x2F-删除密钥"><a href="#edit-key-撤销密钥-x2F-修改密钥有效期-x2F-删除密钥" class="headerlink" title="edit key 撤销密钥&#x2F;修改密钥有效期&#x2F;删除密钥"></a>edit key 撤销密钥&#x2F;修改密钥有效期&#x2F;删除密钥</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gpg --edit-key --keyid-format long uid (进入edit交互)</span><br><span class="line">&gt; key 1 选择第(1)个subkey（不选择key会默认对整个primary key所包含的所有key进行操作)</span><br><span class="line">&gt; key 2 选择第(2)个subkey</span><br><span class="line">&gt; expire 将会对key1 / key2 (进行过期日期设置)</span><br><span class="line">&gt; revkey 吊销key1 / key2 (已经revoke的key仍然可以加解密，他只是一个标记，告诉你使用这个的人已经不会再继续使用它)</span><br><span class="line">&gt; delkey (删除key1 / key2)</span><br><span class="line">&gt; save (不保存修改无法生效)</span><br></pre></td></tr></table></figure>
+<h5 id="uid编辑"><a href="#uid编辑" class="headerlink" title="uid编辑"></a>uid编辑</h5><p>修改uid，uid只作为你的信息，对加密没有影响。uid只能添加，和删除，不能修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gpg --edit-key</span><br><span class="line">&gt; adduid 新增按提示操作</span><br><span class="line">&gt; uid 1 （与key类似，uid 1 表示选中了uid 1</span><br><span class="line">&gt; deluid 删除uid</span><br></pre></td></tr></table></figure>
+
+<h5 id="导出密钥"><a href="#导出密钥" class="headerlink" title="导出密钥"></a>导出密钥</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gpg -ao public-key.txt --export &lt;UserId&gt;</span><br><span class="line">gpg -ao encrypt-subkey --export-secret-subkeys &lt;keyId&gt;</span><br></pre></td></tr></table></figure>
+<p>注意，在keyId后面加上!可以强指定此id而不会全部导出子密钥。</p>
+<h5 id="删除密钥-按userID删除key-不进入交互"><a href="#删除密钥-按userID删除key-不进入交互" class="headerlink" title="删除密钥 按userID删除key(不进入交互)"></a>删除密钥 按userID删除key(不进入交互)</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gpg --delete-secret-keys &lt;UserId&gt;  # 删除私钥，UID 也可以替换成子密钥ID, 主密钥Key ID</span><br><span class="line">gpg --delete-keys &lt;UserId&gt;  # 删除公钥	</span><br></pre></td></tr></table></figure>
+
+<h5 id="加解密"><a href="#加解密" class="headerlink" title="加解密"></a>加解密</h5><p>对称加解密，不带密码缓存，每次都输入的方法<br><code>gpg -c --no-symkey-cache test.txt.gpg</code><br>非对称加密<br>-r 参数 指定接受者id 会使用这个id下的一个公钥来加密，需要对方有这个公钥对应的密钥才能解密。<br><code>gpg -e -r uesrId test.txt</code></p>
+<h5 id="修改私钥读取提示需要密码的时间（秒）"><a href="#修改私钥读取提示需要密码的时间（秒）" class="headerlink" title="修改私钥读取提示需要密码的时间（秒）"></a>修改私钥读取提示需要密码的时间（秒）</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~/.gnupg/gpg-agent.conf</span><br><span class="line">default-cache-ttl 600</span><br><span class="line">max-cache-ttl 7200</span><br></pre></td></tr></table></figure>
+
+<h3 id="一些解释"><a href="#一些解释" class="headerlink" title="一些解释"></a>一些解释</h3><h5 id="revoke和delte的区别"><a href="#revoke和delte的区别" class="headerlink" title="revoke和delte的区别"></a>revoke和delte的区别</h5><p>revoke相当于打上吊销标记，delete才是删除。<br>revoke还有个作用就是通过send-key到key-server，让keyserver同步状态来声明revoke</p>
+<h5 id="Expire"><a href="#Expire" class="headerlink" title="Expire"></a>Expire</h5><p>已经过期的key仍然可以解密。但是不能进行新的加密，会给你过期的提示。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; gpg: CF12434DC!: skipped: Unusable public key</span><br><span class="line">&gt; gpg: test.txt: encryption failed: Unusable public key</span><br></pre></td></tr></table></figure>
+<p>但是我们随时可以设置密钥的有效期，所以即使过期了想继续用的话重新设置有效期即可。其实过期日期主要还是声名给通讯的对方来知晓的，如果只是单机使用直接设个永不过期也无所谓。</p>
+<h5 id="对于revoke-解释"><a href="#对于revoke-解释" class="headerlink" title="对于revoke 解释"></a>对于revoke 解释</h5><p>由于pgp是针对传输的加密，对于密钥丢失&#x2F;泄漏的情况，一般流程是，用户revoke密钥后作出声名,上传revoke过后的key到key server，大家更新之后之后就会知道此key已经revoke，接下来不会再继续使用。但是你不能控制用户是否去更新你的key设置。如果用户没有去更新，然后删掉这个公钥，那么他手上的公钥依然可以解密已revoke的key之前加密过的文件。</p>
+<h5 id="关于密钥指定"><a href="#关于密钥指定" class="headerlink" title="关于密钥指定"></a>关于密钥指定</h5><p>在GPG中密钥一般是由系统自动选择的，比如根据你填写的UserId或者当前要进行的动作(Sign&#x2F;Ecrypt)来自动选择名下最新的一个公钥来进行加密。不过也可以在keyId后加上!来强制指定，当你有多个key时这个做法很有效。<br><code>gpg -e -r CF12434DC! test.txt</code></p>
+<h3 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h3><h5 id="一些想法"><a href="#一些想法" class="headerlink" title="一些想法"></a>一些想法</h5><p>其实非对称加密比较适用于通信加密，只要文件在远离密钥的地方，目前来说几乎是不可解密的；但是假如攻击者获取了存有密钥的设备，对于本地文件的加密，就只剩下本地对于密钥的对称加密保护这一道防线了。这时候就需要一个强密码保护，但是强密码保护很难用人脑记住，肯定存放于某个保存密钥的app甚至是文件内，而这个app的保护密码设定又是一个难题，肯定是人脑能记住的，相对容易输入的，相对不太复杂，这种密码被攻破的概率也很大。<br>如果能随时更改这个密码的话就好了，于是想到一个方案：在一个云端存放子密钥，每端在想要加解密gpg文件前下载gpg子密钥，使用完之后删除。这样，如果设备遗失了第一时间删除网络上的子密钥，设备上的内容就无法读取了。前提是攻击者不会提前知道这个网址，不过提前知道的概率不大，因为只有进入了设备才能知道，网址的存在，但是一旦设备遗失我们已经将网址内的密钥清除了。<br>其实除了算法加密，通过改变加密流程，加密思路，乃至社工的办法，都是算是一种加密，只要能保护文件内容的方法就是好方法。</p>
+
+      </div>
+      
+      
+      
+    </div>
+
+    
+    
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">SubtleDigger</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"neutral","dark":"default"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js","integrity":"sha256-TIYL00Rhw/8WaoUhYTLX9SKIEFdXxg+yMWSLVUbhiLg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
