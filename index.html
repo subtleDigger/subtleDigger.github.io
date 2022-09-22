@@ -226,7 +226,8 @@
     <div class="post-body" itemprop="articleBody">
           <h1 id="Pre"><a href="#Pre" class="headerlink" title="Pre"></a>Pre</h1><p>想要在blog中提供一个文件下载连接，通常做法是将文件储存在一个三方平台，然后在blog中插入这个连接<br>但是如果文件本身不大，有时候我们也是希望将文件本身存在hexo的文件库里然后来引用的。</p>
 <h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><h3 id="其实可以参考引用本地图片的方法"><a href="#其实可以参考引用本地图片的方法" class="headerlink" title="其实可以参考引用本地图片的方法"></a>其实可以参考引用本地图片的方法</h3><p>在source文件夹下存在一个imgs文件夹，里面又一个pic.png 我想引用它就这么写<br><code>![pic](../imgs/pic.png)</code></p>
-<p>于是我在source下再新建一个files文件夹，并在里面新建一个test.txt<br>这样引用<br><code>[test](../files/test.txt)</code></p>
+<p>于是我在source下再新建一个files文件夹，并在里面新建一个test.txt<br>这样引用<br><code>[test](../files/test.txt)</code><br>结果：<br><a href="../files/test.txt">click to preview text file</a></p>
+<p>注意: 如果文件可读的话会直接在网页中进入预览，如果是不是文字类或者可预览的文件，比如没有后缀才会弹出下载<br><a href="../files/test">click to download non-text file</a></p>
 
       
     </div>
@@ -310,7 +311,6 @@
 <h5 id="1-2-本地启动一个服务器来提供pac文件"><a href="#1-2-本地启动一个服务器来提供pac文件" class="headerlink" title="1. 2. 本地启动一个服务器来提供pac文件"></a>1. 2. 本地启动一个服务器来提供pac文件</h5>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd pathToPacFile</span><br><span class="line">python -m SimpleHTTPServer </span><br></pre></td></tr></table></figure>
 <h5 id="1-3-在wifi代理里面选半自动代理，填入pac文件地址"><a href="#1-3-在wifi代理里面选半自动代理，填入pac文件地址" class="headerlink" title="1. 3. 在wifi代理里面选半自动代理，填入pac文件地址"></a>1. 3. 在wifi代理里面选半自动代理，填入pac文件地址</h5><p>  <code>http://127.0.0.1:8000/pathToPacFile</code><br>  但是经测试如果这个socks使用时仍有问题，他跟http一样会在某些时候卡住无法继续，也许是iOS自带的socks支持程度与charles的不同。</p>
 <h4 id="2-使用Socks-Proxy-Client"><a href="#2-使用Socks-Proxy-Client" class="headerlink" title="2. 使用Socks Proxy Client"></a>2. 使用Socks Proxy Client</h4><p>  目前发现的能提供正常可用的sock5连接iOS客户端有以下几个，当然这些国区AppStore都没有。<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ShadowRocket(paid)</span><br><span class="line">Surge(paid)</span><br><span class="line">Brook(a free &amp; open-source one)</span><br></pre></td></tr></table></figure></p>
-<p><a href="../files/test" title="C源码下载">点击下载</a></p>
 
       
     </div>
